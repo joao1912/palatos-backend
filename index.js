@@ -1,8 +1,12 @@
 const express = require("express")
 const app = express()
 app.use(express.json())
-app.use(express.urlencoded())
 const userRoutes = require("./routes/user")
+import sequelize from "./db"
+
+(async function(){
+    //await sequelize.sync()
+})()
 
 app.use("/", userRoutes)
 
