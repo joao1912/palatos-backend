@@ -8,6 +8,8 @@ const Usuarios = sequelize.define("Usuarios", {
         allowNull: false,
         defaultValue: "João lindo"
     }
+    }, {
+    timestamps: false
 })
 
 export default Usuarios
