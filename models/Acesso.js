@@ -19,19 +19,14 @@ Acesso.init(
     }
 )
 
-const Acessos = sequelize.define("Acessos", {
-    
-}, {})
-
-
-Acessos.belongsTo( ListaCategorias, {
+Acesso.belongsTo( ListaCategorias, {
     constraints: true,
     foreignKey: 'fk_lista_categorias'
 })
 
-Acessos.belongsTo( Usuarios , {
+Acesso.belongsTo( Usuarios , {
     constraints: true,
     foreignKey: 'fk_usuario'
 })
 
-export default Acessos
+export default Acesso
