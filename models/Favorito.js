@@ -2,6 +2,7 @@ const { DataTypes } = require("sequelize")
 const Sequelize = require("sequelize")
 import sequelize from "../db"
 import Usuario from "./Usuario"
+import Restaurante from "./Restaurante"
 
 class Favorito extends Sequelize.Model {}
 

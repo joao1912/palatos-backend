@@ -2,6 +2,7 @@ const { DataTypes } = require("sequelize")
 const Sequelize = require("sequelize")
 import sequelize from "../db"
 import Usuarios from "./Usuario"
+import ListaCategoria from "./listaCategoria"
 
 class Acesso extends Sequelize.Model {}
 
@@ -19,7 +20,7 @@ Acesso.init(
     }
 )
 
-Acesso.belongsTo( ListaCategorias, {
+Acesso.belongsTo( ListaCategoria, {
     constraints: true,
     foreignKey: 'fk_lista_categorias'
 })
