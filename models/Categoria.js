@@ -1,9 +1,11 @@
-const { DataTypes} = require("sequelize")
+const { DataTypes } = require("sequelize")
 const Sequelize = require("sequelize")
 
 import sequelize from "../db"
 
-class Categoria extends Sequelize.Model{ }
+import ListaCategoria from './listaCategoria'
+
+class Categoria extends Sequelize.Model { }
 
 
 Categoria.init(
@@ -22,6 +24,13 @@ Categoria.init(
         timestamps: false,
         modelName: "Categoria",
         tableName: "Categorias"
+    }
+)
+
+Categoria.belongsToMany(
+    ListaCategoria,
+    {
+        through: 'Lista_categoria'
     }
 )
 
