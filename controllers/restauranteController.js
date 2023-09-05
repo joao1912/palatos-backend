@@ -82,6 +82,15 @@ class restauranteController {
         //lembre para usar query
     }
 
+    //puxar os alimentos de um restaurante
+
+    //puxar os planos
+
+    //criar os pratos um por um
+
+    //---------
+    // menu administrativo puxar(perfil, menu, financeiro, reservas, comanda, mesas)
+
 }
 
 export default restauranteController
