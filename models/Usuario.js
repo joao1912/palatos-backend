@@ -9,7 +9,6 @@ Usuario.init(
         nome_completo: {
             type: DataTypes.STRING(40),
             allowNull: false,
-            defaultValue: ""
         },
         senha: {
             type: DataTypes.STRING(40),
