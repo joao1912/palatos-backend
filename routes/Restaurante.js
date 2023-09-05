@@ -9,11 +9,11 @@ router.get("/restaurante", RestauranteController.getRestaurant)
 
 router.get("/restaurante/:id", RestauranteController.getRestaurant)
 
-router.post("/addRestaurante" , RestauranteController.createRestaurant)
+router.post("/restaurante/add" , RestauranteController.createRestaurant)
 
-router.put("/editRestaurante", RestauranteController)
+router.put("/restaurante/edit", RestauranteController)
 
-router.delete("/deleteRestaurante/:id", RestauranteController)
+router.delete("/restaurante/delete/:id", RestauranteController)
 
 
 
