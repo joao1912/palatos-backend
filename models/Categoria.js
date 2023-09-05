@@ -3,7 +3,7 @@ const Sequelize = require("sequelize")
 
 import sequelize from "../db"
 
-import ListaCategoria from './listaCategoria'
+import ListaCategoria from './ListaCategoria'
 
 class Categoria extends Sequelize.Model { }
 

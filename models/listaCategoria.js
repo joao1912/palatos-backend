@@ -4,7 +4,7 @@ const Sequelize = require("sequelize")
 import sequelize from "../db"
 import Categoria from "./Categoria"
 
-class listaCategoria extends Sequelize.Model { }
+class ListaCategoria extends Sequelize.Model { }
 
 listaCategoria.init(
     {
@@ -30,4 +30,4 @@ listaCategoria.belongsToMany(
 )
 
 
-export default listaCategoria
+export default ListaCategoria
