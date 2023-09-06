@@ -1,5 +1,5 @@
 import { error } from "console"
-import Sequelize from "sequelize"
+import { Sequelize } from "sequelize"
 
 const database = new Sequelize({
     dialect: "postgres",
