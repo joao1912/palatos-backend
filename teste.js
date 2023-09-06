@@ -1,4 +1,4 @@
-const { Sequelize } = require('sequelize');
+import Sequelize from "sequelize"
 
 // Configurações de conexão com o banco de dados
 const sequelize = new Sequelize('palatos', 'postgres', 'root1221@@', {
