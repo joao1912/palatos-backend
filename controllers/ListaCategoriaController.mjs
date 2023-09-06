@@ -1,4 +1,4 @@
-import ListaCategoria from '../models/ListaCategoria'
+import ListaCategoria from '../models/listaCategoria.mjs'
 
 class listaCategoriaController {
 

@@ -1,5 +1,5 @@
 const express = require("express")
-import listaCategoriaController from "../controllers/listaCategoriaController"
+import listaCategoriaController from "../controllers/ListaCategoriaController.mjs"
 const ListaCategoriaController = new listaCategoriaController()
 
 const router = express.Router()

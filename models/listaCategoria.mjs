@@ -1,12 +1,12 @@
 const { DataTypes } = require("sequelize")
 const Sequelize = require("sequelize")
 
-import sequelize from "../db"
-import Categoria from "./Categoria"
+import sequelize from "../db.mjs"
+import Categoria from "./Categoria.mjs"
 
 class ListaCategoria extends Sequelize.Model { }
 
-listaCategoria.init(
+ListaCategoria.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -22,7 +22,7 @@ listaCategoria.init(
     }
 )
 
-listaCategoria.belongsToMany(
+ListaCategoria.belongsToMany(
     Categoria,
     {
         through: 'categoria'

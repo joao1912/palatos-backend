@@ -1,10 +1,10 @@
 const express = require("express")
 const app = express()
 app.use(express.json())
-const userRoutes = require("./routes/user")
-const restaurantRoutes = require("./routes/Restaurante")
-const searchRoutes = require("./routes/search")
-const sequelize = require("./db")
+const userRoutes = require("./routes/user.mjs")
+const restaurantRoutes = require("./routes/Restaurante.mjs")
+const searchRoutes = require("./routes/search.mjs")
+const sequelize = require("./db.mjs")
 
 (async function(){
     await sequelize.sync()

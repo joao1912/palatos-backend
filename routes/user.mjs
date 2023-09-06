@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-import UserController from "../controllers/userController"
+import UserController from "../controllers/userController.mjs"
 const userController = new UserController()
 
 router.get("/", userController.getUser)
