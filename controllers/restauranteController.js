@@ -53,15 +53,28 @@ class restauranteController {
         }
     }
 
-
     async createRestaurant(req, res) {
 
         try {
 
-            const {nome} = req.body;
+            const {
+                nome,
+                descricao,
+                foto,
+                plano,
+                endereco,
+                cep,
+                rua
+            } = req.body;
 
             const resultRestaurant = await Restaurante.create({
-                //botar as propos com os valores que vão vir do obj
+                nome,
+                descricao,
+                foto,
+                plano,
+                endereco,
+                cep,
+                rua
             })
 
             res.status(200).json({
