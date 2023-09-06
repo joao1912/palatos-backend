@@ -1,7 +1,9 @@
+import { error } from "console"
 import Sequelize from "sequelize"
+
 const database = new Sequelize({
     dialect: "postgres",
-    host: '45.224.129.126',
+    host: 'localhost',
     port: 5432,
     username: 'postgres',
     password: 'root1221@@',
