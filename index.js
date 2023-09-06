@@ -7,7 +7,7 @@ const searchRoutes = require("./routes/search")
 import sequelize from "./db"
 
 (async function(){
-    //await sequelize.sync()
+    await sequelize.sync()
 })()
 
 app.use("/") // não definido
