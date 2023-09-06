@@ -10,7 +10,7 @@ ListaCategoria.init(
     {
         id: {
             type: DataTypes.INTEGER,
-            primaryKey: false,
+            primaryKey: true,
             autoIncrement: true
         }
     },
