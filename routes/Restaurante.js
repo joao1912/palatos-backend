@@ -1,5 +1,5 @@
 const express = require("express")
-import restauranteController from "../controllers/restauranteController.mjs"
+import restauranteController from "../controllers/restauranteController.js"
 const RestauranteController = new restauranteController()
 
 const router = express.Router()

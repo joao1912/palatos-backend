@@ -1,8 +1,8 @@
 const { DataTypes } = require("sequelize")
 const Sequelize = require("sequelize")
 
-import sequelize from "../db.mjs"
-import Categoria from "./Categoria.mjs"
+import sequelize from "../db.js"
+import Categoria from "./Categoria.js"
 
 class ListaCategoria extends Sequelize.Model { }
 

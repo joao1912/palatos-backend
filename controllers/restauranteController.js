@@ -1,4 +1,4 @@
-import Restaurante from "../models/Restaurante.mjs"
+import Restaurante from "../models/Restaurante.js"
 
 class restauranteController {
 
