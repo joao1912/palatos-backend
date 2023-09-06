@@ -1,8 +1,6 @@
 import { DataTypes } from "sequelize"
 import Sequelize from "sequelize"
-
 import database from "../db.js"
-
 import Restaurante from "./Restaurante.js"
 import ListaCategoria from './listaCategoria.js'
 
