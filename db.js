@@ -1,4 +1,6 @@
+import { error } from "console"
 import Sequelize from "sequelize"
+try {
 const database = new Sequelize({
     dialect: "postgres",
     host: 'localhost',
@@ -7,6 +9,9 @@ const database = new Sequelize({
     password: 'root1221@@',
     database: 'palatos'
 })
+} catch(err) {
+    throw new error(`Erro ao criar uma instância do sequelize: ${err}`)
+}
 
 export default database
 
