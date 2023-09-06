@@ -9,7 +9,9 @@ import sequelize from "./db"
     //await sequelize.sync()
 })()
 
-app.use("/", userRoutes)
+app.use("/") // não definido
+
+app.use("/users", userRoutes)
 
 app.use("/restaurante", restaurantRoutes)
 

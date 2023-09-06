@@ -104,6 +104,72 @@ class restauranteController {
     //---------
     // menu administrativo puxar(perfil, menu, financeiro, reservas, comanda, mesas)
 
+    async editRestaurant(req, res) {
+
+        const {
+            id,
+            nome,
+            descricao,
+            foto,
+            plano,
+            endereco,
+            cep,
+            rua
+        } = req.body;
+
+        try {
+            
+            const restaurant = await Restaurante.findByPk(id) //talvez tenha que converter para numerico
+
+            restaurant.set({
+                nome,
+                descricao,
+                foto,
+                plano,
+                endereco,
+                cep,
+                rua
+            })
+
+            restaurant.save()
+
+            res.status(200).json({
+                status: 'success',
+                restaurantUpdated: restaurant
+            })
+        
+        } catch(err) {
+
+            res.json({
+                status: 'failed',
+                erro: err
+            })
+                        
+        }
+
+    }
+
+    async deleteRestaurant(req, res) {
+
+        const idRestaurant = req.params.id;
+
+        try {
+
+            await Restaurante.destroy({where: {id: idRestaurant}})
+            res.status(200).json({
+                status: 'success',
+                message: 'Restaurante Excluido.'
+            })
+
+        } catch(err) {
+            res.json({
+                status: 'failed',
+                erro: err
+            })
+        }
+        
+    }
+
 }
 
 export default restauranteController
