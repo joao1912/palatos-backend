@@ -3,6 +3,7 @@ import Sequelize from "sequelize"
 
 import database from "../db.js"
 
+import Restaurante from "./Restaurante.js"
 import ListaCategoria from './listaCategoria.js'
 
 class Categoria extends Sequelize.Model { }
@@ -28,9 +29,9 @@ Categoria.init(
 )
 
 Categoria.belongsToMany(
-    ListaCategoria,
+    Restaurante,
     {
-        through: 'Lista_categoria'
+        through: ListaCategoria
     }
 )
 

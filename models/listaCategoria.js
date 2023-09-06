@@ -22,12 +22,5 @@ ListaCategoria.init(
     }
 )
 
-ListaCategoria.belongsToMany(
-    Categoria,
-    {
-        through: 'categoria'
-    }
-)
-
 
 export default ListaCategoria
