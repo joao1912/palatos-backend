@@ -7,7 +7,7 @@ import searchRoutes from "./routes/search.js"
 import database from "./db.js"
 
 (async function(){
-    await sequelize.sync()
+    await database.sync()
 })()
 
 app.use("/") // não definido
