@@ -25,12 +25,12 @@ ConfiguracoesRestaurantes.init(
     {
         sequelize,
         timestamps: false,
-        modelName: "ConfiguracoesRestaurantes",
+        modelName: "ConfiguracoesRestaurante",
         tableName: "Configuracoes_restaurantes"
     }
 )
 
-ConfiguracoesRestaurantes   .belongsTo( Restaurante, {
+ConfiguracoesRestaurantes.belongsTo( Restaurante, {
     constraints: true,
     foreignKey: "fk_restaurante"
 })
