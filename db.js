@@ -1,11 +1,11 @@
 const { Sequelize } = require("sequelize")
 const sequelize = new Sequelize({
     dialect: "postgres",
-    host: 'localhost',
+    host: '45.224.129.126',
     port: 5432,
-    username: 'usuario',
-    password: 'senha',
-    database: 'nome-do-banco-de-dados'
+    username: 'postgres',
+    password: 'root1221@@',
+    database: 'palatos'
 })
 
 export default sequelize
