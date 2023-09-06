@@ -1,5 +1,5 @@
-const { Sequelize } = require("sequelize")
-const sequelize = new Sequelize({
+import Sequelize from "sequelize"
+const database = new Sequelize({
     dialect: "postgres",
     host: '45.224.129.126',
     port: 5432,
@@ -8,7 +8,7 @@ const sequelize = new Sequelize({
     database: 'palatos'
 })
 
-module.exports = sequelize
+export default database
 
 /*
     olá, estou criando essa parte do codigo para revisão do sequelize

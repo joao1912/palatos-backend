@@ -1,4 +1,4 @@
-const express = require("express")
+import express from "express"
 import restauranteController from "../controllers/restauranteController.js"
 const RestauranteController = new restauranteController()
 
@@ -14,4 +14,4 @@ router.put("/restaurante/edit/:id", RestauranteController.editRestaurant)
 
 router.delete("/restaurante/delete/:id", RestauranteController.deleteRestaurant)
 
-module.exports = router
+export default router

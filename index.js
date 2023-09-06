@@ -1,10 +1,10 @@
-const express = require("express")
+import express from "express"
 const app = express()
 app.use(express.json())
-const userRoutes = require("./routes/user.js")
-const restaurantRoutes = require("./routes/Restaurante.js")
-const searchRoutes = require("./routes/search.js")
-const sequelize = require("./db.js")
+import userRoutes from "./routes/user.js"
+import restaurantRoutes from "./routes/Restaurante.js"
+import searchRoutes from "./routes/search.js"
+import database from "./db.js"
 
 (async function(){
     await sequelize.sync()

@@ -1,6 +1,6 @@
-const { DataTypes } = require("sequelize")
-const Sequelize = require("sequelize")
-import sequelize from "../db"
+import { DataTypes} from "sequelize"
+import Sequelize from "sequelize"
+import database from "../db"
 import Usuarios from "./Usuario"
 import ListaCategoria from "./listaCategoria"
 
@@ -13,7 +13,7 @@ Acesso.init(
         }  
     },
     {
-        sequelize,
+        database,
         timestamps: false,
         modelName: "Acesso",
         tableName: "Acessos"
