@@ -1,10 +1,10 @@
+import database from "./db.js"
 import express from "express"
 const app = express()
 app.use(express.json())
 import userRoutes from "./routes/user.js"
-import restaurantRoutes from "./routes/Restaurante.js"
+//import restaurantRoutes from "./routes/Restaurante.js"
 import searchRoutes from "./routes/search.js"
-import database from "./db.js"
 
 (async function(){
     await database.sync()
@@ -14,7 +14,7 @@ app.use("/") // não definido
 
 app.use("/users", userRoutes)
 
-app.use("/restaurante", restaurantRoutes)
+//app.use("/restaurante", restaurantRoutes)
 
 app.use("/search", searchRoutes)
 
