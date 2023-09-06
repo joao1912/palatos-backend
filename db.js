@@ -1,16 +1,14 @@
 import { error } from "console"
 import { Sequelize } from "sequelize"
 
-const database = new Sequelize({
+export const database = new Sequelize({
     dialect: "postgres",
     host: 'localhost',
-    port: 5432,
     username: 'postgres',
     password: 'root1221@@',
     database: 'palatos'
 })
 
-export default database
 
 /*
     olá, estou criando essa parte do codigo para revisão do sequelize
