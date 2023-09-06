@@ -1,7 +1,8 @@
-const {DataTypes} = require("sequelize")
+const { DataTypes } = require("sequelize")
 const Sequelize = require("sequelize")
 
 import sequelize from "../db"
+import Categoria from "./Categoria"
 
 class listaCategoria extends Sequelize.Model { }
 
@@ -20,5 +21,13 @@ listaCategoria.init(
         tableName: "Lista_categorias"
     }
 )
+
+listaCategoria.belongsToMany(
+    Categoria,
+    {
+        through: 'categoria'
+    }
+)
+
 
 export default listaCategoria

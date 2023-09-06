@@ -2,6 +2,7 @@ const express = require("express")
 const app = express()
 app.use(express.json())
 const userRoutes = require("./routes/user")
+const restaurantRoutes = require("./routes/Restaurante")
 import sequelize from "./db"
 
 (async function(){
@@ -10,7 +11,7 @@ import sequelize from "./db"
 
 app.use("/", userRoutes)
 
-
+app.use("/restaurante", restaurantRoutes)
 
 app.listen(8085, () => {
     console.log("Servidor rodando na porta 8085")
