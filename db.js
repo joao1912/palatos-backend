@@ -1,7 +1,7 @@
 import { error } from "console"
 import { Sequelize } from "sequelize"
 
-export const database = new Sequelize({
+const database = new Sequelize({
     dialect: "postgres",
     host: 'localhost',
     username: 'postgres',
@@ -37,3 +37,5 @@ export const database = new Sequelize({
     OPERADORES SEQUELIZE são cabulosos, tem que ver a documentação, eles estão no tópico 'consulta de modelos - noções básicas': https://sequelize.org/docs/v6/core-concepts/model-querying-basics/
     
 */
+
+export default database
