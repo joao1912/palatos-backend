@@ -32,7 +32,7 @@ Cardapio.init(
         }
     },
     {
-        database,
+        sequelize: database,
         modelName: "Cardapio",
         tableName: "Cardapios"
     }

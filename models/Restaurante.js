@@ -32,7 +32,7 @@ Restaurante.init(
         }
     },
     {
-        database,
+        sequelize: database,
         modelName: 'Restaurante',
         tableName: 'Restaurantes'
     }

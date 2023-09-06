@@ -15,7 +15,7 @@ Favorito.init(
         }
     },
     {
-        database,
+        sequelize: database,
         timestamps: false,
         modelName: "Favoritos",
         tableName: "Favoritos"

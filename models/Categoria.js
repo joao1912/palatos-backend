@@ -20,7 +20,7 @@ Categoria.init(
         }
     },
     {
-        database,
+        sequelize: database,
         timestamps: false,
         modelName: "Categoria",
         tableName: "Categorias"

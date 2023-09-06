@@ -23,7 +23,7 @@ ConfiguracoesRestaurantes.init(
         }
 },
     {
-        database,
+        sequelize: database,
         timestamps: false,
         modelName: "ConfiguracoesRestaurante",
         tableName: "Configuracoes_restaurantes"

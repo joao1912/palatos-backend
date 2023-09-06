@@ -20,7 +20,7 @@ Usuario.init(
         } 
     },
     {
-        database,
+        sequelize: database,
       modelName: "Usuario",
       tableName: "Usuarios"  
     }

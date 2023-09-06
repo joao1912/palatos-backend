@@ -22,7 +22,7 @@ Avaliacao.init(
         }
     },
     {
-        database,
+        sequelize: database,
         modelName: "Avaliacao",
         tableName: "Avaliacoes"
     }

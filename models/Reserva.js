@@ -18,7 +18,7 @@ Reserva.init(
         }
     },
     {
-        database,
+        sequelize: database,
         modelName: "Reserva",
         tableName: "Reservas"
     }

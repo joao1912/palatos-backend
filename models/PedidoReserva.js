@@ -15,7 +15,7 @@ PedidoReserva.init(
         },
     },
     {
-        database,
+        sequelize: database,
         modelName: "PedidoReserva",
         tableName: "Pedidos_reserva"
     }

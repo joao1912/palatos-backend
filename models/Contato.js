@@ -25,7 +25,7 @@ Contato.init(
         }
     },
     {
-        database,
+        sequelize: database,
         timestamps: false,
         modelName: "Contato",
         tableName: "Contatos"

@@ -13,7 +13,7 @@ Acesso.init(
         }  
     },
     {
-        database,
+        sequelize: database,
         timestamps: false,
         modelName: "Acesso",
         tableName: "Acessos"

@@ -15,7 +15,7 @@ ListaCategoria.init(
         }
     },
     {
-        database,
+        sequelize: database,
         timestamps: false,
         modelName: "ListaCategoria",
         tableName: "Lista_categorias"
