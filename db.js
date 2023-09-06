@@ -8,7 +8,7 @@ const sequelize = new Sequelize({
     database: 'palatos'
 })
 
-export default sequelize
+module.exports = sequelize
 
 /*
     olá, estou criando essa parte do codigo para revisão do sequelize

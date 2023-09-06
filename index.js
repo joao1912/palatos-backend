@@ -4,7 +4,7 @@ app.use(express.json())
 const userRoutes = require("./routes/user")
 const restaurantRoutes = require("./routes/Restaurante")
 const searchRoutes = require("./routes/search")
-import sequelize from "./db"
+const sequelize = require("./db")
 
 (async function(){
     await sequelize.sync()
