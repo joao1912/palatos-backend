@@ -1,9 +1,8 @@
 import { DataTypes } from "sequelize"
 import Sequelize from "sequelize"
 import database from "../db.js"
-
-// import Categoria from "./Categoria.js"
 import ListaCategoria from "./listaCategoria.js"
+import Categoria from "./Categoria.js"
 
 class Restaurante extends Sequelize.Model { }
 
@@ -41,11 +40,23 @@ Restaurante.init(
     }
 )
 
-// Restaurante.belongsToMany(
-//     Categoria,
-//     {
-//         through: ListaCategoria
-//     }
-// )
+Restaurante.belongsToMany(
+    Categoria,
+    {
+        through: {
+            model: ListaCategoria
+        },
+        foreignKey: "fk_categoria",
+        constraints: true
+    }
+)
+
+Categoria.belongsToMany(Restaurante,{
+    through: {
+        model: ListaCategoria
+    },
+    foreignKey: "fk_restaurante",
+    constraints: true
+})
 
 export default Restaurante
