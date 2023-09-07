@@ -2,7 +2,7 @@ import { DataTypes } from "sequelize"
 import Sequelize from "sequelize"
 import database from "../db.js"
 
-import Categoria from "./Categoria.js"
+// import Categoria from "./Categoria.js"
 import ListaCategoria from "./listaCategoria.js"
 
 class Restaurante extends Sequelize.Model { }
@@ -41,11 +41,11 @@ Restaurante.init(
     }
 )
 
-Restaurante.belongsToMany(
-    Categoria,
-    {
-        through: ListaCategoria
-    }
-)
+// Restaurante.belongsToMany(
+//     Categoria,
+//     {
+//         through: ListaCategoria
+//     }
+// )
 
 export default Restaurante

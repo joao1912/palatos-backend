@@ -1,4 +1,3 @@
-import { error } from "console"
 import { Sequelize } from "sequelize"
 
 const database = new Sequelize({
