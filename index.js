@@ -10,7 +10,7 @@ app.use(express.json())
     await database.sync()
 })()
 
-//app.use("/") // não definido
+app.get("/", function(req,res){res.send("OPAAAAAA, Quer café?")}) // não definido
 
 app.use("/users", userRoutes)
 
@@ -19,5 +19,5 @@ app.use("/restaurante", restaurantRoutes)
 app.use("/search", searchRoutes)
 
 app.listen(8085, () => {
-    console.log("Servidor rodando na porta 8085")
+    console.log("Servidor rodando na porta http://45.224.129.126/8085")
 })
