@@ -10,7 +10,7 @@ app.use(express.json())
     await database.sync()
 })()
 
-app.use("/") // não definido
+//app.use("/") // não definido
 
 app.use("/users", userRoutes)
 
