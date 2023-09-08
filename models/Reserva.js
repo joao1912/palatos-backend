@@ -16,6 +16,12 @@ Reserva.init(
         data_entrada: {
             type: DataTypes.DATE,
             allowNull: false
+        },
+
+        isCompleted: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
+            allowNull: false
         }
     },
     {
