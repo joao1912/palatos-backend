@@ -9,11 +9,24 @@ class reservaController {
         if (typeof idUser === "number") {
 
             try {
-                const reserva = await Reserva.findByPk(idUser)
-                res.status(200).json({
-                    status: 'success',
-                    reserva
-                })
+                const reserva = await Reserva.findOne({where: {fk_usuario: idUser}})
+
+                if (reserva == null) {
+
+                    res.status(400).json({
+                        status: 'failed',
+                        erro: "O usuário não foi encontrado."
+                    })
+
+                } else {
+                    
+                    res.status(200).json({
+                        status: 'success',
+                        reserva
+                    })
+                }
+
+                
             } catch (err) {
                 console.log(err)
 
