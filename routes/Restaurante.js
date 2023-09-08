@@ -4,14 +4,14 @@ const RestauranteController = new restauranteController()
 
 const router = express.Router()
 
-router.get("/restaurante", RestauranteController.getRestaurant)
+router.get("/", RestauranteController.getRestaurant)
 
-router.get("/restaurante/:id", RestauranteController.getRestaurant)
+router.get("/:id", RestauranteController.getRestaurant)
 
-router.post("/restaurante/add" , RestauranteController.createRestaurant)
+router.post("/add" , RestauranteController.createRestaurant)
 
-router.put("/restaurante/edit/:id", RestauranteController.editRestaurant)
+router.put("/edit/:id", RestauranteController.editRestaurant)
 
-router.delete("/restaurante/delete/:id", RestauranteController.deleteRestaurant)
+router.delete("/delete/:id", RestauranteController.deleteRestaurant)
 
 export default router
