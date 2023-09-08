@@ -18,6 +18,7 @@ app.get("/", function(req,res){res.send("OPAAAAAA, Quer café?")}) // não defin
 app.use("/users", userRoutes)
 
 app.use("/restaurante", restaurantRoutes)
+
 app.use("/restaurante", reservaRoutes)
 
 app.use("/search", searchRoutes)
