@@ -24,9 +24,11 @@ class restauranteController {
 
             } catch(err) {
 
+                console.log(err)
+                
                 res.json({
                     status: 'failed',
-                    erro: err
+                    erro: "Não foi possível encontrar um restaurante com este ID."
                 })
                 
             }
