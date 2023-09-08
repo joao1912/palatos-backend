@@ -12,7 +12,8 @@ Reserva.init(
             primaryKey: true,
             allowNull: false
         },
-            data_entrada: {
+        
+        data_entrada: {
             type: DataTypes.DATE,
             allowNull: false
         }

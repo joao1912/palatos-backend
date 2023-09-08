@@ -5,7 +5,7 @@ class restauranteController {
     async getRestaurant(req, res) {
 
         const id = req.params.id;
-        if (id) {
+        if (id && typeof id === "number") {
 
             try {
                 const result = await Restaurante.findByPk(id)
