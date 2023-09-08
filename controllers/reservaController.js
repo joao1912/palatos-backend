@@ -13,13 +13,13 @@ class reservaController {
 
                 if (reserva == null) {
 
-                    res.status(400).json({
+                    res.status(404).json({
                         status: 'failed',
                         erro: "O usuário não foi encontrado."
                     })
 
                 } else {
-                    
+
                     res.status(200).json({
                         status: 'success',
                         reserva
