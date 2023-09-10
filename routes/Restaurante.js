@@ -1,5 +1,7 @@
 import express from "express"
 import restauranteController from "../controllers/restauranteController.js"
+
+
 const RestauranteController = new restauranteController()
 
 const router = express.Router()

@@ -6,6 +6,7 @@ import restaurantRoutes from "./routes/Restaurante.js"
 import searchRoutes from "./routes/search.js"
 import reservaRoutes from "./routes/Reserva.js"
 
+export const SECRET_KEY = "chaveSeg"
 const app = express()
 app.use(express.json())
 
