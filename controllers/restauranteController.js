@@ -1,3 +1,5 @@
+import ConfiguracoesRestaurantes from "../models/ConfiguracoesRestaurante.js";
+import Contato from "../models/Contato.js";
 import Restaurante from "../models/Restaurante.js"
 
 class restauranteController {
@@ -60,14 +62,28 @@ class restauranteController {
         try {
 
             const {
+                idUser,
                 nome,
                 descricao,
                 foto,
                 plano,
                 endereco,
                 cep,
-                rua
+                rua,
+                configRestaurante,
+                contato
             } = req.body;
+
+            const {
+                reservasAtivas,
+                tempoTolerancia,
+                avaliacaoComida
+            } = configRestaurante
+
+            const {
+                telefone,
+                celular,
+            } = contato
 
             const resultRestaurant = await Restaurante.create({
                 nome,
@@ -76,8 +92,13 @@ class restauranteController {
                 plano,
                 endereco,
                 cep,
-                rua
+                rua,
+                fk_usuario: idUser
             })
+
+            await createContato(idUser, telefone, celular)
+
+            await createRestConfig(resultRestaurant.id, reservasAtivas, tempoTolerancia, avaliacaoComida)
 
             res.status(200).json({
                 status: 'success',
@@ -109,15 +130,28 @@ class restauranteController {
     async editRestaurant(req, res) {
 
         const {
-            id,
+            idUser,
             nome,
             descricao,
             foto,
             plano,
             endereco,
             cep,
-            rua
+            rua,
+            configRestaurante,
+            contato
         } = req.body;
+
+        const {
+            reservasAtivas,
+            tempoTolerancia, //falta
+            avaliacaoComida
+        } = configRestaurante
+
+        const {
+            telefone,
+            celular, //falta
+        } = contato
 
         try {
             
@@ -134,6 +168,10 @@ class restauranteController {
             })
 
             restaurant.save()
+
+            await editConfigRest() //falta
+
+            await editContato() //falta
 
             res.status(200).json({
                 status: 'success',
@@ -172,6 +210,31 @@ class restauranteController {
         
     }
 
+}
+
+async function createContato(idUser, telefone, celular) {
+    const contatoRest = await Contato.create({
+        telefone_fixo: telefone,
+        celular,
+        fk_usuario: idUser
+    })
+}
+
+async function createRestConfig(restauranteId,  reservas_ativas, tempo_tolerancia, avaliacao_comida) {
+    const configRest = await ConfiguracoesRestaurantes.create({
+        reservas_ativas,
+        tempo_tolerancia,
+        avaliacao_comida,
+        fk_restaurante: restauranteId
+    })
+}
+
+async function editConfigRest() {
+
+}
+
+async function editContato() {
+    
 }
 
 export default restauranteController

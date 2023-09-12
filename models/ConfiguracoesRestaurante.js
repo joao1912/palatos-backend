@@ -15,7 +15,7 @@ ConfiguracoesRestaurantes.init(
         reservas_ativas: {
             type: DataTypes.BOOLEAN,
         },
-        tempo_Tolerancia: {
+        tempo_tolerancia: {
             type: DataTypes.DECIMAL
         },
         avaliacao_comida: {
