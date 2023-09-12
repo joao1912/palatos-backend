@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize"
 import Sequelize from "sequelize"
-import database from "../db"
-import Restaurante from "./Restaurante"
+import database from "../db.js"
+import Restaurante from "./Restaurante.js"
 
 class ConfiguracoesRestaurantes extends Sequelize.Model {}
 

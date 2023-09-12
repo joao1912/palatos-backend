@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize"
 import Sequelize from "sequelize"
-import database from "../db"
-import Usuario from "./Usuario"
-import Restaurante from "./Restaurante"
+import database from "../db.js"
+import Usuario from "./Usuario.js"
+import Restaurante from "./Restaurante.js"
 
 class Favorito extends Sequelize.Model {}
 

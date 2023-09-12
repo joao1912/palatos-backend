@@ -1,5 +1,5 @@
-import Reserva from "../models/Reserva"
-import Usuario from "../models/Usuario";
+import Reserva from "../models/Reserva.js"
+import Usuario from "../models/Usuario.js";
 
 class reservaController {
 

@@ -1,8 +1,8 @@
 import { DataTypes} from "sequelize"
 import Sequelize from "sequelize"
-import database from "../db"
-import Usuarios from "./Usuario"
-import ListaCategoria from "./listaCategoria"
+import database from "../db.js"
+import Usuarios from "./Usuario.js"
+import ListaCategoria from "./listaCategoria.js"
 
 class Acesso extends Sequelize.Model {}
 
