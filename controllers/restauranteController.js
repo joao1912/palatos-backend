@@ -155,7 +155,7 @@ class restauranteController {
 
         try {
             
-            const restaurant = await Restaurante.findByPk(id) //talvez tenha que converter para numerico
+            const restaurant = await Restaurante.findOne({where: {fk_usuario: idUser}}) //talvez tenha que converter para numerico
 
             restaurant.set({
                 nome,
