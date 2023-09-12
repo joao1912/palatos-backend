@@ -1,11 +1,13 @@
 import Sequelize from "sequelize"
+import dotenv from "dotenv"
+const env = dotenv.config().parsed
 
 const database = new Sequelize({
-    dialect: "postgres",
-    host: 'localhost',
-    username: 'postgres',
-    password: 'root1221@@',
-    database: 'palatos'
+    dialect: env.DB_DRIVE,
+    host: process.env.DB_HOST,
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
 })
 
 
