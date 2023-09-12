@@ -19,10 +19,6 @@ Contato.init(
         celular: {
             type: DataTypes.STRING(16)
         },
-        is_whatsapp: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false
-        }
     },
     {
         sequelize: database,
