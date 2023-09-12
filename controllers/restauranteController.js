@@ -144,13 +144,13 @@ class restauranteController {
 
         const {
             reservasAtivas,
-            tempoTolerancia, //falta
+            tempoTolerancia, 
             avaliacaoComida
         } = configRestaurante
 
         const {
             telefone,
-            celular, //falta
+            celular, 
         } = contato
 
         try {
@@ -169,9 +169,9 @@ class restauranteController {
 
             restaurant.save()
 
-            await editConfigRest() //falta
+            await editConfigRest(restaurant.id, reservasAtivas, tempoTolerancia, avaliacaoComida)
 
-            await editContato() //falta
+            await editContato(restaurant.id, telefone, celular)
 
             res.status(200).json({
                 status: 'success',
@@ -229,12 +229,49 @@ async function createRestConfig(restauranteId,  reservas_ativas, tempo_toleranci
     })
 }
 
-async function editConfigRest() {
+async function editConfigRest(restauranteId, reservas_ativas, tempo_tolerancia, avaliacao_comida) {
+    try {
+            
+        const configRest = await ConfiguracoesRestaurantes.findOne({where: {fk_restaurante: restauranteId}}) 
 
+        configRest.set({
+            reservas_ativas,
+            tempo_tolerancia,
+            avaliacao_comida
+        })
+
+        configRest.save()
+    
+    } catch(err) {
+
+        res.json({
+            status: 'failed',
+            erro: err
+        })
+                    
+    }
 }
 
-async function editContato() {
+async function editContato(restauranteId, telefone_fixo, celular) {
+    try {
+            
+        const contatoRest = await Contato.findOne({where: {fk_restaurante: restauranteId}}) //talvez tenha que converter para numerico
+
+        contatoRest.set({
+           telefone_fixo,
+           celular
+        })
+
+        contatoRest.save()
     
+    } catch(err) {
+
+        res.json({
+            status: 'failed',
+            erro: err
+        })
+                    
+    }
 }
 
 export default restauranteController
