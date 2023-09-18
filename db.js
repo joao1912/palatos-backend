@@ -4,10 +4,10 @@ const env = dotenv.config().parsed
 
 const database = new Sequelize({
     dialect: env.DB_DRIVE,
-    host: process.env.DB_HOST,
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
+    host: env.DB_HOST,
+    username: env.DB_USERNAME,
+    password: env.DB_PASSWORD,
+    database: env.DB_NAME
 })
 
 
