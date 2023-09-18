@@ -21,3 +21,4 @@ async function testConnection() {
 
 // Chame a função de teste de conexão
 testConnection();
+

@@ -22,8 +22,7 @@ function validateJwt(req, res, next) {
 
         req.id = decode.userId
         next()
-    })
-      
+    })     
 }
 
 router.get("/", validateJwt , userController.getUser)

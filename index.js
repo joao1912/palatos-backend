@@ -14,7 +14,7 @@ app.use(express.json())
     await database.sync()
 })()
 
-app.get("/", function(req,res){res.send("OPAAAAAA, Quer café?")}) // não definido
+app.get("/", function(req,res){res.send("OPAAAAAA, Quer café?")}) 
 
 app.use("/users", userRoutes)
 
