@@ -1,5 +1,5 @@
 import express from "express"
-import restauranteController from "../controllers/restauranteController.js"
+import restauranteController from "../database/controllers/restauranteController.js"
 
 
 const RestauranteController = new restauranteController()

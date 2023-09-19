@@ -1,5 +1,5 @@
 import express from "express";
-import reservaController from "../controllers/reservaController.js";
+import reservaController from "../database/controllers/reservaController.js";
 
 const ReservaController = new reservaController()
 

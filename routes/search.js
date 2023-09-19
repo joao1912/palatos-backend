@@ -1,5 +1,5 @@
 import express from "express"
-import listaCategoriaController from "../controllers/ListaCategoriaController.js"
+import listaCategoriaController from "../database/controllers/ListaCategoriaController.js"
 const ListaCategoriaController = new listaCategoriaController()
 
 const router = express.Router()

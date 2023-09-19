@@ -1,6 +1,6 @@
 import express from "express"
 const router = express.Router()
-import UserController from "../controllers/userController.js"
+import UserController from "../database/controllers/userController.js"
 const userController = new UserController()
 
 import jwt from "jsonwebtoken"

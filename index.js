@@ -1,4 +1,4 @@
-import database from "./db.js"
+import database from "./database/db.js"
 import express from "express"
 
 import userRoutes from "./routes/user.js"
