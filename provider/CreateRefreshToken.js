@@ -12,6 +12,10 @@ class CreateRefreshToken {
         const atual = Date.now()
         if (atual > jwt.decode(oldFefreshToken).expiresIn) {
             throw new Error("token invalid")
+
+        } else {
+
+            //validar o token
         }
         
         if (userId) {
