@@ -11,7 +11,7 @@ class CreateRefreshToken {
         //verificar se o token ainda é valido
         const atual = Date.now()
         if (atual > jwt.decode(oldFefreshToken).expiresIn) {
-            console.log("teste")
+            throw new Error("token invalid")
         }
         
         if (userId) {
@@ -33,7 +33,7 @@ class CreateRefreshToken {
             return {tokenAccess, refreshToken}
         }
         
-        return null
+        throw new Error("lack of information")
 
     }
 }
