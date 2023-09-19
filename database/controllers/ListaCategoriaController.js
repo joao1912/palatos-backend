@@ -1,9 +1,29 @@
+import { error } from 'console'
 import ListaCategoria from '../models/listaCategoria.js'
+import Restaurante from '../models/Restaurante.js'
 
 class listaCategoriaController {
 
     async getCategorias(req, res) {
 
+        const id = req.params.id
+        if (id) {
+            id = Number(id)
+            const listaRestaurantes = Restaurante.findAll({
+                where: {
+                    fk_categoria: id
+                }
+            })
+            if (listaRestaurantes == null) {
+                throw new Error("Nenhum restaurante encontrado")
+            }
+
+            res.status(200).json({
+                status: 'Success',
+                listaRestaurantes
+            })
+            return
+        }
 
         const allCategorias = await ListaCategoria.findAll()
 
@@ -11,14 +31,14 @@ class listaCategoriaController {
 
             res.status(404).json({
 
-                status: 'NOT FOUND',
-                erro: 'Nenhuma categoria disponível.'
+                status: 'Not Found',
+                erro: 'Nenhuma categoria disponível'
 
             })
 
         } else {
             res.status(200).json({
-                status: 'success',
+                status: 'Success',
                 result: allCategorias
             })
         }
