@@ -1,7 +1,7 @@
 import { verify } from "jsonwebtoken"
 import { SECRET_KEY } from "../index.js"
 
-class AuthTokenAccess {
+class AuthToken {
 
     async execute(req, res, next) {
         const token = req.header("Authorization")
@@ -23,4 +23,4 @@ class AuthTokenAccess {
 
 }
 
-export {AuthTokenAccess} 
+export {AuthToken} 

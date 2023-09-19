@@ -1,4 +1,5 @@
 import { sign } from "jsonwebtoken"
+import jwt from "jsonwebtoken"
 import { SECRET_KEY } from "../index.js"
 import BlackListToken from "../database/models/BlackListToken.js"
 
@@ -7,10 +8,11 @@ class CreateRefreshToken {
 
     async execute(userId, oldFefreshToken) {
 
-        //validar aqui se o refresh token ainda esta valido
-        // if () {
-
-        // }
+        //verificar se o token ainda é valido
+        const atual = Date.now()
+        if (atual > jwt.decode(oldFefreshToken).expiresIn) {
+            console.log("teste")
+        }
         
         if (userId) {
 

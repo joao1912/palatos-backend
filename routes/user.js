@@ -3,7 +3,7 @@ const router = express.Router()
 import UserController from "../database/controllers/userController.js"
 const userController = new UserController()
 
-import { AuthTokenAccess } from "../Middlewares/AuthTokenAccess.js"
+import { AuthTokenAccess } from "../Middlewares/AuthToken.js"
 const authTokenAccess = new AuthTokenAccess()
 
 router.get("/", authTokenAccess.execute() , userController.getUser)
