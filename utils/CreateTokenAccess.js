@@ -10,7 +10,7 @@ class CreateTokenAccess {
     async execute(userId) {
 
         if (userId) {
-            const token = sign({userId: userId}, SECRET_KEY, {expiresIn:3600000}) // 1 hora
+            const token = sign({userId: userId}, SECRET_KEY, {expiresIn: 604800000 }) // 7 dias
             const refreshToken = createRefreshToken.execute(userId)
 
             return {token, refreshToken}
