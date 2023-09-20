@@ -1,6 +1,6 @@
 import Sequelize from "sequelize"
 import dotenv from "dotenv"
-const env = dotenv.config().parsed
+export const env = dotenv.config().parsed
 
 const database = new Sequelize({
     dialect: env.DB_DRIVE,
