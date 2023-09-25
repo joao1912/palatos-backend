@@ -59,10 +59,11 @@ class restauranteController {
 
     async createRestaurant(req, res) {
 
+        const idUser = 3 //pegar o id do accessToken
+
         try {
 
             const {
-                idUser,
                 nome,
                 descricao,
                 foto,
