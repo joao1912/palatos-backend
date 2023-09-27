@@ -1,5 +1,7 @@
 import express from "express"
 import restauranteController from "../database/controllers/restauranteController.js"
+import { AuthToken } from "../Middlewares/AuthToken.js"
+const authToken = new AuthToken()
 
 
 const RestauranteController = new restauranteController()
@@ -10,7 +12,7 @@ router.get("/", RestauranteController.getRestaurant)
 
 router.get("/:id", RestauranteController.getRestaurant)
 
-router.post("/add" , RestauranteController.createRestaurant)
+router.post("/add" , authToken , RestauranteController.createRestaurant)
 
 router.put("/edit/:id", RestauranteController.editRestaurant)
 

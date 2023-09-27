@@ -7,14 +7,13 @@ class AuthToken {
         const token = req.header("Authorization")
 
         if (!token) {
-            res.status(401).json({
-                status: 'failed',
-                erro: "Token ausente"
-            })
+            throw new Error("Token ausente")
         }
         
         verify(token, SECRET_KEY, async (err, decode) => {
-            if (err) return res.status(401)
+            if (err) {
+                throw new Error("invalid token")
+            }
 
             req.id = decode.userId
             next()
