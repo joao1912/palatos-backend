@@ -9,7 +9,8 @@ export const storage = multer.diskStorage({
     filename: (req, file, cb) => {
         console.log("teste")
         const id = new Date().getTime()
-        cb(null, `${id}-${file.originalname}`)
+        cb(null, `${file.originalname}`)
+        // cb(null, `${id}-${file.originalname}`)
     }
 
 })
