@@ -1,16 +1,21 @@
 import multer from "multer";
+import path from "path"
 
 export const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         console.log(file.originalname)
 
-        cb(null, '../uploads')
+        cb(null, path.resolve("uploads"))
     },
     filename: (req, file, cb) => {
-        console.log("teste")
-        const id = new Date().getTime()
-        cb(null, `${file.originalname}`)
-        // cb(null, `${id}-${file.originalname}`)
+        
+        try {
+            const id = new Date().getTime()
+            cb(null, `${id}-${file.originalname}`)
+        } catch(err) {
+            console.log(err)
+        }
+        
     }
 
 })
