@@ -18,6 +18,8 @@ app.use(express.json())
 
 app.get("/", function(req,res){throw new Error("Um erro ai mano")}) 
 
+app.use("/files", express.static("uploads")) //para acessar a imagem é só por o caminho e o nome da imagems: baseUrl/files/nome-do-arquivo
+
 app.use("/users", userRoutes)
 
 app.use("/restaurante", restaurantRoutes)
@@ -25,6 +27,8 @@ app.use("/restaurante", restaurantRoutes)
 app.use("/restaurante", reservaRoutes)
 
 app.use("/search", searchRoutes)
+
+//criar uma rota para testar o upload de imagem no servidor
 
 
 app.use(erros)
