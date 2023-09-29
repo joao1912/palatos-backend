@@ -26,12 +26,7 @@ class restauranteController {
 
             } catch(err) {
 
-                console.log(err)
-                
-                res.json({
-                    status: 'failed',
-                    erro: "Não foi possível encontrar um restaurante com este ID."
-                })
+                throw new Error("Não foi possível encontrar um restaurante com este ID.")
                 
             }
         } else {
@@ -40,29 +35,25 @@ class restauranteController {
 
             if (everyRestaurants == null) {
 
-                res.status(404).json({
+                throw new Error("Restaurantes não encontrados.")
 
-                    status: 'failed',
-                    erro: "Restaurantes não encontrados."
-
-                })
-
-            } else {
-                res.status(200).json({
-                    status: 'success',
-                    result: everyRestaurants
-                })
             }
+
+            res.status(200).json({
+                status: 'success',
+                result: everyRestaurants
+            })
             
         }
     }
 
     async createRestaurant(req, res) {
 
+        const idUser = req.id;
+
         try {
 
             const {
-                idUser,
                 nome,
                 descricao,
                 foto,
@@ -106,26 +97,10 @@ class restauranteController {
             })
 
         } catch (err) {
-            res.json({
-                status: "failed",
-                erro: err
-            })
+            throw new Error("O servidor falhou em criar o restaurante")
         }
 
     }
-
-    async filterRestaurant() {
-        //lembre para usar query
-    }
-
-    //puxar os alimentos de um restaurante
-
-    //puxar os planos
-
-    //criar os pratos um por um
-
-    //---------
-    // menu administrativo puxar(perfil, menu, financeiro, reservas, comanda, mesas)
 
     async editRestaurant(req, res) {
 
@@ -153,40 +128,34 @@ class restauranteController {
             celular, 
         } = contato
 
-        try {
-            
-            const restaurant = await Restaurante.findOne({where: {fk_usuario: idUser}}) //talvez tenha que converter para numerico
+       
+        const restaurant = await Restaurante.findOne({where: {fk_usuario: idUser}}) //talvez tenha que converter para numerico
 
-            restaurant.set({
-                nome,
-                descricao,
-                foto,
-                plano,
-                endereco,
-                cep,
-                rua
-            })
-
-            restaurant.save()
-
-            await editConfigRest(restaurant.id, reservasAtivas, tempoTolerancia, avaliacaoComida)
-
-            await editContato(restaurant.id, telefone, celular)
-
-            res.status(200).json({
-                status: 'success',
-                restaurantUpdated: restaurant
-            })
-        
-        } catch(err) {
-
-            res.json({
-                status: 'failed',
-                erro: err
-            })
-                        
+        if (!restaurant) {
+            throw new Error("O servidor falhou em buscar o restaurante")
         }
 
+        restaurant.set({
+            nome,
+            descricao,
+            foto,
+            plano,
+            endereco,
+            cep,
+            rua
+        })
+
+        restaurant.save()
+
+        await editConfigRest(restaurant.id, reservasAtivas, tempoTolerancia, avaliacaoComida)
+
+        await editContato(restaurant.id, telefone, celular)
+
+        res.status(200).json({
+            status: 'success',
+            restaurantUpdated: restaurant
+        })
+    
     }
 
     async deleteRestaurant(req, res) {
@@ -202,10 +171,7 @@ class restauranteController {
             })
 
         } catch(err) {
-            res.json({
-                status: 'failed',
-                erro: err
-            })
+            throw new Error("O servidor falhou em deletar o restaurante")
         }
         
     }
@@ -218,6 +184,10 @@ async function createContato(idUser, telefone, celular) {
         celular,
         fk_usuario: idUser
     })
+
+    if (!contatoRest) {
+        throw new Error("Não foi possível criar o contato.")
+    }
 }
 
 async function createRestConfig(restauranteId,  reservas_ativas, tempo_tolerancia, avaliacao_comida) {
@@ -227,6 +197,9 @@ async function createRestConfig(restauranteId,  reservas_ativas, tempo_toleranci
         avaliacao_comida,
         fk_restaurante: restauranteId
     })
+    if (!configRest) {
+        throw new Error("Não foi possível criar a configuração do restaurante.")
+    }
 }
 
 async function editConfigRest(restauranteId, reservas_ativas, tempo_tolerancia, avaliacao_comida) {
@@ -244,10 +217,7 @@ async function editConfigRest(restauranteId, reservas_ativas, tempo_tolerancia, 
     
     } catch(err) {
 
-        res.json({
-            status: 'failed',
-            erro: err
-        })
+        throw new Error("O servidor falhou em editar a configuração do restaurante")
                     
     }
 }
@@ -266,10 +236,7 @@ async function editContato(restauranteId, telefone_fixo, celular) {
     
     } catch(err) {
 
-        res.json({
-            status: 'failed',
-            erro: err
-        })
+        throw new Error("O servidor falhou em editar o contato do restaurante")
                     
     }
 }

@@ -9,51 +9,33 @@ class reservaController {
 
         if (typeof idUser === "number") {
 
-            try {
-                const reserva = await Reserva.findOne({where: {fk_usuario: idUser}})
+            const reserva = await Reserva.findOne({where: {fk_usuario: idUser}})
 
-                if (reserva == null) {
+            if (reserva == null) {
 
-                    res.status(404).json({
-                        status: 'failed',
-                        erro: "O usuário não foi encontrado."
-                    })
-
-                } else {
-
-                    res.status(200).json({
-                        status: 'success',
-                        reserva
-                    })
-                }
-
-                
-            } catch (err) {
-                console.log(err)
-
-                res.status(400).json({
+                res.status(404).json({
                     status: 'failed',
-                    erro: "O servidor falhou em buscar a reserva."
+                    erro: "O usuário não foi encontrado."
+                })
+
+            } else {
+
+                res.status(200).json({
+                    status: 'success',
+                    reserva
                 })
             }
             
         } else {
 
-            try {
-                const reservas = await Reserva.findAll()
-                res.status(200).json({
-                    status: 'success',
-                    reservas
-                })
-            } catch (err) {
-                console.log(err)
-
-                res.status(400).json({
-                    status: 'failed',
-                    erro: "O servidor falhou em buscar as reservas."
-                })
-                
+            const reservas = await Reserva.findAll()
+            if (!reservas) {
+                throw new Error("O servidor falhou em buscar as reservas.")
             }
+            res.status(200).json({
+                status: 'success',
+                reservas
+            })
         }
     }
 
@@ -61,7 +43,7 @@ class reservaController {
         const { idUsuario, dataEntrada } = req.body;
         // a data tera que vir completa com horario
 
-        if ( typeof idUsuario == "number") {
+        if ( typeof idUsuario === "number") {
 
             const usuario = await Usuario.findByPk(idUsuario);
             if (!usuario) {
@@ -73,33 +55,23 @@ class reservaController {
 
         } else {
 
-            res.status(400).json({
-                status: 'failed',
-                erro: "typeof error"
-            })
+            throw new Error("typeof error")
 
         }
 
-        try {
+        const novaReserva = await Reserva.create({
+            data_entrada: dataEntrada,
+            fk_usuario: idUsuario
+        })
 
-            const novaReserva = await Reserva.create({
-                data_entrada: dataEntrada,
-                fk_usuario: idUsuario
-            })
-
-            res.status(200).json({
-                status: 'success',
-                novaReserva
-            })
-            
-        } catch (err) {
-            console.log(err)
-
-            res.status(400).json({
-                status: 'failed',
-                erro: "O servidor falhou em criar a reserva."
-            }) 
+        if (!novaReserva) {
+            throw new Error("O servidor falhou em criar a reserva.")
         }
+
+        res.status(200).json({
+            status: 'success',
+            novaReserva
+        })
     }
 
     async editReserva(req, res) {
@@ -107,56 +79,35 @@ class reservaController {
         const cod = req.params.cod;
 
         if (typeof cod != "number") {
-            res.status(400).json({
-                status: 'failed',
-                erro: "typeof error"
-            })
+
+            throw new Error("typeof error")
+
         }
 
-        try {
+        const reserva = await Reserva.findByPk(cod)
 
-            const reserva = await Reserva.findByPk(cod)
+        if (!reserva) {
+            throw new Error("falhou em buscar a reserva")
+        }
 
-            if (reserva !== null) {
+        const completedOrNot = reserva.isCompleted
 
-                const completedOrNot = reserva.isCompleted
+        if (completedOrNot) {
+            throw new Error("A reserva ja foi completada.")
+        }
 
-                if (completedOrNot) {
-                    res.status(400).json({
-                        status: 'failed',
-                        erro: "A reserva ja foi completada."
-                    })
-                }
+        reserva.set({
+            isCompleted: true
+        })
 
-                reserva.set({
-                    isCompleted: true
-                })
+        reserva.save()
 
-                reserva.save()
-
-                res.status(200).json({
-                    status: 'success',
-                    message: "A reserva foi completada."
-                })
-
-            } else {
-                res.status(404).json({
-                    status: 'failed',
-                    erro: "Reserva não encontrada."
-                })
-            }
+        res.status(200).json({
+            status: 'success',
+            message: "A reserva foi completada."
+        })
             
-        } catch (err) {
-            console.log(err)
-
-            res.status(400).json({
-                status: 'failed',
-                erro: "O servidor falhou em buscar a reserva."
-            })
-        }
     }
-
-    
 }
 
 export default reservaController

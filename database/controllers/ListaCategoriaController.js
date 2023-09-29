@@ -29,20 +29,15 @@ class listaCategoriaController {
 
         if (allCategorias == null) {
 
-            res.status(404).json({
+            throw new Error("Nenhuma categoria disponível")
 
-                status: 'Not Found',
-                erro: 'Nenhuma categoria disponível'
-
-            })
-
-        } else {
-            res.status(200).json({
-                status: 'Success',
-                result: allCategorias
-            })
         }
-
+        
+        res.status(200).json({
+            status: 'Success',
+            result: allCategorias
+        })
+        
     }
 
 }
