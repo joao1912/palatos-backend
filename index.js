@@ -7,6 +7,11 @@ import restaurantRoutes from "./routes/Restaurante.js"
 import searchRoutes from "./routes/search.js"
 import reservaRoutes from "./routes/Reserva.js"
 
+import multer from "multer"
+import { storage } from "./Middlewares/MulterConfig.js"
+
+const upload = multer({storage: storage})
+
 import erros from "./Middlewares/erros.js"
 
 export const SECRET_KEY = "chaveSeg"
@@ -31,6 +36,9 @@ app.use("/restaurante", reservaRoutes)
 app.use("/search", searchRoutes)
 
 //criar uma rota para testar o upload de imagem no servidor
+app.get("/loadImage", upload.single("foto") ,(req, res) => {
+    res.json("tudo certo")
+})
 
 
 app.use(erros)
