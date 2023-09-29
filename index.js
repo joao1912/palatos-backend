@@ -36,7 +36,7 @@ app.get("/", function(req,res){throw new Error("Um erro ai mano")})
 // app.use("/search", searchRoutes)
 
 //criar uma rota para testar o upload de imagem no servidor
-app.get("/loadImage", upload.single("foto") ,(req, res) => {
+app.post("/loadImage", upload.single("foto") ,(req, res) => {
     res.json("tudo certo")
 })
 
