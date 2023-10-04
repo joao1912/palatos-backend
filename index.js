@@ -42,6 +42,13 @@ app.post("/loadImage", upload.single("foto") ,(req, res) => {
     res.json("tudo certo")
 })
 
+app.post("/loadImages", upload.array("foto") ,(req, res) => {
+    const fotos = req.files;
+
+    res.json({
+        imagens: [...fotos]
+    })
+})
 
 app.use(erros)
 
