@@ -27,7 +27,7 @@ app.get("/", (req, res) => {
     res.json({message: 'OLA!!'})
 }) 
 
-//app.use("/files", express.static("uploads")) //para acessar a imagem é só por o caminho e o nome da imagems: baseUrl/files/nome-do-arquivo
+app.use("/files", express.static("uploads")) //para acessar a imagem é só por o caminho e o nome da imagems: baseUrl/files/nome-do-arquivo
 
 //app.use("/users", userRoutes)
 
