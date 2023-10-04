@@ -50,13 +50,13 @@ class restauranteController {
     async createRestaurant(req, res) {
 
         const idUser = req.id;
+        const nomeFoto = req.file;
 
         try {
 
             const {
                 nome,
                 descricao,
-                foto,
                 plano,
                 endereco,
                 cep,
@@ -79,7 +79,7 @@ class restauranteController {
             const resultRestaurant = await Restaurante.create({
                 nome,
                 descricao,
-                foto,
+                foto: `http://45.224.129.126:8085/files/${nomeFoto}`,
                 plano,
                 endereco,
                 cep,

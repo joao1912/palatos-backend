@@ -13,6 +13,9 @@ Cardapio.init(
             autoIncrement: true,
             allowNull: false
         },
+        foto: {
+            type: DataTypes.STRING,
+        },
         nome_produto: {
             type: DataTypes.STRING(100),
             allowNull: false
