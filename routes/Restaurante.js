@@ -15,7 +15,7 @@ router.get("/", RestauranteController.getRestaurant)
 
 router.get("/:id", RestauranteController.getRestaurant)
 
-router.post("/add" , upload.array("foto") ,RestauranteController.createRestaurant)
+router.post("/add" , upload.single("file") ,RestauranteController.createRestaurant)
 
 router.put("/edit/:id", RestauranteController.editRestaurant)
 
