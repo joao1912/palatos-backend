@@ -52,6 +52,8 @@ app.post("/loadImages", upload.array("foto") ,(req, res) => {
 
     for(let i = 0; i < produtos.length ; i++) {
 
+        let imageNotExists = true;
+
         for (let j = 0; j < fotos.length; j++) {
             const nomeOriginal = fotos[j].originalname
             const indexPoint = nomeOriginal.indexOf(".")
@@ -64,9 +66,17 @@ app.post("/loadImages", upload.array("foto") ,(req, res) => {
             }
             
             if (produtos[i].nomeImagem == nomeOrigialFiltrado) {
+                imageNotExists = false
                 produtos[i].path = `http://45.224.129.126:8085/files/${fotos[j].filename}`
             }
+
+            if (fotos.length == (j + 1) && imageNotExists) {
+                produtos[i].path = `http://45.224.129.126:8085/files/foto-padrao.png` //colocar aqui a foto padrão
+            }
+
         }
+
+
     }
      
     //agora é só salvar no banco (cardapio) (criar o controller para o cardapio)

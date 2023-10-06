@@ -29,6 +29,10 @@ Cardapio.init(
             type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: 0
+        },
+        foto: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
     },
     {
