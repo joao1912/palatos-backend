@@ -45,6 +45,31 @@ app.post("/loadImage", upload.single("foto") ,(req, res) => {
 //aqui ele salva varias imagens de uma vez
 app.post("/loadImages", upload.array("foto") ,(req, res) => {
     const fotos = req.files;
+    const produtos = req.body;
+    // prop esperada {
+    //  nomeImagem
+    //}
+
+    for(let i = 0; i < produtos.length ; i++) {
+
+        for (let j = 0; j < fotos.length; j++) {
+            const nomeOriginal = fotos[j].originalname
+            const indexPoint = nomeOriginal.indexOf(".")
+            let nomeOrigialFiltrado
+
+            if (indexPoint !== -1) {
+                nomeOrigialFiltrado = nomeOriginal.slice(indexPoint)
+            } else {
+                nomeOrigialFiltrado = nomeOriginal
+            }
+            
+            if (produtos[i].nomeImagem == nomeOrigialFiltrado) {
+                produtos[i].path = `http://45.224.129.126:8085/files/${fotos[j].filename}`
+            }
+        }
+    }
+     
+    //agora é só salvar no banco (cardapio) (criar o controller para o cardapio)
 
     res.json({
         imagens: [...fotos]
