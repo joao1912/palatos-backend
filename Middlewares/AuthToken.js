@@ -16,6 +16,11 @@ class AuthToken {
             }
 
             req.id = decode.userId
+
+            if (decode.idRestaurante) {
+                req.idRestaurante = decode.idRestaurante; 
+            }
+            
             next()
         })   
     }

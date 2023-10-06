@@ -76,7 +76,6 @@ app.post("/loadImages", upload.array("foto") ,(req, res) => {
 
         }
 
-
     }
      
     //agora é só salvar no banco (cardapio) (criar o controller para o cardapio)

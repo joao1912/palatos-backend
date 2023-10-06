@@ -1,0 +1,25 @@
+ola estou criando esse arquivo para anotas os objetos que as requisições que alguns controladores aguardam.
+
+----------------------------------------------------------------
+
+CARDAPIO
+
+cardapioController.createCardapio(
+
+    header = {
+        accessToken,
+        restToken
+    }
+
+    body = {
+        nome,
+        preco,
+        descricao,
+        nomeImagem,
+        file(tem que conter a imagem na formatação correta)
+    }
+)
+
+EXTRA: nomeImagem tem que ser unico, não pode haver nomes iguais.
+
+----------------------------------------------------------------
