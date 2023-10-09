@@ -1,6 +1,8 @@
+import { SECRET_KEY } from "../../index.js";
 import ConfiguracoesRestaurantes from "../models/ConfiguracoesRestaurante.js";
 import Contato from "../models/Contato.js";
 import Restaurante from "../models/Restaurante.js"
+import jwt from "jsonwebtoken";
 
 class restauranteController {
 
@@ -57,24 +59,16 @@ class restauranteController {
             const {
                 nome,
                 descricao,
-                plano,
+                plano, //pendente
                 endereco,
                 cep,
                 rua,
-                configRestaurante,
-                contato
-            } = req.body;
-
-            const {
                 reservasAtivas,
                 tempoTolerancia,
-                avaliacaoComida
-            } = configRestaurante
-
-            const {
+                avaliacaoComida, //pendente
                 telefone,
                 celular,
-            } = contato
+            } = req.body;
 
             const resultRestaurant = await Restaurante.create({
                 nome,
@@ -91,9 +85,12 @@ class restauranteController {
 
             await createRestConfig(resultRestaurant.id, reservasAtivas, tempoTolerancia, avaliacaoComida)
 
+            const token = jwt.sign({userId: idUser, idRestaurante: resultRestaurant.id}, SECRET_KEY, {expiresIn: '7d'})
+
             res.status(200).json({
                 status: 'success',
-                resultRestaurant
+                resultRestaurant,
+                token
             })
 
         } catch (err) {

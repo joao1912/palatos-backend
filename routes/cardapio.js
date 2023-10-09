@@ -10,8 +10,8 @@ const upload = multer({storage})
 
 const CardapioController = new cardapioController()
 
-router.get("/:idRestautante", CardapioController.getCardapio)
+router.get("/cardapio/:idRestautante", CardapioController.getCardapio)
 
-router.post("/add", authToken.execute(), upload.array("file") ,CardapioController.createCardapio)
+router.post("/cardapio/add", authToken.execute(), upload.array("file") ,CardapioController.createCardapio)
 
 export default router

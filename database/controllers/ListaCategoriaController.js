@@ -1,4 +1,4 @@
-import { error } from 'console'
+
 import ListaCategoria from '../models/listaCategoria.js'
 import Restaurante from '../models/Restaurante.js'
 
