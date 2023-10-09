@@ -18,9 +18,6 @@ ConfiguracoesRestaurantes.init(
         tempo_tolerancia: {
             type: DataTypes.DECIMAL
         },
-        avaliacao_comida: {
-            type: DataTypes.BOOLEAN
-        }
 },
     {
         sequelize: database,

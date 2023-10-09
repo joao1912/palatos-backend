@@ -65,7 +65,6 @@ class restauranteController {
                 rua,
                 reservasAtivas,
                 tempoTolerancia,
-                avaliacaoComida, //pendente
                 telefone,
                 celular,
             } = req.body;
@@ -83,7 +82,7 @@ class restauranteController {
 
             await createContato(idUser, telefone, celular)
 
-            await createRestConfig(resultRestaurant.id, reservasAtivas, tempoTolerancia, avaliacaoComida)
+            await createRestConfig(resultRestaurant.id, reservasAtivas, tempoTolerancia)
 
             const token = jwt.sign({userId: idUser, idRestaurante: resultRestaurant.id}, SECRET_KEY, {expiresIn: '7d'})
 
@@ -110,22 +109,12 @@ class restauranteController {
             endereco,
             cep,
             rua,
-            configRestaurante,
-            contato
-        } = req.body;
-
-        const {
             reservasAtivas,
             tempoTolerancia, 
-            avaliacaoComida
-        } = configRestaurante
-
-        const {
             telefone,
             celular, 
-        } = contato
+        } = req.body;
 
-       
         const restaurant = await Restaurante.findOne({where: {fk_usuario: idUser}}) //talvez tenha que converter para numerico
 
         if (!restaurant) {
@@ -144,7 +133,7 @@ class restauranteController {
 
         restaurant.save()
 
-        await editConfigRest(restaurant.id, reservasAtivas, tempoTolerancia, avaliacaoComida)
+        await editConfigRest(restaurant.id, reservasAtivas, tempoTolerancia)
 
         await editContato(restaurant.id, telefone, celular)
 
