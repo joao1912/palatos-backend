@@ -1,5 +1,5 @@
 import express from 'express';
-import cardapioController from '../database/controllers/cardapioController';
+import cardapioController from '../database/controllers/cardapioController.js';
 import { AuthToken } from "../Middlewares/AuthToken.js"
 import multer from "multer"
 import { storage } from "./Middlewares/MulterConfig.js"
