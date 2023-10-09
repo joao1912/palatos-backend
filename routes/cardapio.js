@@ -2,7 +2,7 @@ import express from 'express';
 import cardapioController from '../database/controllers/cardapioController.js';
 import { AuthToken } from "../Middlewares/AuthToken.js"
 import multer from "multer"
-import { storage } from "./Middlewares/MulterConfig.js"
+import { storage } from "../Middlewares/MulterConfig.js"
 
 const router = express.Router();
 const authToken = new AuthToken()
