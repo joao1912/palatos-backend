@@ -1,4 +1,4 @@
-import { verify } from "jsonwebtoken"
+import jwt from "jsonwebtoken"
 import { SECRET_KEY } from "../index.js"
 
 class AuthToken {
@@ -10,7 +10,7 @@ class AuthToken {
             throw new Error("Token ausente")
         }
         
-        verify(token, SECRET_KEY, async (err, decode) => {
+        jwt.verify(token, SECRET_KEY, async (err, decode) => {
             if (err) {
                 throw new Error("invalid token")
             }
