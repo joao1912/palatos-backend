@@ -34,7 +34,7 @@ app.get("/", (req, res) => {
 
 app.use("/files", express.static("uploads")) //para acessar a imagem é só por o caminho e o nome da imagems: baseUrl/files/nome-do-arquivo
 
-app.use("/users", userRoutes)
+// app.use("/users", userRoutes)
 
 app.use("/restaurante", restaurantRoutes)
 
