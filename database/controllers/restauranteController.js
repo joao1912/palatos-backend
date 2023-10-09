@@ -3,6 +3,8 @@ import ConfiguracoesRestaurantes from "../models/ConfiguracoesRestaurante.js";
 import Contato from "../models/Contato.js";
 import Restaurante from "../models/Restaurante.js"
 import jwt from "jsonwebtoken";
+import { CreateTokenAccess } from "../../utils/CreateTokenAccess.js";
+const createTokenAccess = CreateTokenAccess()
 
 class restauranteController {
 
@@ -84,7 +86,9 @@ class restauranteController {
 
             await createRestConfig(resultRestaurant.id, reservasAtivas, tempoTolerancia)
 
-            const token = jwt.sign({userId: idUser, idRestaurante: resultRestaurant.id}, SECRET_KEY, {expiresIn: '7d'})
+            const token = createTokenAccess.execute(idUser, resultRestaurant.id)
+
+            // const token1 = jwt.sign({userId: idUser, idRestaurante: resultRestaurant.id}, SECRET_KEY, {expiresIn: '7d'})
 
             res.status(200).json({
                 status: 'success',

@@ -15,6 +15,9 @@ const upload = multer({storage: storage})
 
 import erros from "./Middlewares/erros.js"
 
+import { CreateTokenAccess } from "./utils/CreateTokenAccess.js"
+const createTokenAccess = CreateTokenAccess()
+
 export const SECRET_KEY = "chaveSeg"
 const app = express()
 app.use(express.json())
@@ -25,7 +28,8 @@ app.use(cors())
 })()
 
 app.get("/", (req, res) => {
-    res.json({message: 'OLA!!'})
+    const token = createTokenAccess.execute(10, 10)
+    res.json({message: 'OLA!!', token})
 }) 
 
 app.use("/files", express.static("uploads")) //para acessar a imagem é só por o caminho e o nome da imagems: baseUrl/files/nome-do-arquivo
