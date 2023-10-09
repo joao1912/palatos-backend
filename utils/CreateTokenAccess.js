@@ -1,4 +1,5 @@
-import { sign } from "jsonwebtoken"
+import pkg from 'jsonwebtoken';
+const { sign } = pkg;
 import { SECRET_KEY } from "../index.js"
 
 class CreateTokenAccess {
