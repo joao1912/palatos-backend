@@ -27,4 +27,4 @@ class AuthToken {
 
 }
 
-export {AuthToken} 
+export default AuthToken 
