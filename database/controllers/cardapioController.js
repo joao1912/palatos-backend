@@ -1,4 +1,4 @@
-import Cardapio from "../models/Cardapio";
+import Cardapio from "../models/Cardapio.js";
 
 class cardapioController {
 
