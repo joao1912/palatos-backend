@@ -16,7 +16,7 @@ const upload = multer({storage: storage})
 import erros from "./Middlewares/erros.js"
 
 import { CreateTokenAccess } from "./utils/CreateTokenAccess.js"
-const createTokenAccess = CreateTokenAccess()
+const createTokenAccess = new CreateTokenAccess()
 
 export const SECRET_KEY = "chaveSeg"
 const app = express()
