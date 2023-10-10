@@ -4,7 +4,7 @@ import Contato from "../models/Contato.js";
 import Restaurante from "../models/Restaurante.js"
 import jwt from "jsonwebtoken";
 import { CreateTokenAccess } from "../../utils/CreateTokenAccess.js";
-const createTokenAccess = CreateTokenAccess()
+const createTokenAccess = new CreateTokenAccess()
 
 class restauranteController {
 
