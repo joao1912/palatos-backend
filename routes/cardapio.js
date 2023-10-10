@@ -12,6 +12,6 @@ const CardapioController = new cardapioController()
 
 router.get("/cardapio/:idRestautante", CardapioController.getCardapio)
 
-router.post("/cardapio/add", authToken.execute(), upload.array("file") ,CardapioController.createCardapio)
+router.post("/cardapio/add", authToken.execute, upload.array("file") ,CardapioController.createCardapio)
 
 export default router
