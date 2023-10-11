@@ -6,11 +6,11 @@ class AuthToken {
     async execute(req, res, next) {
         const tokenNotFilter = req.header("Authorization")
         
-        const token = cutBearer(tokenNotFilter)
-        
         if (!token) {
             throw new Error("Token ausente")
         }
+
+        const token = cutBearer(tokenNotFilter)
         
         jwt.verify(token, SECRET_KEY, async (err, decode) => {
             if (err) {
