@@ -4,8 +4,10 @@ import { SECRET_KEY } from "../index.js"
 class AuthToken {
 
     async execute(req, res, next) {
-        const token = req.header("Authorization")
-        console.log(token)
+        const tokenNotFilter = req.header("Authorization")
+        
+        const token = cutBearer(tokenNotFilter)
+        
         if (!token) {
             throw new Error("Token ausente")
         }
@@ -25,6 +27,19 @@ class AuthToken {
         })   
     }
 
+}
+
+function cutBearer(token) {
+
+    const containOrNot = token.lastIndexOf("Bearer")
+
+    if (containOrNot !== -1) {
+        const newToken = token.substring(7)
+        return newToken
+    }
+
+    return token
+    
 }
 
 export default AuthToken 
