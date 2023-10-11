@@ -6,8 +6,8 @@ import cors from "cors"
     await database.sync()
 })()
 
-import userRoutes from "./routes/user.js"
 import restaurantRoutes from "./routes/Restaurante.js"
+import userRoutes from "./routes/user.js"
 import searchRoutes from "./routes/search.js"
 import reservaRoutes from "./routes/Reserva.js"
 import cardapioRoutes from "./routes/cardapio.js"
