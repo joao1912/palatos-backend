@@ -9,14 +9,14 @@ class CreateTokenAccess {
         if (userId && idRestaurante) {
             const token = sign({userId: userId, idRestaurante: idRestaurante}, SECRET_KEY, {expiresIn: 604800000 }) // 7 dias
 
-            return {token}
+            return token
         } else if (userId) {
             const token = sign({userId: userId}, SECRET_KEY, {expiresIn: 604800000 }) // 7 dias
 
-            return {token}
+            return token
         }
         
-        return "erro"
+        return null
     }
 }
 
