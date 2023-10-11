@@ -11,7 +11,7 @@ const RestauranteController = new restauranteController()
 
 const router = express.Router()
 
-router.get("/", authToken.execute ,RestauranteController.getRestaurant)
+router.get("/", RestauranteController.getRestaurant)
 
 router.get("/:id", RestauranteController.getRestaurant)
 

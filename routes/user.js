@@ -4,10 +4,10 @@ import UserController from "../database/controllers/userController.js"
 const userController = new UserController()
 
 import AuthToken from "../Middlewares/AuthToken.js"
-const authTokenAccess = new AuthToken()
+const authToken = new AuthToken()
 
-router.get("/", authTokenAccess.execute , userController.getUser)
+router.get("/", authToken.execute , userController.getUser)
 
-router.post("/newUser", userController.createUser)
+router.post("/newUser", authToken.execute ,userController.createUser)
 
 export default router
