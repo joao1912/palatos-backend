@@ -5,7 +5,7 @@ class AuthToken {
 
     async execute(req, res, next) {
         const token = req.header("Authorization")
-
+        console.log(token)
         if (!token) {
             throw new Error("Token ausente")
         }
@@ -20,7 +20,7 @@ class AuthToken {
             if (decode.idRestaurante) {
                 req.idRestaurante = decode.idRestaurante; 
             }
-            
+            console.log("ue")
             next()
         })   
     }
