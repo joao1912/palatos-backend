@@ -16,7 +16,7 @@ class CreateTokenAccess {
             return {token}
         }
         
-        return null
+        return "erro"
     }
 }
 
