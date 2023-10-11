@@ -7,7 +7,7 @@ class AuthToken {
         const tokenNotFilter = req.header("Authorization")
         
         if (!tokenNotFilter) {
-            throw new Error("Token ausente")
+            throw new Error("Token ausente", 401)
         }
 
         const token = cutBearer(tokenNotFilter)
