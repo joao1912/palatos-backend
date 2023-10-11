@@ -11,14 +11,14 @@ const RestauranteController = new restauranteController()
 
 const router = express.Router()
 
-router.get("/", RestauranteController.getRestaurant)
+router.get("/", authToken.execute ,RestauranteController.getRestaurant)
 
 router.get("/:id", RestauranteController.getRestaurant)
 
-router.post("/add" , upload.single("file") ,RestauranteController.createRestaurant)
+router.post("/add", authToken.execute, upload.single("file") ,RestauranteController.createRestaurant)
 
-router.put("/edit/:id", RestauranteController.editRestaurant)
+router.put("/edit/:id", authToken.execute, RestauranteController.editRestaurant)
 
-router.delete("/delete/:id", RestauranteController.deleteRestaurant)
+router.delete("/delete/:id",authToken.execute, RestauranteController.deleteRestaurant)
 
 export default router

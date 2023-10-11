@@ -1,8 +1,6 @@
-import { SECRET_KEY } from "../../index.js";
 import ConfiguracoesRestaurantes from "../models/ConfiguracoesRestaurante.js";
 import Contato from "../models/Contato.js";
 import Restaurante from "../models/Restaurante.js"
-import jwt from "jsonwebtoken";
 import { CreateTokenAccess } from "../../utils/CreateTokenAccess.js";
 const createTokenAccess = new CreateTokenAccess()
 
@@ -86,7 +84,7 @@ class restauranteController {
 
             await createRestConfig(resultRestaurant.id, reservasAtivas, tempoTolerancia)
 
-            const token = createTokenAccess.execute(idUser, resultRestaurant.id)
+            const token = await createTokenAccess.execute(idUser, resultRestaurant.id)
 
             // const token1 = jwt.sign({userId: idUser, idRestaurante: resultRestaurant.id}, SECRET_KEY, {expiresIn: '7d'})
 
