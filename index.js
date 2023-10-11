@@ -2,6 +2,10 @@ import database from "./database/db.js"
 import express from "express"
 import cors from "cors"
 
+;(async function(){
+    await database.sync()
+})()
+
 import userRoutes from "./routes/user.js"
 import restaurantRoutes from "./routes/Restaurante.js"
 import searchRoutes from "./routes/search.js"
@@ -22,10 +26,6 @@ export const SECRET_KEY = "chaveSeg"
 const app = express()
 app.use(express.json())
 app.use(cors())
-
-;(async function(){
-    await database.sync()
-})()
 
 app.get("/", (req, res) => {
     const token = createTokenAccess.execute(10, 10)
