@@ -6,7 +6,7 @@ class AuthToken {
     async execute(req, res, next) {
         const tokenNotFilter = req.header("Authorization")
         
-        if (!token) {
+        if (!tokenNotFilter) {
             throw new Error("Token ausente")
         }
 
