@@ -28,9 +28,18 @@ app.use(express.json())
 app.use(cors())
 
 app.get("/", (req, res) => {
-    const token = createTokenAccess.execute(10, 10)
+    
     res.json({message: 'OLA!!', token})
 }) 
+
+app.post("/createToken", (req, res) => {
+    const token = createTokenAccess.execute(10, 10)
+
+    res.status(200).json({
+        message: "eeeeee",
+        token
+    })
+})
 
 app.use("/files", express.static("uploads")) //para acessar a imagem é só por o caminho e o nome da imagems: baseUrl/files/nome-do-arquivo
 
