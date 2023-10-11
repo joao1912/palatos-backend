@@ -28,20 +28,12 @@ Categoria.init(
 
 // relacionamento muitos pra muitos
 
-Categoria.belongsToMany(Restaurante, {
+Restaurante.belongsToMany(Categoria, {
     through: {
         model: ListaCategoria,
     },
-    foreignKey: "fk_restaurante",
+    foreignKey: "fk_categoria",
     constraints: true
 })
-
-// Restaurante.belongsToMany(Categoria, {
-//     through: {
-//         model: ListaCategoria,
-//     },
-//     foreignKey: "fk_categoria",
-//     constraints: true
-// })
 
 export default Categoria
