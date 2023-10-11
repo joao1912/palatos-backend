@@ -1,6 +1,7 @@
 import database from "./database/db.js"
 import express from "express"
 import cors from "cors"
+import 'express-async-errors'
 
 ;(async function(){
     await database.sync()
