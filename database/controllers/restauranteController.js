@@ -54,14 +54,12 @@ class restauranteController {
         const idUser = req.id;
         const nomeFoto = req.file;
 
-        console.log("restauranteCriado")
-
         try {
-
+            let plano = 3
             const {
                 nome,
                 descricao,
-                plano, //pendente
+               // plano, 
                 endereco,
                 cep,
                 rua,
