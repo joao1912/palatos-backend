@@ -11,7 +11,7 @@ class userController {
         res.status(200).json({
             status: "success",
             message: "user authenticated"
-        })
+        }) 
     }
 
     async createUser(req, res) {

@@ -8,16 +8,15 @@ cardapioController.createCardapio(
 
     header = {
         accessToken,
-        restToken
     }
 
-    body = {
+    body = [{
         nome,
         preco,
         descricao,
         nomeImagem,
         file(tem que conter a imagem na formatação correta)
-    }
+    }]
 )
 
 EXTRA: nomeImagem tem que ser unico, não pode haver nomes iguais.
