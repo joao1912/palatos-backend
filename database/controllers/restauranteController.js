@@ -97,6 +97,7 @@ class restauranteController {
             })
 
         } catch (err) {
+            console.log(err)
             throw new Error("O servidor falhou em criar o restaurante")
         }
 
