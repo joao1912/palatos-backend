@@ -28,7 +28,7 @@ class cardapioController {
     async createCardapio(req, res) {
 
         const fotos = req.files;
-        const [produtos] = req.body;
+        const produtos = req.body;
         const idRestautante = req.idRestaurante;
 
         if (!idRestautante) {
