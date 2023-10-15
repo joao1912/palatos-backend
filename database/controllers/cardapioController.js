@@ -42,6 +42,7 @@ class cardapioController {
         
         for (let prop in produtos) {
             const formData = produtos[prop]
+            console.log(formData)
             const nome_produto = formData.get('nome')
             const descricao = formData.get('descricao')
             const preco = Number(formData.get('preco'))
