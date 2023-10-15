@@ -42,7 +42,7 @@ class cardapioController {
         
         for (let prop in produtos) {
             const {nome, descricao, preco, path} = produtos[prop]
-
+            console.log(produtos[prop])
             const entries = produtos[prop].entries();
 
             for (const pair of entries) {
