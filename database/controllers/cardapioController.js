@@ -61,6 +61,7 @@ class cardapioController {
             let product
             try {
                 product = await Cardapio.create(newProduct)
+                console.log(product)
             } catch(err) {
                 console.log(err)
                 throw new Error("O servidor falhou em criar o menu")
