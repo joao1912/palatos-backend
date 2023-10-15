@@ -28,8 +28,10 @@ class cardapioController {
     async createCardapio(req, res) {
 
         const fotos = req.files;
-        const produtos = req.body;
+        const produtosObj = req.body;
         const idRestautante = req.idRestaurante;
+
+        const produtos = [produtosObj]
 
         if (!idRestautante) {
             throw new Error("token inválido")
