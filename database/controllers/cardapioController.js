@@ -34,7 +34,7 @@ class cardapioController {
         if (!idRestautante) {
             throw new Error("token inválido")
         }
-
+        console.log("===============================")
         console.log("Fotos: "+JSON.stringify(fotos))
         console.log("===============================")
         console.log("Prodtos: "+ JSON.stringify(produtos))
@@ -52,13 +52,20 @@ class cardapioController {
 
             const newProduct = {
                 nome_produto: produtos[i].nome,
-                preco: produtos[i].preco,
+                preco: Number(produtos[i].preco),
                 descricao: produtos[i].descricao,
                 foto: produtos[i].path,
                 fk_restaurante: idRestautante
             }
 
-            const product = await Cardapio.create(newProduct)
+            let product
+            try {
+                product = await Cardapio.create(newProduct)
+            } catch(err) {
+                console.log(err)
+                throw new Error("O servidor falhou em criar o menu")
+            }
+
             menu.push(product)
             
         }
