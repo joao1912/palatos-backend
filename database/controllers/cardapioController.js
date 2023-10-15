@@ -41,10 +41,10 @@ class cardapioController {
         const menu = []  
         
         for (let prop in produtos) {
-            
+
             console.log(prop)
             console.log(produtos)
-            console.log(produtos[prop])
+            console.log(JSON.parse(produtos[prop]))
 
             const {nome, descricao, preco, path} = produtos[prop]
             
