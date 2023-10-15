@@ -28,37 +28,31 @@ class cardapioController {
     async createCardapio(req, res) {
 
         const fotos = req.files;
-        const produtosObj = req.body;
+        const produtos = req.body;
         const idRestautante = req.idRestaurante;
-
-        const produtos = [produtosObj]
 
         if (!idRestautante) {
             throw new Error("token inválido")
         }
-        console.log("===============================")
-        console.log("Fotos: "+JSON.stringify(fotos))
-        console.log("===============================")
-        console.log("Produtos: ")
-        console.log(produtos)
-        console.log("===============================")
+        
+        console.log(produtos[i].nome)
 
         compareAndSetPath(produtos, fotos)
 
-        console.log("===============================")
-        console.log("NewProdtos: "+ JSON.stringify(produtos))
-        console.log("===============================")
-
-        const menu = []
+        const menu = []  
         
-        
-        for (let i = 0; i < produtos.length ; i++) {
-            console.log("teste")
+        for (let prop in produtos) {
+            const formData = produtos[prop]
+            const nome_produto = formData.get('nome')
+            const descricao = formData.get('descricao')
+            const preco = Number(formData.get('preco'))
+            const foto = formData.get('path')
+            
             const newProduct = {
-                nome_produto: produtos[i].nome,
-                preco: Number(produtos[i].preco),
-                descricao: produtos[i].descricao,
-                foto: produtos[i].path,
+                nome_produto,
+                preco,
+                descricao,
+                foto,
                 fk_restaurante: idRestautante
             }
 
@@ -87,7 +81,7 @@ class cardapioController {
 
 function compareAndSetPath(produtos, fotos) {
 
-    for(let i = 0; i < produtos.length ; i++) {
+    for(let prop in produtos) {
 
         let imageNotExists = true;
 
@@ -101,14 +95,16 @@ function compareAndSetPath(produtos, fotos) {
             } else {
                 nomeOrigialFiltrado = nomeOriginal
             }
+
+            const nomeImagem = produtos[prop].get('nomeImagem')
             
-            if (produtos[i].nomeImagem == nomeOrigialFiltrado) {
+            if (nomeImagem == nomeOrigialFiltrado) {
                 imageNotExists = false
-                produtos[i].path = `http://45.224.129.126:8085/files/${fotos[j].filename}`
+                produtos[prop].append('path', `http://45.224.129.126:8085/files/${fotos[j].filename}`)
             }
 
             if (fotos.length == (j + 1) && imageNotExists) {
-                produtos[i].path = `http://45.224.129.126:8085/files/foto-padrao.png` //colocar aqui a foto padrão
+                produtos[prop].append('path', `http://45.224.129.126:8085/files/foto-padrao.png`)  //colocar aqui a foto padrão
             }
         }
     }
