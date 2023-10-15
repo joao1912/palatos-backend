@@ -2,6 +2,7 @@ import database from "./database/db.js"
 import express from "express"
 import cors from "cors"
 import 'express-async-errors'
+import Usuario from "./database/models/Usuario.js"
 
 ;(async function(){
     await database.sync()
@@ -97,6 +98,13 @@ app.post("/loadImages", upload.array("foto") ,(req, res) => {
     res.json({
         imagens: [...fotos]
     })
+})
+
+Usuario.create({
+    id: 10,
+    nome_completo: "userTester",
+    senha: "senha",
+    email: "test@teste.com"
 })
 
 app.use(erros)
