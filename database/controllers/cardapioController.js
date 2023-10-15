@@ -42,6 +42,8 @@ class cardapioController {
         
         for (let prop in produtos) {
             const {nome, descricao, preco, path} = produtos[prop]
+
+            console.log(descricao + " "+ preco)
             
             const newProduct = {
                 nome_produto: nome,
