@@ -48,6 +48,7 @@ class cardapioController {
 
         const menu = []
         
+        console.log(produtos.length)
         for (let i = 0; i < produtos.length ; i++) {
 
             const newProduct = {
