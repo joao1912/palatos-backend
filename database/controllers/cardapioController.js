@@ -41,8 +41,13 @@ class cardapioController {
         const menu = []  
         
         for (let prop in produtos) {
-            const {nome, descricao, preco, path} = produtos[prop]
+            
+            console.log(prop)
+            console.log(produtos)
             console.log(produtos[prop])
+
+            const {nome, descricao, preco, path} = produtos[prop]
+            
             const entries = produtos[prop].entries();
 
             for (const pair of entries) {
