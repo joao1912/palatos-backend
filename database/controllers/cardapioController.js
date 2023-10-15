@@ -50,7 +50,7 @@ class cardapioController {
         
         console.log(produtos.length)
         for (let i = 0; i < produtos.length ; i++) {
-
+            console.log("teste")
             const newProduct = {
                 nome_produto: produtos[i].nome,
                 preco: Number(produtos[i].preco),
