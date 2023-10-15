@@ -69,6 +69,8 @@ class restauranteController {
                 celular,
             } = req.body;
 
+            console.log(nome, descricao,plano, endereco, cep,rua,reservasAtivas,tempoTolerancia,telefone,celular, idUser, nomeFoto)
+
             const resultRestaurant = await Restaurante.create({
                 nome,
                 descricao,
