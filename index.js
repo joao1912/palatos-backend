@@ -100,13 +100,6 @@ app.post("/loadImages", upload.array("foto") ,(req, res) => {
     })
 })
 
-Usuario.create({
-    id: 10,
-    nome_completo: "userTester",
-    senha: "senha",
-    email: "test@teste.com"
-})
-
 app.use(erros)
 
 app.listen(8085, () => {
