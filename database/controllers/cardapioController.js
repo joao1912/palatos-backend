@@ -41,18 +41,13 @@ class cardapioController {
         const menu = []  
         
         for (let prop in produtos) {
-            const formData = produtos[prop]
-            console.log(formData[0])
-            const nome_produto = formData.get('nome')
-            const descricao = formData.get('descricao')
-            const preco = Number(formData.get('preco'))
-            const foto = formData.get('path')
+            const {nome, descricao, preco, path} = produtos[prop]
             
             const newProduct = {
-                nome_produto,
-                preco,
-                descricao,
-                foto,
+                nome_produto: nome,
+                preco: preco,
+                descricao: descricao,
+                foto: path,
                 fk_restaurante: idRestautante
             }
 
