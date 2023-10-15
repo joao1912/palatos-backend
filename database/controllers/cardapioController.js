@@ -1,3 +1,4 @@
+import { json } from "sequelize";
 import Cardapio from "../models/Cardapio.js";
 
 class cardapioController {
@@ -34,7 +35,16 @@ class cardapioController {
             throw new Error("token inválido")
         }
 
+        console.log("Fotos: "+JSON.stringify(fotos))
+        console.log("===============================")
+        console.log("Prodtos: "+ JSON.stringify(produtos))
+        console.log("===============================")
+
         compareAndSetPath(produtos, fotos)
+
+        console.log("===============================")
+        console.log("NewProdtos: "+ JSON.stringify(produtos))
+        console.log("===============================")
 
         const menu = []
         
