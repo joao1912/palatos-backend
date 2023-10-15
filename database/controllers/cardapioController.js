@@ -35,7 +35,6 @@ class cardapioController {
             throw new Error("token inválido")
         }
         
-        console.log(produtos[i].nome)
 
         compareAndSetPath(produtos, fotos)
 
