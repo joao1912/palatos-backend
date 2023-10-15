@@ -37,7 +37,8 @@ class cardapioController {
         console.log("===============================")
         console.log("Fotos: "+JSON.stringify(fotos))
         console.log("===============================")
-        console.log("Prodtos: "+ JSON.stringify(produtos))
+        console.log("Produtos: ")
+        console.log(produtos)
         console.log("===============================")
 
         compareAndSetPath(produtos, fotos)
@@ -48,7 +49,7 @@ class cardapioController {
 
         const menu = []
         
-        console.log(produtos.length)
+        
         for (let i = 0; i < produtos.length ; i++) {
             console.log("teste")
             const newProduct = {
