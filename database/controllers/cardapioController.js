@@ -27,62 +27,66 @@ class cardapioController {
 
     async createCardapio(req, res) {
 
-        const fotos = req.files;
-        const produtos = req.body;
+        const foto = req.file;
+        const {
+            nome,
+            descricao,
+            preco
+        } = req.body;
         const idRestautante = req.idRestaurante;
 
         if (!idRestautante) {
             throw new Error("token inválido")
         }
-        
 
-        compareAndSetPath(produtos, fotos)
+        const path = `http://45.224.129.126:8085/files/${foto.filename}`
+       
+        const newProduct = {
+            nome_produto: nome,
+            preco: preco,
+            descricao: descricao,
+            foto: path,
+            fk_restaurante: idRestautante
+        }
 
-        const menu = []  
-        
-        for (let prop in produtos) {
+        let produto
 
-            console.log(prop)
-            console.log(produtos)
-            console.log(JSON.parse(produtos[prop]))
+        try {
 
-            const {nome, descricao, preco, path} = produtos[prop]
-            
-            const entries = produtos[prop].entries();
+            produto = await Cardapio.create(newProduct)
 
-            for (const pair of entries) {
-                console.log(pair[0] + ', ' + pair[1]);
-            }
-            
-            const newProduct = {
-                nome_produto: nome,
-                preco: preco,
-                descricao: descricao,
-                foto: path,
-                fk_restaurante: idRestautante
-            }
-
-            let product
-            try {
-                product = await Cardapio.create(newProduct)
-                console.log(product)
-            } catch(err) {
-                console.log(err)
-                throw new Error("O servidor falhou em criar o menu")
-            }
-
-            menu.push(product)
-            
+        } catch (err) {
+            console.log(err)
+            throw new Error("O servidor falhou em criar o menu.")
         }
 
         res.status(200).json({
             status: "success",
             message: "Menu criado com sucesso.",
-            menu: menu
+            menu: produto
         })
 
     }
 
+    async deleteCardapio(req,res) {
+
+        const idPratos = req.body;
+
+        for (let i = 0 ; i < idPratos.length ; i++) {
+
+            await Cardapio.destroy({
+                where: {
+                    codigo: idPratos[i]
+                }
+            })
+
+        }
+
+        res.status(200).json({
+            status: "success",
+            message: "Pratos deletados"
+        })
+    }
 }
 
 function compareAndSetPath(produtos, fotos) {
@@ -106,7 +110,7 @@ function compareAndSetPath(produtos, fotos) {
             
             if (nomeImagem == nomeOrigialFiltrado) {
                 imageNotExists = false
-                produtos[prop].append('path', `http://45.224.129.126:8085/files/${fotos[j].filename}`)
+                produtos[prop].append('path', )
             }
 
             if (fotos.length == (j + 1) && imageNotExists) {
