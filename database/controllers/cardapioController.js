@@ -1,4 +1,3 @@
-import { json } from "sequelize";
 import Cardapio from "../models/Cardapio.js";
 
 class cardapioController {
@@ -86,37 +85,6 @@ class cardapioController {
             status: "success",
             message: "Pratos deletados"
         })
-    }
-}
-
-function compareAndSetPath(produtos, fotos) {
-
-    for(let prop in produtos) {
-
-        let imageNotExists = true;
-
-        for (let j = 0; j < fotos.length; j++) {
-            const nomeOriginal = fotos[j].originalname
-            const indexPoint = nomeOriginal.indexOf(".")
-            let nomeOrigialFiltrado
-
-            if (indexPoint !== -1) {
-                nomeOrigialFiltrado = nomeOriginal.slice(indexPoint)
-            } else {
-                nomeOrigialFiltrado = nomeOriginal
-            }
-
-            const nomeImagem = produtos[prop].get('nomeImagem')
-            
-            if (nomeImagem == nomeOrigialFiltrado) {
-                imageNotExists = false
-                produtos[prop].append('path', )
-            }
-
-            if (fotos.length == (j + 1) && imageNotExists) {
-                produtos[prop].append('path', `http://45.224.129.126:8085/files/foto-padrao.png`)  //colocar aqui a foto padrão
-            }
-        }
     }
 }
 

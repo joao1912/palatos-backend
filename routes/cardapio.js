@@ -14,4 +14,6 @@ router.get("/cardapio/:idRestautante", CardapioController.getCardapio)
 
 router.post("/cardapio/add", authToken.execute, upload.array("file") ,CardapioController.createCardapio)
 
+router.delete("/cardapio/delete", authToken.execute, CardapioController.deleteCardapio)
+
 export default router
