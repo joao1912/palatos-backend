@@ -12,7 +12,7 @@ const CardapioController = new cardapioController()
 
 router.get("/cardapio/:idRestautante", CardapioController.getCardapio)
 
-router.post("/cardapio/add", authToken.execute ,CardapioController.createCardapio)
+router.post("/cardapio/add", authToken.execute, upload.single("file") ,CardapioController.createCardapio)
 
 router.delete("/cardapio/delete", authToken.execute, CardapioController.deleteCardapio)
 
