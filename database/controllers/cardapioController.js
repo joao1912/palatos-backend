@@ -40,9 +40,10 @@ class cardapioController {
             throw new Error("token inválido")
         }
         console.log("teste 3")
+        console.log(foto)
         const path = `http://45.224.129.126:8085/files/${foto.filename}`
        
-        console.log("só pra ver né")
+        
         const newProduct = {
             nome_produto: nome,
             preco: preco,
