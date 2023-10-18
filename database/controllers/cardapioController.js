@@ -38,7 +38,7 @@ class cardapioController {
         if (idRestautante == null) {
             throw new Error("token inválido")
         }
-        console.log(foto)
+        console.log("teste: " + foto)
         const path = `http://45.224.129.126:8085/files/${foto.filename}`
         
         const newProduct = {
