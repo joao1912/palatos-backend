@@ -35,11 +35,11 @@ class cardapioController {
         const idRestautante = req.idRestaurante;
         console.log("teste1")
         console.log(idRestautante)
-        if (!idRestautante) {
+        if (idRestautante == null) {
             console.log("teste2")
             throw new Error("token inválido")
         }
-
+        console.log("teste 3")
         const path = `http://45.224.129.126:8085/files/${foto.filename}`
        
         const newProduct = {
@@ -49,18 +49,19 @@ class cardapioController {
             foto: path,
             fk_restaurante: idRestautante
         }
-
+        console.log("teste 4")
         console.log(newProduct)
 
         let produto
 
         try {
-
+            console.log("teste 5")
             produto = await Cardapio.create(newProduct)
-            console.log("Produto criado: " + produto)
+            console.log("teste 6")
 
         } catch (err) {
-            console.log("ERRO: " + err)
+
+            console.log("teste 7")
             throw new Error("O servidor falhou em criar o menu.")
         }
 
