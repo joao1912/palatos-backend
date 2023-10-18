@@ -42,6 +42,7 @@ class cardapioController {
         console.log("teste 3")
         const path = `http://45.224.129.126:8085/files/${foto.filename}`
        
+        console.log("só pra ver né")
         const newProduct = {
             nome_produto: nome,
             preco: preco,
