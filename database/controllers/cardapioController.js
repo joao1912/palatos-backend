@@ -33,8 +33,9 @@ class cardapioController {
             preco
         } = req.body;
         const idRestautante = req.idRestaurante;
-
+        console.log("teste1")
         if (!idRestautante) {
+            console.log("teste2")
             throw new Error("token inválido")
         }
 
