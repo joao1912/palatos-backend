@@ -25,8 +25,7 @@ class cardapioController {
     }
 
     async createCardapio(req, res) {
-        console.log(req)
-        console.log(req.body)
+        
         const foto = req.file;
         const {
             nome,
@@ -36,15 +35,11 @@ class cardapioController {
 
         const idRestautante = req.idRestaurante;
       
-       
         if (idRestautante == null) {
             throw new Error("token inválido")
         }
-
-        console.log("teste 3")
         console.log(foto)
         const path = `http://45.224.129.126:8085/files/${foto.filename}`
-       
         
         const newProduct = {
             nome_produto: nome,
@@ -53,15 +48,14 @@ class cardapioController {
             foto: path,
             fk_restaurante: idRestautante
         }
-        console.log("teste 4")
-        console.log(newProduct)
+        
 
         let produto
 
         try {
-            console.log("teste 5")
+
             produto = await Cardapio.create(newProduct)
-            console.log("teste 6")
+           
 
         } catch (err) {
 
