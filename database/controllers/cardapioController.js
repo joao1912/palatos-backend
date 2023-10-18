@@ -26,14 +26,16 @@ class cardapioController {
 
     async createCardapio(req, res) {
         
-        const foto = req.file;
-        console.log(JSON.stringify(req.file))
+        //const foto = req.file;
+       
         const {
             nome,
             descricao,
-            preco
+            preco,
+            file
         } = req.body;
-
+        console.log(file)
+        console.log(JSON.stringify(file))
         const idRestautante = req.idRestaurante;
       
         if (idRestautante == null) {
