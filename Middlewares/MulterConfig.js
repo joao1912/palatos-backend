@@ -10,9 +10,9 @@ if (!fs.existsSync(uploadDirectory)) {
 }
 
 export const storage = multer.diskStorage({
+    
     destination: (req, file, cb) => {
-        console.log(file.originalname)
-
+        console.log("teste 32")
         cb(null, uploadDirectory)
     },
     filename: (req, file, cb) => {
@@ -21,6 +21,7 @@ export const storage = multer.diskStorage({
             const id = new Date().getTime()
             cb(null, `${id}-${file.originalname}`)
         } catch(err) {
+            console.log("teste 33")
             console.log(err)
         }
         
