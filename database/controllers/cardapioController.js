@@ -48,6 +48,8 @@ class cardapioController {
             fk_restaurante: idRestautante
         }
 
+        console.log(newProduct)
+
         let produto
 
         try {
