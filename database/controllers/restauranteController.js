@@ -72,6 +72,8 @@ class restauranteController {
 
             const contatoRest = await createContato(idUser, telefone, celular)
 
+            console.log(contatoRest)
+
             const resultRestaurant = await Restaurante.create({
                 nome,
                 descricao,
