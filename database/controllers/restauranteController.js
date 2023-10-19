@@ -70,7 +70,7 @@ class restauranteController {
                 celular,
             } = req.body;
 
-            console.log(nome, descricao,plano, endereco, cep,rua,reservasAtivas,tempoTolerancia,telefone,celular, idUser, nomeFoto)
+            const contatoRest = await createContato(idUser, telefone, celular)
 
             const resultRestaurant = await Restaurante.create({
                 nome,
@@ -80,10 +80,9 @@ class restauranteController {
                 endereco,
                 cep,
                 rua,
-                fk_usuario: idUser
+                fk_usuario: idUser,
+                fk_contato:contatoRest.id
             })
-
-            await createContato(idUser, telefone, celular)
 
             await createRestConfig(resultRestaurant.id, reservasAtivas, tempoTolerancia)
 
