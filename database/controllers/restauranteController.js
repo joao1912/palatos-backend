@@ -9,10 +9,9 @@ class restauranteController {
     async getRestaurant(req, res) {
 
         const id = req.params.id;
-        console.log(id)
-        console.log(req.params)
+        
         if (id) {
-            console.log("teste 1")
+           
             try {   
                 const result = await Restaurante.findByPk(id)
 
@@ -34,7 +33,7 @@ class restauranteController {
                 
             }
         } else {
-            console.log("teste 2")
+           
             const everyRestaurants = await Restaurante.findAll()
 
             if (everyRestaurants == null) {
@@ -76,7 +75,7 @@ class restauranteController {
             const resultRestaurant = await Restaurante.create({
                 nome,
                 descricao,
-                foto: `http://45.224.129.126:8085/files/${nomeFoto}`,
+                foto: `http://45.224.129.126:8085/files/${nomeFoto.filename}`,
                 plano,
                 endereco,
                 cep,
