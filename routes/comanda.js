@@ -7,5 +7,7 @@ const ComandaController = new comandaController()
 
 const router = express.Router()
 
-router.get("/comandas", comandaController.getComandas)
+router.get("/comandas", authToken.execute, comandaController.getComandas)
 router.delete("/comandas/delete/:id", comandaController.deleteComanda)
+
+export default router
