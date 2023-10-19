@@ -72,8 +72,6 @@ class restauranteController {
 
             const contatoRest = await createContato(idUser, telefone, celular)
 
-            console.log(contatoRest)
-
             const resultRestaurant = await Restaurante.create({
                 nome,
                 descricao,
@@ -181,6 +179,8 @@ async function createContato(idUser, telefone, celular) {
     if (!contatoRest) {
         throw new Error("Não foi possível criar o contato.")
     }
+
+    return contatoRest
 }
 
 async function createRestConfig(restauranteId,  reservas_ativas, tempo_tolerancia, avaliacao_comida) {
@@ -193,6 +193,8 @@ async function createRestConfig(restauranteId,  reservas_ativas, tempo_toleranci
     if (!configRest) {
         throw new Error("Não foi possível criar a configuração do restaurante.")
     }
+
+    return configRest
 }
 
 async function editConfigRest(restauranteId, reservas_ativas, tempo_tolerancia, avaliacao_comida) {
