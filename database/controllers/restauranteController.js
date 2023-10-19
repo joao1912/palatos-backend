@@ -10,8 +10,8 @@ class restauranteController {
 
         const id = req.params.id;
         if (id) {
-
-            try {
+            console.log("teste 1")
+            try {   
                 const result = await Restaurante.findByPk(id)
 
                 if (result == null) {
@@ -32,7 +32,7 @@ class restauranteController {
                 
             }
         } else {
-
+            console.log("teste 2")
             const everyRestaurants = await Restaurante.findAll()
 
             if (everyRestaurants == null) {
