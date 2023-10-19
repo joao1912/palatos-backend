@@ -13,6 +13,7 @@ import userRoutes from "./routes/user.js"
 import searchRoutes from "./routes/search.js"
 import reservaRoutes from "./routes/Reserva.js"
 import cardapioRoutes from "./routes/cardapio.js"
+import comandaRoutes from "./routes/comanda.js"
 
 import multer from "multer"
 import { storage } from "./Middlewares/MulterConfig.js"
@@ -52,6 +53,8 @@ app.use("/restaurante", restaurantRoutes)
 app.use("/restaurante", reservaRoutes)
 
 app.use("/restaurante", cardapioRoutes)
+
+app.use("/restaurante", comandaRoutes)
 
 app.use("/search", searchRoutes)
 
