@@ -9,6 +9,8 @@ class restauranteController {
     async getRestaurant(req, res) {
 
         const id = req.params.id;
+        console.log(id)
+        console.log(req.params)
         if (id) {
             console.log("teste 1")
             try {   
