@@ -1,13 +1,13 @@
 import express from "express";
-import ComandaController from "../database/controllers/comandaController"
-import AuthToken from "../Middlewares/AuthToken";
+import comandaController from "../database/controllers/comandaController.js"
+import AuthToken from "../Middlewares/AuthToken.js";
 
 const authToken = new AuthToken()
 const ComandaController = new comandaController()
 
 const router = express.Router()
 
-router.get("/comandas", authToken.execute, comandaController.getComandas)
-router.delete("/comandas/delete/:id", comandaController.deleteComanda)
+router.get("/comandas", authToken.execute, ComandaController.getComandas)
+router.delete("/comandas/delete/:id", ComandaController.deleteComanda)
 
 export default router

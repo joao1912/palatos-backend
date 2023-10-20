@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize";
 import Sequelize from "sequelize";
-import database from "../db";
-import ProdutoCarrinho from "./ProdutoCarrinho"
-import PedidoReserva from "./PedidoReserva"
+import database from "../db.js";
+import ProdutoCarrinho from "./ProdutoCarrinho.js"
+import PedidoReserva from "./PedidoReserva.js"
 
 class Comanda extends Sequelize.Model { }
 
