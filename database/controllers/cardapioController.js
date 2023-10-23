@@ -27,11 +27,12 @@ class cardapioController {
     async createCardapio(req, res) {
         
         const foto = req.file;
-        console.log(JSON.stringify(req.file))
+        
         const {
             nome,
             descricao,
-            preco
+            preco,
+            tipo
         } = req.body;
 
         const idRestautante = req.idRestaurante;
@@ -39,7 +40,7 @@ class cardapioController {
         if (idRestautante == null) {
             throw new Error("token inválido")
         }
-        console.log("teste: " + foto)
+        
         const path = `http://45.224.129.126:8085/files/${foto.filename}`
         
         const newProduct = {
@@ -47,20 +48,18 @@ class cardapioController {
             preco: preco,
             descricao: descricao,
             foto: path,
+            tipo: tipo,
             fk_restaurante: idRestautante
         }
         
-
         let produto
 
         try {
 
             produto = await Cardapio.create(newProduct)
-           
-
+        
         } catch (err) {
 
-            console.log("teste 7")
             throw new Error("O servidor falhou em criar o menu.")
         }
 

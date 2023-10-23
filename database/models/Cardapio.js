@@ -33,6 +33,10 @@ Cardapio.init(
         foto: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        tipo: {
+            type: DataTypes.STRING(20),
+            allowNull: false
         }
     },
     {
