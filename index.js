@@ -13,7 +13,7 @@ import userRoutes from "./routes/user.js"
 import searchRoutes from "./routes/search.js"
 import reservaRoutes from "./routes/Reserva.js"
 import cardapioRoutes from "./routes/cardapio.js"
-import comandaRoutes from "./routes/comanda.js"
+import comandaRoutes from "./routes/Comanda.js"
 
 import multer from "multer"
 import { storage } from "./Middlewares/MulterConfig.js"
@@ -29,6 +29,8 @@ export const SECRET_KEY = "chaveSeg"
 const app = express()
 app.use(express.json())
 app.use(cors())
+
+
 
 app.get("/", (req, res) => {
     

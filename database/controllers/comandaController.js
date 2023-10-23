@@ -1,4 +1,4 @@
-import Comanda from "../models/Comanda"
+import Comanda from "../models/Comanda.js"
 
 class comandaController {
     async getComandas(req, res) {
@@ -43,3 +43,5 @@ class comandaController {
         }
     }
 }
+
+export default comandaController
