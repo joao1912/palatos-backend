@@ -17,10 +17,18 @@ class financeiroController {
             }
         })
 
+        const allProducts = []
+        for (let i = 0 ; i < allPurchases.length ; i++) {
+
+            const product = await Cardapio.findByPk(allPurchases.fk_cardapio)
+            allProducts.push(product)
+
+        }
+
         const filteredPurchases = {
-            pratos: 0,
-            bebidas: 0,
-            sobremesas: 0
+            pratos: [],
+            bebidas: [],
+            sobremesas: []
         }
 
         const porcentPurchases = {
@@ -32,7 +40,7 @@ class financeiroController {
         if (!allPurchases) {
             res.status(200).json({
                 status: 'success',
-                allPurchases,
+                allProducts,
                 filteredPurchases,
                 porcentPurchases
             })
@@ -46,13 +54,13 @@ class financeiroController {
             switch(produto.tipo) {
 
                 case "Prato":
-                    filteredPurchases.pratos += 1
+                    filteredPurchases.pratos.push(produto)
                     break
                 case "Bebidas":
-                    filteredPurchases.bebidas += 1
+                    filteredPurchases.bebidas.push(produto)
                     break
                 case "Sobremesas":
-                    filteredPurchases.sobremesas += 1
+                    filteredPurchases.sobremesas.push(produto)
                     break
             }
 
@@ -60,9 +68,9 @@ class financeiroController {
 
         const totPurchases = allPurchases.length
 
-        porcentPurchases.pratos = (filteredPurchases.pratos / totPurchases) * 100;
-        porcentPurchases.bebidas = (filteredPurchases.bebidas / totPurchases) * 100;
-        porcentPurchases.sobremesas = (filteredPurchases.sobremesas / totPurchases) * 100;
+        porcentPurchases.pratos = (filteredPurchases.length / totPurchases) * 100;
+        porcentPurchases.bebidas = (filteredPurchases.length / totPurchases) * 100;
+        porcentPurchases.sobremesas = (filteredPurchases.length / totPurchases) * 100;
 
         res.status(200).json({
             status: 'success',
