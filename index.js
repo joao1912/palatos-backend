@@ -9,11 +9,12 @@ import Usuario from "./database/models/Usuario.js"
 })()
 
 import restaurantRoutes from "./routes/Restaurante.js"
-import userRoutes from "./routes/user.js"
+import userRoutes from "./routes/User.js"
 import searchRoutes from "./routes/search.js"
 import reservaRoutes from "./routes/Reserva.js"
-import cardapioRoutes from "./routes/cardapio.js"
+import cardapioRoutes from "./routes/Cardapio.js"
 import comandaRoutes from "./routes/Comanda.js"
+import financeiroRoutes from "./routes/Financeiro.js"
 
 import multer from "multer"
 import { storage } from "./Middlewares/MulterConfig.js"
@@ -58,52 +59,9 @@ app.use("/restaurante", cardapioRoutes)
 
 app.use("/restaurante", comandaRoutes)
 
+app.use("/restaurante", financeiroRoutes)
+
 app.use("/search", searchRoutes)
-
-//aqui ele salva uma imagem de cada vez
-app.post("/loadImage", upload.single("foto") ,(req, res) => {
-    res.json("tudo certo")
-})
-
-//aqui ele salva varias imagens de uma vez
-app.post("/loadImages", upload.array("foto") ,(req, res) => {
-    const fotos = req.files;
-    const produtos = req.body;
-
-    for(let i = 0; i < produtos.length ; i++) {
-
-        let imageNotExists = true;
-
-        for (let j = 0; j < fotos.length; j++) {
-            const nomeOriginal = fotos[j].originalname
-            const indexPoint = nomeOriginal.indexOf(".")
-            let nomeOrigialFiltrado
-
-            if (indexPoint !== -1) {
-                nomeOrigialFiltrado = nomeOriginal.slice(indexPoint)
-            } else {
-                nomeOrigialFiltrado = nomeOriginal
-            }
-            
-            if (produtos[i].nomeImagem == nomeOrigialFiltrado) {
-                imageNotExists = false
-                produtos[i].path = `http://45.224.129.126:8085/files/${fotos[j].filename}`
-            }
-
-            if (fotos.length == (j + 1) && imageNotExists) {
-                produtos[i].path = `http://45.224.129.126:8085/files/foto-padrao.png` //colocar aqui a foto padrão
-            }
-
-        }
-
-    }
-     
-    //agora é só salvar no banco (cardapio) (criar o controller para o cardapio)
-
-    res.json({
-        imagens: [...fotos]
-    })
-})
 
 app.use(erros)
 

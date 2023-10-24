@@ -3,6 +3,7 @@ import Sequelize from "sequelize"
 import database from "../db.js"
 import Usuario from "./Usuario"
 import Cardapio from "./Cardapio"
+import Restaurante from "./Restaurante"
 
 
 class Financeiro extends Sequelize.Model { }
@@ -36,6 +37,13 @@ Financeiro.belongsTo(
     {
         constraints: true,
         foreignKey:'fk_cardapio'
+    }
+)
+Financeiro.belongsTo(
+    Restaurante,
+    {
+        constraints: true,
+        foreignKey:'fk_restaurante'
     }
 )
 
