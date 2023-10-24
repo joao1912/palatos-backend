@@ -7,6 +7,7 @@ class comandaController {
             throw new Error("Token inválido.")
         }
 
+        try {
         const listComandas = await Comanda.findAll()
 
         res.status(200).json({
@@ -14,6 +15,9 @@ class comandaController {
             message: "Lista de comandas",
             ListaComandas: listComandas
         })
+    } catch(err) {
+        throw new Error("Erro ao obter comandas")
+    }
     }
 
     async deleteComanda(req, res) {
