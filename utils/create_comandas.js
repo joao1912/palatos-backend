@@ -13,7 +13,7 @@ const idRestaurante = 43
 async function create_comandas() {
     const idPedidoReserva = 1
 
-    result = await Mesa.create({
+    let result = await Mesa.create({
         qr_code: "vich",
         ocupada: false,
         conta: 154.55,
