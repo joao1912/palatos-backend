@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize"
 import Sequelize from "sequelize"
 import database from "../db.js"
-import Usuario from "./Usuario"
+import Usuario from "./Usuario.js"
 import Cardapio from "./Cardapio"
 import Restaurante from "./Restaurante"
 
