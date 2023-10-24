@@ -89,8 +89,6 @@ class restauranteController {
 
             const token = await createTokenAccess.execute(idUser, resultRestaurant.id)
 
-            // const token1 = jwt.sign({userId: idUser, idRestaurante: resultRestaurant.id}, SECRET_KEY, {expiresIn: '7d'})
-
             res.status(200).json({
                 status: 'success',
                 resultRestaurant,
