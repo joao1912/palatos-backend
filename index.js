@@ -61,7 +61,7 @@ app.use("/restaurante", reservaRoutes)
 
 app.use("/restaurante", cardapioRoutes)
 
-app.use("/restaurante", comandaRoutes)
+app.use("/restaurante/comandas", comandaRoutes)
 
 app.use("/restaurante", financeiroRoutes)
 
