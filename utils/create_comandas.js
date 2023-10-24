@@ -11,33 +11,7 @@ const userId = 10
 const idRestaurante = 43
 
 async function create_comandas() {
-    let result = await Cardapio.create({
-        codigo: 3000,
-        nome_produto: "Arroz",
-        preco: 20,
-        descricao: "Arroz da nossa terra, pra nossa gente",
-        foto: "",
-        tipo: "prato",
-        fk_restaurante: idRestaurante
-    })
-
-    console.log(result)
-
-    result = await Reserva.create({
-        cod: 233,
-        data_entrada: new Date().getTime() + 4,
-        fk_usuario: userId
-    })
-    console.log(result)
-
-    result = await PedidoReserva.create({
-        fk_reserva: 233,
-        fk_cardapio: 3000
-    })
-
-    console.log(result)
-
-    const idPedidoReserva = result.id
+    const idPedidoReserva = 1
 
     result = await Mesa.create({
         qr_code: "vich",
