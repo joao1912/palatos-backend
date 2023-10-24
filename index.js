@@ -9,7 +9,7 @@ import Usuario from "./database/models/Usuario.js"
 })()
 
 import restaurantRoutes from "./routes/Restaurante.js"
-import userRoutes from "./routes/user.js"
+import userRoutes from "./routes/User.js"
 import searchRoutes from "./routes/search.js"
 import reservaRoutes from "./routes/Reserva.js"
 import cardapioRoutes from "./routes/Cardapio.js"
