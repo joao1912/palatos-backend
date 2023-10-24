@@ -11,7 +11,7 @@ import Usuario from "./database/models/Usuario.js"
 
 import create_comandas from "./utils/create_comandas.js"
 
-create_comandas()
+//create_comandas()
 import restaurantRoutes from "./routes/Restaurante.js"
 import userRoutes from "./routes/User.js"
 import searchRoutes from "./routes/search.js"
