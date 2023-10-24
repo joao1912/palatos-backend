@@ -55,7 +55,6 @@ app.use("/files", express.static("uploads")) //para acessar a imagem é só por 
 
 app.use("/users", userRoutes)
 
-app.use("/restaurante", restaurantRoutes)
 
 app.use("/restaurante", reservaRoutes)
 
@@ -64,6 +63,8 @@ app.use("/restaurante", cardapioRoutes)
 app.use("/restaurante/comandas", comandaRoutes)
 
 app.use("/restaurante", financeiroRoutes)
+
+app.use("/restaurante", restaurantRoutes)
 
 app.use("/search", searchRoutes)
 
