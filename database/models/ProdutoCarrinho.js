@@ -38,13 +38,6 @@ ProdutoCarrinho.belongsTo(
 )
 
 
-ProdutoCarrinho.hasMany(
-    Cardapio,
-    {
-        constraints: true,
-        foreignKey:'fk_cardapio',
-    }
-)
 
 export default ProdutoCarrinho
 
