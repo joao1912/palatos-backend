@@ -6,6 +6,8 @@ class cardapioController {
 
         const { idRestautante } = req.params;
 
+        console.log("chegou")
+
         const menu = await Cardapio.findAll({
             where: {
                 fk_restaurante: idRestautante
