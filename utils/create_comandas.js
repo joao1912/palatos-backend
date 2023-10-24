@@ -17,7 +17,7 @@ async function create_comandas() {
         qr_code: "vich",
         ocupada: false,
         conta: 154.55,
-        identificacao_mesa: "Mesa noventa",
+        identificacao_mesa: "Mesa 90",
     })
 console.log(result)
 
