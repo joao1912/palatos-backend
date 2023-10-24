@@ -8,6 +8,10 @@ import Usuario from "./database/models/Usuario.js"
     await database.sync()
 })()
 
+
+import create_comandas from "./utils/create_comandas.js"
+
+create_comandas()
 import restaurantRoutes from "./routes/Restaurante.js"
 import userRoutes from "./routes/User.js"
 import searchRoutes from "./routes/search.js"
