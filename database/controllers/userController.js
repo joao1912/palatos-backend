@@ -1,9 +1,69 @@
+import Contato from "../models/Contato";
+import Favorito from "../models/Favorito";
+import Reserva from "../models/Reserva";
+import Restaurante from "../models/Restaurante";
+import Usuario from "../models/Usuario";
 
 class userController {
 
     async getUser(req, res) {
-        //retornar os usuarios
-        res.send("Olha que lindo!")
+
+        const {
+            id
+        }=req.body;
+
+        const user = await Usuario.findByPk(id)
+
+        if(!user){
+            throw new Error("O usuário não foi encontrado.")
+        }
+
+        const arrayFavoritos= []
+
+        const favorito = await Favorito.findAll({
+            where:{
+                fk_usuario:id
+            }
+        })
+
+        for (let i=0; i<favorito; i++) {
+
+            const restaurant = await Restaurante.findByPk(favorito.fk_restaurante)
+            const obj= {
+                id_restaurante:restaurant.id,
+                foto:restaurant.foto
+            }
+
+            arrayFavoritos.push(obj)
+
+
+        }
+
+        const reservas= await Reserva.findAll({
+            where:{
+                fk_usuario:id
+            }
+        })
+
+        const contato= await Contato.findOne({
+            where:{
+                fk_usuario:id
+            }
+        })
+
+        const resultado={
+            foto:user.foto,
+            nome:user.nome_completo,
+            email:user.email,
+            tel:contato.celular,
+            favoritos:arrayFavoritos || [],
+            reservas:reservas || []
+        }
+
+        res.status(200).json({
+            status:"success",
+            resultado: resultado
+        })
     }
 
     auth(req, res) {

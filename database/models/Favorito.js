@@ -27,9 +27,10 @@ Favorito.belongsTo( Usuario, {
     foreignKey: "fk_usuario"
 })
 
-Favorito.belongsTo( Restaurante, {
+Favorito.hasOne( Restaurante, {
     constraints: true,
     foreignKey: "fk_restaurante"
 })
+
 
 export default Favorito
