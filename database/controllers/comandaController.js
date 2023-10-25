@@ -1,14 +1,37 @@
 import Comanda from "../models/Comanda.js"
+import ProdutoCarrinho from "../models/ProdutoCarrinho.js"
+import Mesa from "../models/Mesa.js"
 
 class comandaController {
     async getComandas(req, res) {
         let idRestaurante = req.idRestaurante
-        if(idRestaurante == null) {
+        if (idRestaurante == null) {
             throw new Error("Token inválido.")
         }
 
         try {
-        const listComandas = await Comanda.findAll()
+            const listComandas = await Comanda.findAll()
+
+            for (let obj of listComandas) {
+
+                let id = -1
+
+                let result = await ProdutoCarrinho.findOne({
+                    where: {
+                        fk_mesa: obj.id
+                    }
+                })
+
+                if (result.id) {
+                    id = result.id
+
+                    result = await Mesa.findByPk(id)
+                    if (result.id) {
+                        obj.identificacao_mesa = result.identificacao_mesa
+                    }
+                }
+            }
+        }
 
         res.status(200).json({
             status: "success",
@@ -18,34 +41,34 @@ class comandaController {
     } catch(err) {
         throw new Error("Erro ao obter comandas")
     }
-    }
+}
 
     async deleteComanda(req, res) {
-        let idRestaurante = req.idRestaurante
-        if (idRestaurante == null) {
-            throw new Error({
-                message: "Token inválido.",
-                statusCode: 403
-            })
-        }
-
-        const { idComanda } = req.body
-        try {
-            Comanda.destroy({
-                where: {
-                    id: idComanda
-                }
-            })
-
-            res.status(200).json({
-                status: "success",
-                message: "Comanda removida."
-
-            })
-        } catch (err) {
-            throw new Error("Erro ao deletar comanda.")
-        }
+    let idRestaurante = req.idRestaurante
+    if (idRestaurante == null) {
+        throw new Error({
+            message: "Token inválido.",
+            statusCode: 403
+        })
     }
+
+    const { idComanda } = req.body
+    try {
+        Comanda.destroy({
+            where: {
+                id: idComanda
+            }
+        })
+
+        res.status(200).json({
+            status: "success",
+            message: "Comanda removida."
+
+        })
+    } catch (err) {
+        throw new Error("Erro ao deletar comanda.")
+    }
+}
 }
 
 export default comandaController
