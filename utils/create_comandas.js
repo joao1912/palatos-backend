@@ -11,7 +11,8 @@ const userId = 10
 const idRestaurante = 43
 
 async function create_comandas() {
-    const idPedidoReserva = 1
+    let idPedidoReserva = 1
+
 
     let result = await Mesa.create({
         qr_code: "vich",
@@ -19,35 +20,37 @@ async function create_comandas() {
         conta: 154.55,
         identificacao_mesa: "Mesa 90",
     })
-console.log(result)
+    console.log(result)
 
-const idMesa = result.id
+    const idMesa = result.id
 
-result = await ProdutoCarrinho.create({
-    fk_cardapio: 3000,
-    fk_mesa: idMesa,
+    result = await ProdutoCarrinho.create({
+        fk_cardapio: 3000,
+        fk_mesa: idMesa,
 
-})
-console.log(result)
-
-const idProdutoCarrinho = result.id
-
-result = await Comanda.create({
-    is_reserva: false,
-    data_entrada: new Date().getTime() + 7,
-    chegou: false,
-    fk_produto_carrinho: idProdutoCarrinho,
-    fk_pedido_reserva: idPedidoReserva
-})
+    })
+    console.log(result)
 
 
-result = await Comanda.create({
-    is_reserva: true,
-    data_entrada: new Date().getTime() + 3,
-    chegou: true,
-    fk_produto_carrinho: idProdutoCarrinho,
-    fk_pedido_reserva: idPedidoReserva
-})
+
+    const idProdutoCarrinho = result.id
+
+    result = await PedidoReserva.create({
+        fk_reserva: 233,
+        fk_cardapio: 3000
+    })
+
+    idPedidoReserva = result.id
+
+
+    result = await Comanda.create({
+        is_reserva: false,
+        data_entrada: new Date().getTime() + 7,
+        chegou: false,
+        fk_produto_carrinho: idProdutoCarrinho,
+        fk_pedido_reserva: idPedidoReserva
+    })
+
 
 
 
