@@ -1,8 +1,8 @@
-import Contato from "../models/Contato";
-import Favorito from "../models/Favorito";
-import Reserva from "../models/Reserva";
-import Restaurante from "../models/Restaurante";
-import Usuario from "../models/Usuario";
+import Contato from "../models/Contato.js";
+import Favorito from "../models/Favorito.js";
+import Reserva from "../models/Reserva.js";
+import Restaurante from "../models/Restaurante.js";
+import Usuario from "../models/Usuario.js";
 
 class userController {
 
