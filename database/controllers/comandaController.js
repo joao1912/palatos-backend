@@ -25,6 +25,7 @@ class comandaController {
 
                 if(!result) {
                     console.log("Resultado nulo")
+                    console.log(result)
                 }
                 if (result.id) {
                     id = result.id
