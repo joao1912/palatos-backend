@@ -6,7 +6,7 @@ const userController = new UserController()
 import AuthToken from "../Middlewares/AuthToken.js"
 const authToken = new AuthToken()
 
-router.get("/", authToken.execute , userController.getUsers)
+router.get("/", authToken.execute, userController.getUsers)
 
 router.get("/auth", authToken.execute, userController.auth)
 
