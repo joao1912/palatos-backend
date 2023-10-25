@@ -31,14 +31,16 @@ class comandaController {
                     }
                 }
             }
+
+            res.status(200).json({
+                status: "success",
+                message: "Lista de comandas",
+                ListaComandas: listComandas
+            })
         }
 
-        res.status(200).json({
-            status: "success",
-            message: "Lista de comandas",
-            ListaComandas: listComandas
-        })
-    } catch(err) {
+        
+     catch(err) {
         throw new Error("Erro ao obter comandas")
     }
 }
