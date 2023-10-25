@@ -17,8 +17,12 @@ router.get("/:id", RestauranteController.getRestaurant)
 
 router.post("/add", authToken.execute, upload.single("file") ,RestauranteController.createRestaurant)
 
+router.post("/login",  RestauranteController.loginRestaurant)
+
 router.put("/edit/:id", authToken.execute, RestauranteController.editRestaurant)
 
 router.delete("/delete/:id",authToken.execute, RestauranteController.deleteRestaurant)
+
+
 
 export default router

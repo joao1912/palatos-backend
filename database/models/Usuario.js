@@ -17,7 +17,12 @@ Usuario.init(
         email: {
             type: DataTypes.STRING(40),
             allowNull: false
-        } 
+        },
+        foto:{
+            type: DataTypes.STRING,
+            allowNull:false
+        }
+
     },
     {
         sequelize: database,

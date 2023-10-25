@@ -2,6 +2,8 @@ import ConfiguracoesRestaurantes from "../models/ConfiguracoesRestaurante.js";
 import Contato from "../models/Contato.js";
 import Restaurante from "../models/Restaurante.js"
 import { CreateTokenAccess } from "../../utils/CreateTokenAccess.js";
+import Usuario from "../models/Usuario.js";
+import bcrypt from "bcrypt"
 const createTokenAccess = new CreateTokenAccess()
 
 class restauranteController {
@@ -164,6 +166,41 @@ class restauranteController {
             throw new Error("O servidor falhou em deletar o restaurante")
         }
         
+    }
+
+    async loginRestaurant(req,res){
+
+        const {
+            email,
+            senha
+        } = req.body;
+
+        const usuario= await Usuario.findOne({
+            where: {
+                email: email
+            } 
+        })
+
+        if (!usuario){
+            throw new Error("Email ou Senha incorretos.")
+        }
+
+        try {
+            await bcrypt.compare(senha, usuario.senha)
+            const createTokenAccess= new CreateTokenAccess()
+            const token= await createTokenAccess.execute(usuario.id)
+
+            res.status(200).json({
+                status:"success",
+                token: token
+            })
+
+        } catch (err) {
+            throw new Error("Email ou Senha incorretos.")
+        }
+
+        
+
     }
 
 }

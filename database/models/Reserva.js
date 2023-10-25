@@ -17,7 +17,6 @@ Reserva.init(
             type: DataTypes.DATE,
             allowNull: false
         },
-        //horario
         isCompleted: {
             type: DataTypes.BOOLEAN,
             defaultValue: false,
