@@ -23,6 +23,9 @@ class comandaController {
                     }
                 })
 
+                if(!result) {
+                    console.log("Resultado nulo")
+                }
                 if (result.id) {
                     id = result.id
                     console.log("Primeiro passo")
