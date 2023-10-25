@@ -11,7 +11,6 @@ const userId = 10
 const idRestaurante = 43
 
 async function create_comandas() {
-    let idPedidoReserva = 1
 
 
     let result = await Mesa.create({
@@ -20,27 +19,28 @@ async function create_comandas() {
         conta: 154.55,
         identificacao_mesa: "Mesa 90",
     })
-    console.log(result)
 
     const idMesa = result.id
+    console.log(`Id criado para mesa: ${idMesa}`)
 
     result = await ProdutoCarrinho.create({
         fk_cardapio: 3000,
-        fk_mesa: idMesa,
+        fk_mesa: idMesa
 
     })
-    console.log(result)
 
 
 
     const idProdutoCarrinho = result.id
+    console.log(`Id criado para produto_carrinho: ${idProdutoCarrinho}`)
 
     result = await PedidoReserva.create({
         fk_reserva: 233,
         fk_cardapio: 3000
     })
 
-    idPedidoReserva = result.id
+    const idPedidoReserva = result.id
+    console.log(`Id criado para pedido_reserva: ${idPedidoReserva}`)
 
 
     result = await Comanda.create({
@@ -51,7 +51,7 @@ async function create_comandas() {
         fk_pedido_reserva: idPedidoReserva
     })
 
-
+console.log(`Id criado para comanda: ${result.id}`)
 
 
 }

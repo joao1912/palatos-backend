@@ -23,6 +23,9 @@ class comandaController {
                     }
                 })
 
+                console.log(`Id retornado do produto carrinho: ${result.id}`)
+                console.log(`Id do objeto percorrido: ${obj.id}`)
+                
                 if(!result) {
                     console.log("Resultado nulo")
                     console.log(result)
