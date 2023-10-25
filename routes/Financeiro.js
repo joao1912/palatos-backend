@@ -6,6 +6,6 @@ const router = express.Router()
 const FinanceiroController = new financeiroController()
 const authToken = new AuthToken()
 
-router.get("/financeiro/getAll", authToken.execute ,FinanceiroController.getAllPurchases)
+router.get("/getAll", authToken.execute ,FinanceiroController.getAllPurchases)
 
 export default router

@@ -7,11 +7,11 @@ const ReservaController = new reservaController()
 
 const router = express.Router()
 
-router.get("/reservas", authToken.execute, ReservaController.getReservas)
-router.get("/reserva/:id", authToken.execute, ReservaController.getReservas)
+router.get("/", authToken.execute, ReservaController.getReservas)
+router.get("/:id", authToken.execute, ReservaController.getReservas)
 
-router.post("/reserva/add/", ReservaController.addReserva)
+router.post("/add/", ReservaController.addReserva)
 
-router.put("/reserva/completed/:cod", authToken.execute, ReservaController.editReserva)
+router.put("/completed/:cod", authToken.execute, ReservaController.editReserva)
 
 export default router

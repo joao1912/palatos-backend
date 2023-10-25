@@ -51,18 +51,17 @@ app.post("/createToken", async (req, res) => {
     })
 })
 
-app.use("/files", express.static("uploads")) //para acessar a imagem é só por o caminho e o nome da imagems: baseUrl/files/nome-do-arquivo
+app.use("/files", express.static("uploads")) 
 
 app.use("/users", userRoutes)
 
+app.use("/restaurante/reserva", reservaRoutes)
 
-app.use("/restaurante", reservaRoutes)
-
-app.use("/restaurante", cardapioRoutes)
+app.use("/restaurante/cardapio", cardapioRoutes)
 
 app.use("/restaurante/comandas", comandaRoutes)
 
-app.use("/restaurante", financeiroRoutes)
+app.use("/restaurante/financeiro", financeiroRoutes)
 
 app.use("/restaurante", restaurantRoutes)
 
