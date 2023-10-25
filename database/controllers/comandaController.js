@@ -1,6 +1,7 @@
 import Comanda from "../models/Comanda.js"
 import ProdutoCarrinho from "../models/ProdutoCarrinho.js"
 import Mesa from "../models/Mesa.js"
+import e from "cors"
 
 class comandaController {
     async getComandas(req, res) {
@@ -24,9 +25,11 @@ class comandaController {
 
                 if (result.id) {
                     id = result.id
+                    console.log("Primeiro passo")
 
                     result = await Mesa.findByPk(id)
                     if (result.id) {
+                        console.log("segundo passo")
                         obj.identificacao_mesa = result.identificacao_mesa
                     }
                 }
@@ -41,7 +44,7 @@ class comandaController {
 
         
      catch(err) {
-        throw new Error("Erro ao obter comandas")
+        throw new Error(`Erro ao obter comandas: ${err}`)
     }
 }
 
