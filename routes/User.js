@@ -6,7 +6,7 @@ const authToken = new AuthToken()
 const userController = new UserController()
 const router = express.Router()
 
-router.get("/", authToken.execute, userController.getUsers)
+//router.get("/", authToken.execute, userController.getUsers)
 
 router.get("/auth", authToken.execute, userController.auth)
 
