@@ -2,7 +2,6 @@ import database from "./database/db.js"
 import express from "express"
 import cors from "cors"
 import 'express-async-errors'
-import Usuario from "./database/models/Usuario.js"
 import swaggerUi from "swagger-ui-express"
 
 ;(async function(){
