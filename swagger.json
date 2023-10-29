@@ -41,7 +41,12 @@
             "get": {
                 "summary": "Authenticar um usuário",
                 "description": "Essa rota vai verificar se token que foi enviado está valido ou não",
-                "tags": ["users"]
+                "tags": ["users"],
+                "responses": {
+                    "200": {
+                        "description": "Um objeto"
+                    }
+                }
             }
         }
     },
