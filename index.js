@@ -27,8 +27,8 @@ const upload = multer({storage: storage})
 
 import erros from "./Middlewares/erros.js"
 
-import swaggerDocs from "./swagger.json"
-
+//import swaggerDocs from "./swagger.json"
+import swaggerDocs from "./swagger.json" assert { type: "json"};
 import { CreateTokenAccess } from "./utils/CreateTokenAccess.js"
 const createTokenAccess = new CreateTokenAccess()
 
