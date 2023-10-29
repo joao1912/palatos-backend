@@ -1,4 +1,4 @@
-import database from "./database/db.js"
+import database from "./database/db.mjs"
 import express from "express"
 import cors from "cors"
 import 'express-async-errors'
