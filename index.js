@@ -3,6 +3,7 @@ import express from "express"
 import cors from "cors"
 import 'express-async-errors'
 import Usuario from "./database/models/Usuario.js"
+import swaggerUi from "swagger-ui-express"
 
 ;(async function(){
     await database.sync()
@@ -27,6 +28,8 @@ const upload = multer({storage: storage})
 
 import erros from "./Middlewares/erros.js"
 
+import swaggerDocs from "./swagger.json"
+
 import { CreateTokenAccess } from "./utils/CreateTokenAccess.js"
 const createTokenAccess = new CreateTokenAccess()
 
@@ -35,7 +38,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-
+app.use("/api-docs", swaggerUi.serve , swaggerUi.setup(swaggerDocs))
 
 app.get("/", (req, res) => {
     
