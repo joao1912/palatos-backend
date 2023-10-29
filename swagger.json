@@ -89,7 +89,10 @@
                         "name": "id",
                         "in": "path",
                         "description": "O id do usuário",
-                        "required": true
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -160,6 +163,200 @@
                     }
                 }
             }
+        },
+        "/restaurante/": {
+            "get": {
+                "summary": "Buscar todos os restaurantes",
+                "description": "Essa rota é responsável por buscar todas os restaurantes cadastrados",
+                "tags": ["restaurante"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Restaurante"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/restaurante/search/": {
+            "get": {
+                "summary": "Buscar um restaurante por id",
+                "description": "Essa rota é responsável por buscar um restaurante cadastrado",
+                "tags": ["restaurante"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Restaurante"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    },
+                    "400": {
+                        "description": "Não foi possível encontrar um restaurante com este ID"
+                    }
+                }
+            }
+        },
+        "/restaurante/add": {
+            "post": {
+                "summary": "Criar um restaurante",
+                "description": "Essa rota será respnsável por criar um novo restaurante",
+                "tags": ["restaurante"],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "El palatos"
+                                    },
+                                    "descricao": {
+                                        "type": "string",
+                                        "example": "Uma descrição muito boa, o restaurante é ótimo com qualquer tipo de comida, todo tipo de cliente é bem vindo aqui!"
+                                    },
+                                    "plano": {
+                                        "type": "integer",
+                                        "example": 3
+                                    },
+                                    "endereco": {
+                                        "type": "string",
+                                        "example": "Rua maria marta dos anjos"
+                                    },
+                                    "cep": {
+                                        "type": "string",
+                                        "example": "88040235"
+                                    },
+                                    "rua": {
+                                        "type": "string"
+                                    },
+                                    "reservasAtivas": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "tempoTolerancia": {
+                                        "type": "integer",
+                                        "example": 20
+                                    },
+                                    "telefone": {
+                                        "type": "string",
+                                        "example": "0000-0000"
+                                    },
+                                    "celular": {
+                                        "type": "string",
+                                        "example": "4998335567"
+                                    },
+                                    "file": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        },
+                                        "resultRestaurant": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "nullable": false
+                                                },
+                                                "nome": {
+                                                    "type": "string",
+                                                    "maxLength": 40,
+                                                    "nullable": false
+                                                },
+                                                "descricao": {
+                                                    "type": "string"
+                                                },
+                                                "foto": {
+                                                    "type": "string",
+                                                    "example": "http://45.224.129.126:8085/files/nome-foto"
+                                                },
+                                                "plano": {
+                                                    "type": "integer",
+                                                    "nullable": false
+                                                },
+                                                "endereco": {
+                                                    "type": "string",
+                                                    "nullable": false,
+                                                    "maxLength": 50
+                                                },
+                                                "cep": {
+                                                    "type": "string",
+                                                    "maxLength": 10
+                                                },
+                                                "rua": {
+                                                    "type": "string",
+                                                    "maxLength": 35
+                                                }
+                                            }
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    },
+                    "400": {
+                        "description": "O servidor falhou em criar o restaurante"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -194,6 +391,51 @@
                         "nullable": false
                     }
 
+                }
+            },
+            "Restaurante": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "nome": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "nullable": false
+                    },
+                    "descricao": {
+                        "type": "string"
+                    },
+                    "foto": {
+                        "type": "string"
+                    },
+                    "plano": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "endereco": {
+                        "type": "string",
+                        "nullable": false,
+                        "maxLength": 50
+                    },
+                    "cep": {
+                        "type": "string",
+                        "maxLength": 10
+                    },
+                    "rua": {
+                        "type": "string",
+                        "maxLength": 35
+                    },
+                    "fk_contato": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "fk_usuario": {
+                        "type": "integer",
+                        "nullable": false
+                    }
                 }
             }
         }

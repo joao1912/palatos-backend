@@ -13,7 +13,7 @@ const router = express.Router()
 
 router.get("/", RestauranteController.getRestaurant)
 
-router.get("/:id", RestauranteController.getRestaurant)
+router.get("/search/:id", RestauranteController.getRestaurant)
 
 router.post("/add", authToken.execute, upload.single("file") ,RestauranteController.createRestaurant)
 

@@ -56,7 +56,6 @@ class restauranteController {
 
         const idUser = req.id;
         const nomeFoto = req.file;
-        console.log(nomeFoto)
 
         try {
             let plano = 3
