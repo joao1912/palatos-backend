@@ -19,8 +19,67 @@
             "get": {
                 "summary": "Buscar todos os usuarios",
                 "description": "Essa rota será responsável por buscar todos os usuarios cadastrados",
+                "tags": ["users"],
+                "responses": {
+                    "200": {
+                        "description": "Um array de objetos dos usuários cadastrados",
+                        "content": {
+                            "aplication/json": {
+                                "schema":{
+                                    "$ref": "#/components/schemas/Usuario"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/users/auth": {
+            "get": {
+                "summary": "Authenticar um usuário",
+                "description": "Essa rota vai verificar se token que foi enviado está valido ou não",
                 "tags": ["users"]
             }
         }
+    },
+    "security": [
+        {
+            "type": ["http"],
+            "schema": ["bearer"],
+            "bearerFormat":["JWT"]
+        }
+    ],
+    "components": {
+        "schemas": {
+            "Usuario": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "nome_completo":{
+                        "type": "string",
+                        "maxLength": 40
+                    },
+                    "senha": {
+                        "type": "string",
+                        "maxLength": 40
+                    },
+                    "email": {
+                        "type": "string",
+                        "maxLength": 40
+                    },
+                    "foto": {
+                        "type": "string",
+                        "nullable": false
+                    }
+
+                }
+            }
+        }
     }
+
 }

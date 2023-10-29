@@ -66,6 +66,12 @@ class userController {
         })
     }
 
+    async getUsers(req, res) {
+
+        
+
+    }
+
     auth(req, res) {
 
         res.status(200).json({
