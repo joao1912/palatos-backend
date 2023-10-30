@@ -47,7 +47,7 @@
         },
         "/users/auth": {
             "get": {
-                "summary": "Authenticar um usuário",
+                "summary": "Verificar o token do usuário",
                 "description": "Essa rota vai verificar se token que foi enviado está valido ou não",
                 "tags": ["users"],
                 "security": [
@@ -189,7 +189,7 @@
                 }
             }
         },
-        "/restaurante/search/": {
+        "/restaurante/search/{id}": {
             "get": {
                 "summary": "Buscar um restaurante por id",
                 "description": "Essa rota é responsável por buscar um restaurante cadastrado",
@@ -228,7 +228,7 @@
         "/restaurante/add": {
             "post": {
                 "summary": "Criar um restaurante",
-                "description": "Essa rota será respnsável por criar um novo restaurante",
+                "description": "Essa rota será responsável por criar um novo restaurante",
                 "tags": ["restaurante"],
                 "security": [
                     {
@@ -357,6 +357,206 @@
                     }
                 }
             }
+        },
+        "/restaurante/login": {
+            "post": {
+                "summary": "Login de um restaurante",
+                "description": "Essa rota é responsável por verificar e logar um restaurante",
+                "tags": ["restaurante"],
+                "requestBody": {
+                    "content": {
+                        "aplication/json": {
+                            "schema":{
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "joao@email.com"
+                                    },
+                                    "senha": {
+                                        "type": "string",
+                                        "example": "umaSenha123"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "aplication/json": {
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401":{
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/restaurante/edit/{idRestaurante}": {
+            "put": {    
+                "summary": "Editar um restaurante por id",
+                "description": "Essa rota é responsável por editar informação de um restaurante já cadastrado",
+                "tags": ["restaurante"],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "idRestaurante",
+                        "in": "path",
+                        "description": "O id do restaurante",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema":{
+                                "type": "object",
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "El palatos EDITADO"
+                                    },
+                                    "descricao": {
+                                        "type": "string",
+                                        "example": "Uma descrição muito boa, o restaurante é ótimo com qualquer tipo de comida, todo tipo de cliente é bem vindo aqui! EDITADO"
+                                    },
+                                    "plano": {
+                                        "type": "integer",
+                                        "example": 3
+                                    },
+                                    "endereco": {
+                                        "type": "string",
+                                        "example": "Rua maria marta dos anjos EDITADO"
+                                    },
+                                    "cep": {
+                                        "type": "string",
+                                        "example": "88040235"
+                                    },
+                                    "rua": {
+                                        "type": "string"
+                                    },
+                                    "reservasAtivas": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "tempoTolerancia": {
+                                        "type": "integer",
+                                        "example": 20
+                                    },
+                                    "telefone": {
+                                        "type": "string",
+                                        "example": "0000-0000"
+                                    },
+                                    "celular": {
+                                        "type": "string",
+                                        "example": "4998335567"
+                                    },
+                                    "file": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "restaurantUpdated": {
+                                            "type": "object",
+                                            "$ref": "#/components/schemas/Restaurante"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/restaurante/delete/{idRestaurante}": {
+            "delete": {
+                "summary": "deletar um restaurante por id",
+                "description": "Essa rota é responsável por deletar um restaurante",
+                "tags": ["restaurante"],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "idRestaurante",
+                        "in": "path",
+                        "description": "O id do restaurante",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Restaurante Excluido"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "O servidor falhou em deletar o restaurante"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -430,6 +630,309 @@
                     },
                     "fk_contato": {
                         "type": "integer",
+                        "nullable": false
+                    },
+                    "fk_usuario": {
+                        "type": "integer",
+                        "nullable": false
+                    }
+                }
+            },
+            "Avaliacao": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "quant_estrelas": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "data": {
+                        "type": "string",
+                        "nullable": false
+                    },
+                    "fk_restaurante": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "fk_usuario": {
+                        "type": "integer",
+                        "nullable": false
+                    }
+                }
+            },
+            "Cardapio":{
+                "type": "object",
+                "properties": {
+                    "codigo": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "nome_produto": {
+                        "type": "string",
+                        "nullable": false
+                    },
+                    "preco": {
+                        "type": "number",
+                        "nullable": false
+                    },
+                    "descricao": {
+                        "type": "string"
+                    },
+                    "foto": {
+                        "type": "string",
+                        "nullable": false
+                    },
+                    "tipo": {
+                        "type": "string",
+                        "nullable": false
+                    },
+                    "fk_restaurante": {
+                        "type": "integer",
+                        "nullable": false
+                    }
+                }	
+            },
+            "Categoria": {
+                "type": "object",
+                "properties": {
+                    "id":{
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "nome": {
+                        "type": "string",
+                        "nullable": false
+                    }
+                }
+            },
+            "Comanda": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "is_reserva":{
+                        "type": "boolean",
+                        "nullable": false
+                    },
+                    "data_entrada": {
+                        "type": "string",
+                        "nullable": false
+                    },
+                    "chegou": {
+                        "type": "boolean",
+                        "nullable": false,
+                        "default": false
+                    },
+                    "fk_produto_carrinho": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "fk_pedido_reserva": {
+                        "type": "integer",
+                        "nullable": false
+                    }
+                }
+            },
+            "Configuracoes_restaurantes": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "reservas_ativas":{
+                        "type": "boolean",
+                        "nullable": false
+                    },
+                    "tempo_tolerancia": {
+                        "type": "number",
+                        "nullable": false
+                    },
+                    "fk_restaurante": {
+                        "type": "integer",
+                        "nullable": false,
+                        "default": false
+                    }
+                }
+            },
+            "Contato": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "telefone_fixo":{
+                        "type": "string",
+                        "maxLength": 16,
+                        "nullable": false
+                    },
+                    "celular": {
+                        "type": "string",
+                        "maxLength": 15,
+                        "nullable": false
+                    },
+                    "fk_usuario": {
+                        "type": "integer",
+                        "nullable": false
+                    }
+                }
+            },
+            "Favorito": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "fk_restaurante": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "fk_usuario": {
+                        "type": "integer",
+                        "nullable": false
+                    }
+                }
+            },
+            "Financeiro": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "data_compra":{
+                        "type": "string",
+                        "nullable": false
+                    },
+                    "fk_cardapio": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "fk_usuario": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "fk_restaurante": {
+                        "type": "integer",
+                        "nullable": false
+                    }
+                }
+            },
+            "Lista_categoria": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "fk_categoria": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "fk_restaurante": {
+                        "type": "integer",
+                        "nullable": false
+                    }
+                }
+            },
+            "Lista_mesa": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "fk_mesa": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "fk_restaurante": {
+                        "type": "integer",
+                        "nullable": false
+                    }
+                }
+            },
+            "Mesa": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "qr_code":{
+                        "type": "string",
+                        "nullable": false
+                    },
+                    "ocupada": {
+                        "type": "boolean",
+                        "nullable": false,
+                        "default": false
+                    },
+                    "conta": {
+                        "type": "number",
+                        "nullable": false
+                    },
+                    "identificacao_mesa": {
+                        "type": "string",
+                        "nullable": false,
+                        "maxLength": 10
+                    }
+                }
+            },
+            "Pedido_reserva": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "fk_reserva": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "fk_cardapio": {
+                        "type": "integer",
+                        "nullable": false
+                    }
+                }
+            },
+            "Produto_carrinho": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "fk_mesa": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "fk_cardapio": {
+                        "type": "integer",
+                        "nullable": false
+                    }
+                }
+            },
+            "Reserva": {
+                "type": "object",
+                "properties": {
+                    "cod": {
+                        "type": "integer",
+                        "nullable": false
+                    },
+                    "data_entrada":{
+                        "type": "string",
+                        "nullable": false
+                    },
+                    "isCompleted": {
+                        "type": "boolean",
                         "nullable": false
                     },
                     "fk_usuario": {

@@ -2,6 +2,7 @@ import { DataTypes } from "sequelize"
 import Sequelize from "sequelize"
 import database from "../db.js"
 import Usuario from "./Usuario.js"
+import Restaurante from "./Restaurante.js"
 
 class Avaliacao extends Sequelize.Model {}
 
@@ -13,12 +14,6 @@ Avaliacao.init(
         },
         data: {
             type: DataTypes.DATE
-        },
-        cod_restaurante: {
-            type: DataTypes.INTEGER
-        },
-        cod_produto: {
-            type: DataTypes.INTEGER
         }
     },
     {
@@ -27,6 +22,11 @@ Avaliacao.init(
         tableName: "Avaliacoes"
     }
 )
+
+Avaliacao.belongsTo(Restaurante, {
+    constraints: true,
+    foreignKey: "fk_restaurante"
+})
 
 Avaliacao.belongsTo( Usuario , {
     constraints: true,

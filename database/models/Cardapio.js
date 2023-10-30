@@ -25,11 +25,6 @@ Cardapio.init(
         descricao: {
             type: DataTypes.TEXT,
         },
-        avaliacao: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 0
-        },
         foto: {
             type: DataTypes.STRING,
             allowNull: false

@@ -26,8 +26,4 @@ Categoria.init(
     }
 )
 
-// relacionamento muitos pra muitos
-
-
-
 export default Categoria

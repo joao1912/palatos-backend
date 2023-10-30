@@ -106,7 +106,6 @@ class restauranteController {
     async editRestaurant(req, res) {
 
         const {
-            idUser,
             nome,
             descricao,
             foto,
@@ -120,7 +119,9 @@ class restauranteController {
             celular, 
         } = req.body;
 
-        const restaurant = await Restaurante.findOne({where: {fk_usuario: idUser}}) //talvez tenha que converter para numerico
+        const {idRestaurante} = req.params;
+
+        const restaurant = await Restaurante.findByPk(idRestaurante) 
 
         if (!restaurant) {
             throw new Error("O servidor falhou em buscar o restaurante")
@@ -151,7 +152,7 @@ class restauranteController {
 
     async deleteRestaurant(req, res) {
 
-        const idRestaurant = req.params.id;
+        const idRestaurant = req.params.idRestaurante;
 
         try {
 
