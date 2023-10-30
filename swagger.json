@@ -645,6 +645,169 @@
                     }
                 }
             }
+        },
+        "/restaurante/cardapio/{idRestaurante}": {
+            "get": {
+                "summary": "Buscar o cardapio de um restaurante",
+                "description": "Essa rota é responsável por buscar todos os produtos de um restaurante",
+                "tags": ["restaurante", "cardapio"],
+                "parameters": [
+                    {
+                        "name": "idRestaurante",
+                        "description": "O id de um restaurante",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "menu": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Cardapio"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/restaurante/cardapio/add":{
+            "post": {
+                "summary": "Adicionar um produto",
+                "description": "Essa rota é responsável por criar um produto",
+                "tags": ["restaurante", "cardapio"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "nome": {
+                                        "type": "string",
+                                        "example": "Camarão"
+                                    },
+                                    "descricao": {
+                                        "type": "string",
+                                        "example": "Uma descrição legal!"
+                                    },
+                                    "preco": {
+                                        "type": "number",
+                                        "example": 13.5
+                                    },
+                                    "tipo": {
+                                        "type": "string",
+                                        "example": "prato"
+                                    },
+                                    "file": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Produto criado com sucesso"
+                                        },
+                                        "produto": {
+                                            "type": "object",
+                                            "$ref": "#/components/schemas/Cardapio"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/restaurante/cardapio/delete": {
+            "delete": {
+                "summary": "Deletar um ou mais pratos por id",
+                "description": "Essa rota é responsável por deletar um ou mais produtos por id",
+                "tags": ["restaurante", "cardapio"],
+                "requestBody": {
+                    "content": {
+                        "aplication/json": {
+                            "schema": {
+                            
+                                "type": "array",
+                                "items": {
+                                    "type": "integer",
+                                    "example": 0
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Pratos deletados"
+                                        }
+                                    } 
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
         }
     },
     "components": {

@@ -67,8 +67,8 @@ class cardapioController {
 
         res.status(200).json({
             status: "success",
-            message: "Menu criado com sucesso.",
-            menu: produto
+            message: "Produto criado com sucesso.",
+            produto: produto
         })
 
     }
