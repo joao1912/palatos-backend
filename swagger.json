@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "API do app palatos",
-        "description": "essa api tem como o objetivo receber tratar os dados recebidos do app palatos e devolver o que for solicitado",
+        "description": "essa api tem como o objetivo receber e tratar os dados recebidos do app palatos e devolver o que for solicitado",
         "contact": {
             "email": "joaopedrot1912@gmail.com"
         },

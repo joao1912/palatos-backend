@@ -8,7 +8,6 @@ import swaggerUi from "swagger-ui-express"
     await database.sync()
 })()
 
-
 import create_comandas from "./utils/create_comandas.js"
 
 //create_comandas()
@@ -19,11 +18,6 @@ import reservaRoutes from "./routes/Reserva.js"
 import cardapioRoutes from "./routes/Cardapio.js"
 import comandaRoutes from "./routes/Comanda.js"
 import financeiroRoutes from "./routes/Financeiro.js"
-
-import multer from "multer"
-import { storage } from "./Middlewares/MulterConfig.js"
-
-const upload = multer({storage: storage})
 
 import erros from "./Middlewares/erros.js"
 
