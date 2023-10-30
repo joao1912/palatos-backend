@@ -40,12 +40,12 @@ class reservaController {
     }
 
     async addReserva(req,res) {
-        const { idUsuario, dataEntrada } = req.body;
+        const { userId, dataEntrada } = req.body; //falta o pedido do cliente
         // a data tera que vir completa com horario
 
-        if ( typeof idUsuario === "number") {
+        if ( typeof userId === "number") {
 
-            const usuario = await Usuario.findByPk(idUsuario);
+            const usuario = await Usuario.findByPk(userId);
             if (!usuario) {
                 return res.status(404).json({
                     status: 'failed',
@@ -61,7 +61,7 @@ class reservaController {
 
         const novaReserva = await Reserva.create({
             data_entrada: dataEntrada,
-            fk_usuario: idUsuario
+            fk_usuario: userId
         })
 
         if (!novaReserva) {

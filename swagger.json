@@ -808,6 +808,160 @@
                     }
                 }
             }
+        },
+        "/restaurante/reserva/": {
+            "get": {
+                "summary": "Buscar as reservas do dia",
+                "description": "Essa rota é responsável por buscar todas as reservas do dia",
+                "tags": ["restaurante", "reserva"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "reservas": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Reserva"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/restaurante/reserva/{id}": {
+            "get": {
+                "summary": "Buscar uma reserva",
+                "description": "Essa rota é responsável por buscar uma reserva",
+                "tags": ["restaurante", "reserva"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "Id da reserva",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Reserva"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/restaurante/reserva/add": {
+            "post": {
+                "summary": "Adicionar uma reserva",
+                "description": "Essa rota é responsável por criar uma reserva",
+                "tags": ["restaurante", "reserva"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "Id do usuário"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "aplication/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "dataEntrada": {
+                                        "type": "string"
+                                    },
+                                    "pedido": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "cod":{
+                                                    "type": "integer"
+                                                },
+                                                "quantidade": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "aplication/json": {
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "novaReserva": {
+                                            "type": "object",
+                                            "$ref": "#/components/schemas/Reserva"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
         }
     },
     "components": {
