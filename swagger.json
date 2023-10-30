@@ -557,6 +557,94 @@
                     }
                 }
             }
+        },
+        "/restaurante/comandas": {
+            "get": {
+                "summary": "Buscar todas as comandas",
+                "description": "Essa rota é responsável por buscar todas as comandas do dia",
+                "tags": ["restaurante", "comanda"],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Lista de comandas"
+                                        },
+                                        "ListaComandas": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Comanda"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/restaurante/comandas/delete/{id}": {
+            "delete": {
+                "summary": "Deletar uma comanda",
+                "description": "Essa rota é responsável por deletar uma comanda",
+                "tags": ["restaurante", "comanda"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "Id da comanda",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Comanda removida"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {

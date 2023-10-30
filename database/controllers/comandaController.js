@@ -5,11 +5,7 @@ import e from "cors"
 
 class comandaController {
     async getComandas(req, res) {
-        let idRestaurante = req.idRestaurante
-        if (idRestaurante == null) {
-            throw new Error("Token inválido.")
-        }
-
+       
         try {
             const listComandas = await Comanda.findAll()
 
@@ -56,19 +52,12 @@ class comandaController {
 }
 
     async deleteComanda(req, res) {
-    let idRestaurante = req.idRestaurante
-    if (idRestaurante == null) {
-        throw new Error({
-            message: "Token inválido.",
-            statusCode: 403
-        })
-    }
 
-    const { idComanda } = req.body
+    const { id } = req.params;
     try {
         Comanda.destroy({
             where: {
-                id: idComanda
+                id: id
             }
         })
 
