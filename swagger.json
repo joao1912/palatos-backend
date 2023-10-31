@@ -15,6 +15,34 @@
         }
     ],
     "paths": {
+        "/createToken": {
+            "post": {
+                "summary": "Criar um token JWT",
+                "description": "Essa rota vai criar um token jwt valido, ATENÇAO: essa rota é temporaria",
+                "tags": ["token"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Token criado!" 
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/users": {
             "get": {
                 "summary": "Buscar todos os usuarios",

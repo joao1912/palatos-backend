@@ -41,7 +41,7 @@ app.post("/createToken", async (req, res) => {
     const token = await createTokenAccess.execute(10, 10)
 
     res.status(200).json({
-        message: "eeeeee",
+        message: "Token criado!",
         token
     })
 })
