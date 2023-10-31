@@ -21,7 +21,7 @@ class comandaController {
                     }
                 })
 
-                console.log("teste 1 " + result.id)
+                console.log(result)
 
                 console.log(`Id retornado do produto carrinho: ${result.id}`)
                 console.log(`Id do objeto percorrido: ${obj.id}`)
