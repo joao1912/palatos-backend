@@ -562,7 +562,7 @@
             "get": {
                 "summary": "Buscar todas as comandas",
                 "description": "Essa rota é responsável por buscar todas as comandas do dia",
-                "tags": ["restaurante", "comanda"],
+                "tags": ["comanda"],
                 "security": [
                     {
                         "BearerAuth": []
@@ -605,7 +605,7 @@
             "delete": {
                 "summary": "Deletar uma comanda",
                 "description": "Essa rota é responsável por deletar uma comanda",
-                "tags": ["restaurante", "comanda"],
+                "tags": ["comanda"],
                 "security": [
                     {
                         "bearerAuth": []
@@ -650,7 +650,7 @@
             "get": {
                 "summary": "Buscar o cardapio de um restaurante",
                 "description": "Essa rota é responsável por buscar todos os produtos de um restaurante",
-                "tags": ["restaurante", "cardapio"],
+                "tags": ["cardapio"],
                 "parameters": [
                     {
                         "name": "idRestaurante",
@@ -692,7 +692,7 @@
             "post": {
                 "summary": "Adicionar um produto",
                 "description": "Essa rota é responsável por criar um produto",
-                "tags": ["restaurante", "cardapio"],
+                "tags": ["cardapio"],
                 "security": [
                     {
                         "bearerAuth": []
@@ -767,7 +767,7 @@
             "delete": {
                 "summary": "Deletar um ou mais pratos por id",
                 "description": "Essa rota é responsável por deletar um ou mais produtos por id",
-                "tags": ["restaurante", "cardapio"],
+                "tags": ["cardapio"],
                 "requestBody": {
                     "content": {
                         "aplication/json": {
@@ -813,7 +813,7 @@
             "get": {
                 "summary": "Buscar as reservas do dia",
                 "description": "Essa rota é responsável por buscar todas as reservas do dia",
-                "tags": ["restaurante", "reserva"],
+                "tags": ["reserva"],
                 "security": [
                     {
                         "bearerAuth": []
@@ -852,7 +852,7 @@
             "get": {
                 "summary": "Buscar uma reserva",
                 "description": "Essa rota é responsável por buscar uma reserva",
-                "tags": ["restaurante", "reserva"],
+                "tags": ["reserva"],
                 "security": [
                     {
                         "bearerAuth": []
@@ -891,7 +891,7 @@
             "post": {
                 "summary": "Adicionar uma reserva",
                 "description": "Essa rota é responsável por criar uma reserva",
-                "tags": ["restaurante", "reserva"],
+                "tags": ["reserva"],
                 "security": [
                     {
                         "bearerAuth": []
@@ -959,6 +959,54 @@
                     },
                     "500": {
                         "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/restaurante/reserva/completed/{cod}": {
+            "put": {
+                "summary": "Completar uma reserva",
+                "description": "Essa rota é responsável por trocar a prop isCompleted da reserva para true",
+                "tags": ["reserva"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "cod",
+                        "description": "Código da reserva",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                           "type": "string" 
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "aplication/json":{
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "A reserva foi completada."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
                     }
                 }
             }
