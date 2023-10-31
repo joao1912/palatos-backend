@@ -12,16 +12,9 @@ class comandaController {
             for (let obj of listComandas) {
 
                 let id = -1
+               
 
-                console.log("teste 1 " + obj.id)
-
-                let result = await ProdutoCarrinho.findOne({
-                    where: {
-                        fk_mesa: obj.id
-                    }
-                })
-
-                console.log(result)
+                let result = await ProdutoCarrinho.findByPk(obj.fk_produto_carrinho)
 
                 console.log(`Id retornado do produto carrinho: ${result.id}`)
                 console.log(`Id do objeto percorrido: ${obj.id}`)
@@ -31,7 +24,7 @@ class comandaController {
                     console.log(result)
                 }
                 if (result.id) {
-                    id = result.id
+                    id = result.fk_mesa
                     console.log("Primeiro passo")
 
                     result = await Mesa.findByPk(id)
