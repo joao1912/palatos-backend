@@ -7,10 +7,6 @@ class financeiroController {
 
         const { idRestaurante } = req.body;
 
-        if (!idRestaurante) {
-            throw new Error("token ausente")
-        }
-
         const allPurchases = await Financeiro.findAll({
             where: {
                 fk_restaurante: idRestaurante
@@ -47,6 +43,8 @@ class financeiroController {
         }
 
         for (let i = 0 ; i < allPurchases.length; i++) {
+
+            //AQUI DEVE SER FEITO UM FILTRO PARA NAO TEAR REPITIDOS E SOMAR A QUANTIDADE DE CADA PRODUTO
 
             const idPrato = allPurchases[i].fk_cardapio
             const produto = await Cardapio.findByPk(idPrato)

@@ -1010,6 +1010,85 @@
                     }
                 }
             }
+        },
+        "/restaurante/financeiro/getAll": {
+            "get": {
+                "summary": "Buscar todas as compras realizadas em um restaurante",
+                "description": "Essa rota é responsável por filtrar e buscar todas as compras realizadas em um restaurante, retornando a quantidade que foi comprada de cada produto",
+                "tags": ["financeiro"],
+                "security": [
+                    {
+                        "bearerAuth":[]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "allPurchases": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Cardapio"
+                                            }
+                                        },
+                                        "filteredPurchases": {
+                                            "type": "object",
+                                           "properties": {
+                                                "pratos": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/Cardapio"
+                                                    }
+                                                },
+                                                "bebidas": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/Cardapio"
+                                                    }
+                                                },
+                                                "sobremesas": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/Cardapio"
+                                                    }
+                                                }
+                                           } 
+                                        },
+                                        "porcentPurchases": {
+                                            "type": "object",
+                                            "properties": {
+                                                "pratos": {
+                                                   "type": "number" ,
+                                                   "example": 40
+                                                },
+                                                "bebidas": {
+                                                    "type": "number" ,
+                                                    "example": 40
+                                                },
+                                                "sobremesas": {
+                                                "type": "number" ,
+                                                "example": 20
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
         }
     },
     "components": {
