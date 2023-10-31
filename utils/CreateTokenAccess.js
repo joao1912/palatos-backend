@@ -7,7 +7,7 @@ class CreateTokenAccess {
     async execute(userId, idRestaurante) {
 
         if (userId && idRestaurante) {
-            const token = sign({userId: userId, idRestaurante: idRestaurante}, SECRET_KEY, {expiresIn: 604800000, algorithm: 'HS256' }) // 7 dias
+            const token = sign({userId: userId, idRestaurante: idRestaurante}, SECRET_KEY, {expiresIn: 604800000}) // 7 dias
 
             return token
         } else if (userId) {
