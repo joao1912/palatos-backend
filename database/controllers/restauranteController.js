@@ -4,6 +4,7 @@ import Restaurante from "../models/Restaurante.js"
 import { CreateTokenAccess } from "../../utils/CreateTokenAccess.js";
 import Usuario from "../models/Usuario.js";
 import bcrypt from "bcrypt"
+import Cardapio from "../models/Cardapio.js";
 const createTokenAccess = new CreateTokenAccess()
 
 class restauranteController {
@@ -156,7 +157,17 @@ class restauranteController {
 
         try {
 
+            const restaurantDeleted = await Restaurante.findByPk(idRestaurant)
             await Restaurante.destroy({where: {id: idRestaurant}})
+            const products = await Cardapio.findOne({where: {fk_restaurante: idRestaurant}})
+
+            if (products) {
+                await Cardapio.destroy({where: {fk_restaurante: idRestaurant}})
+            }
+
+            await Contato.destroy({where: restaurantDeleted.fk_usuario})
+            await ConfiguracoesRestaurantes.destroy({where: {fk_restaurante: idRestaurant}})
+
             res.status(200).json({
                 status: 'success',
                 message: 'Restaurante Excluido.'
