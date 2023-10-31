@@ -9,17 +9,19 @@ class comandaController {
         try {
             const listComandas = await Comanda.findAll()
 
-            console.log(listComandas[0].id)
-
             for (let obj of listComandas) {
 
                 let id = -1
+
+                console.log("teste 1 " + obj.id)
 
                 let result = await ProdutoCarrinho.findOne({
                     where: {
                         fk_mesa: obj.id
                     }
                 })
+
+                console.log("teste 1 " + result.id)
 
                 console.log(`Id retornado do produto carrinho: ${result.id}`)
                 console.log(`Id do objeto percorrido: ${obj.id}`)
