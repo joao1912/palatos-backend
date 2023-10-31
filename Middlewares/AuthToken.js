@@ -11,8 +11,6 @@ class AuthToken {
         }
 
         const token = cutBearer(tokenNotFilter)
-
-        console.log(token)
         
         jwt.verify(token, SECRET_KEY, async (err, decode) => {
             if (err) {
