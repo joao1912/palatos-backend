@@ -37,7 +37,7 @@ app.get("/", (req, res) => {
     res.json({message: 'OLA!!', token})
 }) 
 
-app.get("/createToken", async (req, res) => {
+app.post("/createToken", async (req, res) => {
     const token = await createTokenAccess.execute(10, 10)
 
     res.status(200).json({
