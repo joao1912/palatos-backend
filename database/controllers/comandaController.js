@@ -9,6 +9,8 @@ class comandaController {
         try {
             const listComandas = await Comanda.findAll()
 
+            console.log(listComandas)
+
             for (let obj of listComandas) {
 
                 let id = -1
