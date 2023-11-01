@@ -11,7 +11,7 @@ class userController {
 
         const {
             id
-        }=req.body;
+        }=req.params;
 
         const user = await Usuario.findByPk(id)
 

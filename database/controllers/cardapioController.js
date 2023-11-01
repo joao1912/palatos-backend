@@ -57,10 +57,6 @@ class cardapioController {
         } = req.body;
 
         const idRestautante = req.idRestaurante;
-      
-        if (idRestautante == null) {
-            throw new Error("token inválido")
-        }
         
         const path = `http://45.224.129.126:8085/files/${foto.filename}`
         
