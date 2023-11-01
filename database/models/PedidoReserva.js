@@ -15,6 +15,7 @@ PedidoReserva.init(
         },
         observacoes:{
             type:DataTypes.STRING,
+            defaultValue: "",
         },
         quantidade:{
             type:DataTypes.INTEGER,

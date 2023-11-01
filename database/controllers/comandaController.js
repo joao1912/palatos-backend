@@ -1,11 +1,16 @@
 import Comanda from "../models/Comanda.js"
 import ProdutoCarrinho from "../models/ProdutoCarrinho.js"
 import Mesa from "../models/Mesa.js"
-import e from "cors"
+import { CustomError } from "../../Middlewares/erros.js"
 
 class comandaController {
     async getComandas(req, res) {
        
+        const { idRestaurante } = req.params
+        if(!idRestaurante) {
+            throw new CustomError("Id do restaurante ausente", 400)
+        }
+
         try {
             const listComandas = await Comanda.findAll()
 
