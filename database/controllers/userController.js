@@ -15,10 +15,6 @@ class userController {
 
         const user = await Usuario.findByPk(id)
 
-        if(!user){
-            throw new Error("O usuário não foi encontrado.")
-        }
-
         const arrayFavoritos= []
 
         const favorito = await Favorito.findAll({

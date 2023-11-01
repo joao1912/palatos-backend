@@ -107,7 +107,7 @@
                 }
             }
         },
-        "/users/getUser": {
+        "/users/getUser/{id}": {
             "get":{
                 "summary": "Buscar um usuário",
                 "description": "Essa rota vai buscar um usuário por id",
