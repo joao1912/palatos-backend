@@ -81,7 +81,7 @@ class cardapioController {
         
         } catch (err) {
 
-            throw new Error("O servidor falhou em criar o menu.")
+            throw new Error(`O servidor falhou em criar o menu: ${err.message}`)
         }
 
         res.status(200).json({
