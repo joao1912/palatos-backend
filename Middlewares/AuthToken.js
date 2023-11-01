@@ -7,14 +7,14 @@ class AuthToken {
         const tokenNotFilter = req.header("Authorization")
         
         if (!tokenNotFilter) {
-            throw new Error("Token ausente", 401)
+            throw new CustomError("Token ausente", 401)
         }
 
         const token = cutBearer(tokenNotFilter)
         
         jwt.verify(token, SECRET_KEY, async (err, decode) => {
             if (err) {
-                throw new Error("invalid token")
+                throw new CustomError("invalid token", 401)
             }
 
             req.id = decode.userId
