@@ -12,6 +12,6 @@ router.get("/auth", authToken.execute, userController.auth)
 
 router.get('/getUser', userController.getUser)
 
-router.post("/newUser", authToken.execute, userController.createUser)
+router.post("/newUser", userController.createUser)
 
 export default router
