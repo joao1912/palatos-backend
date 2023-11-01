@@ -129,7 +129,39 @@
                         "content": {
                             "aplication/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Usuario"
+                                    "type": "object",
+                                    "properties": {
+                                        "nome":{
+                                            "type": "string",
+                                            "maxLength": 40
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "maxLength": 40
+                                        },
+                                        "foto": {
+                                            "type": "string",
+                                            "nullable": false
+                                        },
+                                        "tel": {
+                                            "type": "string",
+                                            "example": "+55 48 1234-5678"
+                                        },
+                                        "favoritos": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "$ref": "#/components/schemas/Favorito"
+                                            }
+                                        },
+                                        "reservas": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "$ref": "#/components/schemas/Reserva"
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
