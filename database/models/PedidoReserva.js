@@ -13,6 +13,14 @@ PedidoReserva.init(
             type: DataTypes.INTEGER,
             autoIncrement: true
         },
+        observacoes:{
+            type:DataTypes.STRING,
+        },
+        quantidade:{
+            type:DataTypes.INTEGER,
+            defaultValue:0,
+        }
+
     },
     {
         sequelize: database,

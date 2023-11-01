@@ -2,6 +2,7 @@ import { DataTypes } from "sequelize"
 import Sequelize from "sequelize"
 import database from "../db.js"
 import Usuario from "./Usuario.js"
+import Restaurante from "./Restaurante.js"
 
 class Reserva extends Sequelize.Model {}
 
@@ -35,5 +36,9 @@ Reserva.belongsTo( Usuario, {
     foreignKey: "fk_usuario"
 })
 
+Reserva.belongsTo(Restaurante,{
+    constraints: true,
+    foreignKey: "fk_restaurante"
+})
 
 export default Reserva

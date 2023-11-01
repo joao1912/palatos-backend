@@ -1,3 +1,5 @@
+import { CustomError } from "../../Middlewares/erros.js";
+import PedidoReserva from "../models/PedidoReserva.js";
 import Reserva from "../models/Reserva.js"
 import Usuario from "../models/Usuario.js";
 
@@ -40,7 +42,7 @@ class reservaController {
     }
 
     async addReserva(req,res) {
-        const { userId, dataEntrada } = req.body; //falta o pedido do cliente
+        const { userId, dataEntrada, idRestaurante, pedido} = req.body; 
         // a data tera que vir completa com horario
 
         if ( typeof userId === "number") {
@@ -61,17 +63,33 @@ class reservaController {
 
         const novaReserva = await Reserva.create({
             data_entrada: dataEntrada,
-            fk_usuario: userId
+            fk_usuario: userId,
+            fk_restaurante: idRestaurante
         })
 
         if (!novaReserva) {
             throw new Error("O servidor falhou em criar a reserva.")
         }
 
+        // const objeto={
+        //     codigo,observacoes,quantidade,fk_reserva,fk_cardapio
+        // }
+
+        for(let produto of pedido){
+           await PedidoReserva.create({
+                observacoes:produto.observacoes,
+                quantidade:produto.quantidade,
+                fk_reserva: novaReserva.cod,
+                fk_cardapio: produto.codigo
+           }) 
+        }
+
+
         res.status(200).json({
             status: 'success',
             novaReserva
         })
+
     }
 
     async editReserva(req, res) {

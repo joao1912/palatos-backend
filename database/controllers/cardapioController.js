@@ -1,4 +1,5 @@
 import Cardapio from "../models/Cardapio.js";
+import { CustomError } from "../../Middlewares/erros.js";
 
 class cardapioController {
 
@@ -25,6 +26,24 @@ class cardapioController {
             throw new Error("Menu não pode ser encontrado")
         }
     }
+
+     async getProdutoIndividual(req, res){
+        const {id}=req.params 
+
+        const produto= await Cardapio.findByPk(id)
+        
+        if(!produto){
+           throw new CustomError("Produto não encontrado",404)
+        }
+         res.status(200).json({
+            status:"Sucesso",
+            produto:produto
+         })
+
+     }
+
+
+
 
     async createCardapio(req, res) {
         
