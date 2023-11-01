@@ -19,7 +19,7 @@ import cardapioRoutes from "./routes/Cardapio.js"
 import comandaRoutes from "./routes/Comanda.js"
 import financeiroRoutes from "./routes/Financeiro.js"
 
-import erros from "./Middlewares/erros.js"
+import { CustomError, errorHandler } from "./Middlewares/erros.js"
 
 import swaggerDocs from "./swagger.json" assert { type: "json"};
 import { CreateTokenAccess } from "./utils/CreateTokenAccess.js"
@@ -34,7 +34,8 @@ app.use("/api-docs", swaggerUi.serve , swaggerUi.setup(swaggerDocs))
 
 app.get("/", (req, res) => {
     
-    res.json({message: 'OLA!!', token})
+    throw new CustomError("Eita", 401)
+    // res.json({message: 'OLA!!', token})
 }) 
 
 app.post("/createToken", async (req, res) => {
@@ -62,7 +63,7 @@ app.use("/restaurante", restaurantRoutes)
 
 app.use("/search", searchRoutes)
 
-app.use(erros)
+app.use(errorHandler)
 
 app.listen(8085, () => {
     console.log("Servidor rodando na porta http://45.224.129.126:8085/")

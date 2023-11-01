@@ -24,5 +24,4 @@ router.put("/edit/:idRestaurante", authToken.execute, RestauranteController.edit
 router.delete("/delete/:idRestaurante",authToken.execute, RestauranteController.deleteRestaurant)
 
 
-
 export default router
