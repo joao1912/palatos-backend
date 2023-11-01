@@ -3,7 +3,7 @@ import Favorito from "../models/Favorito.js";
 import Reserva from "../models/Reserva.js";
 import Restaurante from "../models/Restaurante.js";
 import Usuario from "../models/Usuario.js";
-import { CustomError } from "../../Middlewares/erros.js";
+
 
 class userController {
 

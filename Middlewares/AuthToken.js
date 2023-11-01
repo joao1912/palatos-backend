@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken"
 import { SECRET_KEY } from "../index.js"
+import { CustomError } from "../../Middlewares/erros.js";
 
 class AuthToken {
 
