@@ -55,7 +55,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Um array de objetos dos usuários cadastrados",
+                        "description": "OK",
                         "content": {
                             "aplication/json": {
                                 "schema":{
@@ -125,7 +125,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Um objeto de um usuário",
+                        "description": "OK",
                         "content": {
                             "aplication/json": {
                                 "schema": {
