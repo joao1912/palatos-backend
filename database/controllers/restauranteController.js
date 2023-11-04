@@ -184,28 +184,32 @@ class restauranteController {
             } 
         })
 
-        if (!usuario){
+        const restaurante = await Restaurante.findOne({
+            where: {fk_usuario: usuario.id}
+        })
+
+        const createTokenAccess= new CreateTokenAccess()
+        const token= await createTokenAccess.execute(usuario.id, restaurante.id)
+
+        res.status(200).json({
+            status:"success",
+            token: token
+        })
+
+        /* if (!usuario){
             throw new CustomError("Email ou Senha incorretos.", 401)
-        }
+        }        
 
         try {
             await bcrypt.compare(senha, usuario.senha)
 
-            const restaurante = await Restaurante.findOne({
-                where: {fk_usuario: usuario.id}
-            })
+            
 
-            const createTokenAccess= new CreateTokenAccess()
-            const token= await createTokenAccess.execute(usuario.id, restaurante.id)
-
-            res.status(200).json({
-                status:"success",
-                token: token
-            })
+            
 
         } catch (err) {
             throw new CustomError("Email ou Senha incorretos.", 401)
-        }
+        } */
     }
 }
 
