@@ -10,8 +10,8 @@ router.get("/", authToken.execute, userController.getUsers)
 
 router.get("/auth", authToken.execute, userController.auth)
 
-router.get('/getUser', authToken.execute, userController.getUser)
+router.get('/getUser/:id', userController.getUser)
 
-router.post("/newUser", authToken.execute, userController.createUser)
+router.post("/newUser", userController.createUser)
 
 export default router

@@ -6,6 +6,11 @@ import { CustomError } from "../../Middlewares/erros.js"
 class comandaController {
     async getComandas(req, res) {
        
+        const { idRestaurante } = req.params
+        if(!idRestaurante) {
+            throw new CustomError("Id do restaurante ausente", 400)
+        }
+
         try {
             const listComandas = await Comanda.findAll()
 

@@ -8,7 +8,7 @@ const ComandaController = new comandaController()
 const router = express.Router()
 
 
-router.get("/", authToken.execute, ComandaController.getComandas)
+router.get("/", ComandaController.getComandas)
 router.delete("/delete/:id", authToken.execute,ComandaController.deleteComanda)
 
 

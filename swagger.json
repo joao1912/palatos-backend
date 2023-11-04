@@ -107,7 +107,7 @@
                 }
             }
         },
-        "/users/getUser": {
+        "/users/getUser/{id}": {
             "get":{
                 "summary": "Buscar um usuário",
                 "description": "Essa rota vai buscar um usuário por id",
@@ -178,7 +178,7 @@
                 "requestBody": {
                     "required": true,
                     "content": {
-                        "aplication/json": {
+                        "multipart/form-data": {
                             "schema": {
                                 "type": "object",
                                 "properties": {
@@ -188,8 +188,8 @@
                                     },
                                     "foto": {
                                         "type": "string",
-                                        "format": "binary",
-                                        "example": "base64_encoded_image_data"
+                                        "format": "binary"
+                                      
                                     },
                                     "email": {
                                         "type": "string",

@@ -11,13 +11,9 @@ class userController {
 
         const {
             id
-        }=req.body;
+        }=req.params;
 
         const user = await Usuario.findByPk(id)
-
-        if(!user){
-            throw new Error("O usuário não foi encontrado.")
-        }
 
         const arrayFavoritos= []
 
@@ -69,7 +65,9 @@ class userController {
 
     async getUsers(req, res) {
 
-        res.status(200).json({message: "ainda em produção"})
+        const usuarios= await Usuario.findAll()
+
+        res.status(200).json({usuarios})
 
     }
 

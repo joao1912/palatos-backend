@@ -6,6 +6,7 @@ import ProdutoCarrinho from "../database/models/ProdutoCarrinho.js"
 import PedidoReserva from "../database/models/PedidoReserva.js"
 import Reserva from "../database/models/Reserva.js"
 import Comanda from "../database/models/Comanda.js"
+import Restaurante from "../database/models/Restaurante.js";
 
 const userId = 10
 const idRestaurante = 43
@@ -35,6 +36,8 @@ async function create_comandas() {
     console.log(`Id criado para produto_carrinho: ${idProdutoCarrinho}`)
 
     result = await PedidoReserva.create({
+        observacoes: "Sem saladas!",
+        quantidade: 2,
         fk_reserva: 233,
         fk_cardapio: 3000
     })
