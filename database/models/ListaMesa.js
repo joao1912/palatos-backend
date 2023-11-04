@@ -23,14 +23,6 @@ ListaMesa.init(
     },   
 )
 
-/* ListaMesa.belongsTo(
-    Mesa,
-    {
-        constraints: true,
-        foreignKey:'fk_mesa'
-    }
-) */
-
 ListaMesa.belongsTo(
     Restaurante,
     {

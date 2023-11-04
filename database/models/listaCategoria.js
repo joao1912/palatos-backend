@@ -1,8 +1,7 @@
 import { DataTypes } from "sequelize"
 import Sequelize from "sequelize"
-
 import database from "../db.js"
-import Categoria from "./Categoria.js"
+
 
 class ListaCategoria extends Sequelize.Model { }
 

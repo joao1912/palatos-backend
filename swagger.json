@@ -1171,8 +1171,7 @@
                         "maxLength": 40
                     },
                     "senha": {
-                        "type": "string",
-                        "maxLength": 40
+                        "type": "string"
                     },
                     "email": {
                         "type": "string",
@@ -1485,6 +1484,13 @@
                         "type": "integer",
                         "nullable": false
                     },
+                    "observacoes": {
+                        "type": "string"
+                    },
+                    "quantidadea": {
+                        "type": "integer",
+                        "example": 1
+                    },
                     "fk_reserva": {
                         "type": "integer",
                         "nullable": false
@@ -1530,6 +1536,23 @@
                     "fk_usuario": {
                         "type": "integer",
                         "nullable": false
+                    }
+                }
+            },
+            "Acesso": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "data_acesso": {
+                        "type": "string"
+                    },
+                    "fk_lista_categorias": {
+                        "type": "integer"
+                    },
+                    "fk_usuario": {
+                        "type": "integer"
                     }
                 }
             }

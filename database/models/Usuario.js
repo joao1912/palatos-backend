@@ -11,7 +11,7 @@ Usuario.init(
             allowNull: false,
         },
         senha: {
-            type: DataTypes.STRING(40),
+            type: DataTypes.STRING,
             allowNull: false
         },
         email: {
