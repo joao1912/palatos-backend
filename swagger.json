@@ -19,7 +19,9 @@
             "post": {
                 "summary": "Criar um token JWT",
                 "description": "Essa rota vai criar um token jwt valido, ATENÇAO: essa rota é temporaria",
-                "tags": ["token"],
+                "tags": [
+                    "token"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -30,7 +32,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Token criado!" 
+                                            "example": "Token criado!"
                                         },
                                         "token": {
                                             "type": "string"
@@ -47,7 +49,9 @@
             "get": {
                 "summary": "Buscar todos os usuarios",
                 "description": "Essa rota será responsável por buscar todos os usuarios cadastrados",
-                "tags": ["users"],
+                "tags": [
+                    "users"
+                ],
                 "security": [
                     {
                         "BearerAuth": []
@@ -58,9 +62,9 @@
                         "description": "OK",
                         "content": {
                             "aplication/json": {
-                                "schema":{
+                                "schema": {
                                     "type": "array",
-                                    "items":{
+                                    "items": {
                                         "$ref": "#/components/schemas/Usuario"
                                     }
                                 }
@@ -80,7 +84,9 @@
             "get": {
                 "summary": "Verificar o token do usuário",
                 "description": "Essa rota vai verificar se token que foi enviado está valido ou não",
-                "tags": ["users"],
+                "tags": [
+                    "users"
+                ],
                 "security": [
                     {
                         "BearerAuth": []
@@ -100,7 +106,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "example":  "user authenticated"
+                                            "example": "user authenticated"
                                         }
                                     }
                                 }
@@ -114,10 +120,12 @@
             }
         },
         "/users/getUser/{id}": {
-            "get":{
+            "get": {
                 "summary": "Buscar um usuário",
                 "description": "Essa rota vai buscar um usuário por id",
-                "tags": ["users"],
+                "tags": [
+                    "users"
+                ],
                 "security": [
                     {
                         "BearerAuth": []
@@ -149,7 +157,7 @@
                                         "usuario": {
                                             "type": "object",
                                             "properties": {
-                                                "nome":{
+                                                "nome": {
                                                     "type": "string",
                                                     "maxLength": 40
                                                 },
@@ -200,7 +208,9 @@
             "post": {
                 "summary": "Criar um usuário",
                 "description": "Essa rota vai criar um usuário",
-                "tags": ["users"],
+                "tags": [
+                    "users"
+                ],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -215,7 +225,6 @@
                                     "file": {
                                         "type": "string",
                                         "format": "binary"
-                                      
                                     },
                                     "email": {
                                         "type": "string",
@@ -228,7 +237,7 @@
                                 }
                             }
                         }
-                    }   
+                    }
                 },
                 "responses": {
                     "200": {
@@ -254,7 +263,9 @@
             "post": {
                 "summary": "Logar um usuário",
                 "description": "Essa rota é responsável por logar um usuário se as informações recebidas forem aprovadas.",
-                "tags": ["users"],
+                "tags": [
+                    "users"
+                ],
                 "requestBody": {
                     "content": {
                         "aplication/json": {
@@ -301,27 +312,35 @@
                 }
             }
         },
-        "/restaurante/": {
+        "/restaurante": {
             "get": {
                 "summary": "Buscar todos os restaurantes",
                 "description": "Essa rota é responsável por buscar todas os restaurantes cadastrados",
-                "tags": ["restaurante"],
+                "tags": [
+                    "restaurante"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "content": {
                             "aplication/json": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Restaurante"
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "result": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Restaurante"
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
-                    },
-                    "500": {
-                        "description": "Internal server error"
                     }
                 }
             }
@@ -330,7 +349,9 @@
             "get": {
                 "summary": "Buscar um restaurante por id",
                 "description": "Essa rota é responsável por buscar um restaurante cadastrado",
-                "tags": ["restaurante"],
+                "tags": [
+                    "restaurante"
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -348,15 +369,21 @@
                             "aplication/json": {
                                 "schema": {
                                     "type": "object",
-                                    "$ref": "#/components/schemas/Restaurante"
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "result": {
+                                            "type": "object",
+                                            "$ref": "#/components/schemas/Restaurante"
+                                        }
+                                    }
                                 }
                             }
                         }
                     },
-                    "500": {
-                        "description": "Internal server error"
-                    },
-                    "400": {
+                    "404": {
                         "description": "Não foi possível encontrar um restaurante com este ID"
                     }
                 }
@@ -366,7 +393,9 @@
             "post": {
                 "summary": "Criar um restaurante",
                 "description": "Essa rota será responsável por criar um novo restaurante",
-                "tags": ["restaurante"],
+                "tags": [
+                    "restaurante"
+                ],
                 "security": [
                     {
                         "BearerAuth": []
@@ -389,7 +418,9 @@
                                     },
                                     "plano": {
                                         "type": "integer",
-                                        "example": 3
+                                        "example": 3,
+                                        "minimum": 1,
+                                        "maximum": 3
                                     },
                                     "endereco": {
                                         "type": "string",
@@ -481,16 +512,12 @@
                                             }
                                         }
                                     }
-                                    
                                 }
                             }
                         }
                     },
                     "500": {
                         "description": "Internal server error"
-                    },
-                    "400": {
-                        "description": "O servidor falhou em criar o restaurante"
                     }
                 }
             }
@@ -499,11 +526,13 @@
             "post": {
                 "summary": "Login de um restaurante",
                 "description": "Essa rota é responsável por verificar e logar um restaurante",
-                "tags": ["restaurante"],
+                "tags": [
+                    "restaurante"
+                ],
                 "requestBody": {
                     "content": {
                         "aplication/json": {
-                            "schema":{
+                            "schema": {
                                 "type": "object",
                                 "properties": {
                                     "email": {
@@ -524,7 +553,7 @@
                         "description": "OK",
                         "content": {
                             "aplication/json": {
-                                "schema":{
+                                "schema": {
                                     "type": "object",
                                     "properties": {
                                         "status": {
@@ -539,17 +568,19 @@
                             }
                         }
                     },
-                    "401":{
+                    "401": {
                         "description": "Unauthorized"
                     }
                 }
             }
         },
         "/restaurante/edit/{idRestaurante}": {
-            "put": {    
+            "put": {
                 "summary": "Editar um restaurante por id",
                 "description": "Essa rota é responsável por editar informação de um restaurante já cadastrado",
-                "tags": ["restaurante"],
+                "tags": [
+                    "restaurante"
+                ],
                 "security": [
                     {
                         "BearerAuth": []
@@ -569,7 +600,7 @@
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
-                            "schema":{
+                            "schema": {
                                 "type": "object",
                                 "properties": {
                                     "nome": {
@@ -643,6 +674,9 @@
                     },
                     "400": {
                         "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Restaurant not found"
                     }
                 }
             }
@@ -651,7 +685,9 @@
             "delete": {
                 "summary": "deletar um restaurante por id",
                 "description": "Essa rota é responsável por deletar um restaurante",
-                "tags": ["restaurante"],
+                "tags": [
+                    "restaurante"
+                ],
                 "security": [
                     {
                         "BearerAuth": []
@@ -689,7 +725,7 @@
                             }
                         }
                     },
-                    "400": {
+                    "500": {
                         "description": "O servidor falhou em deletar o restaurante"
                     }
                 }
@@ -699,7 +735,9 @@
             "get": {
                 "summary": "Buscar todas as comandas",
                 "description": "Essa rota é responsável por buscar todas as comandas do dia",
-                "tags": ["comanda"],
+                "tags": [
+                    "comanda"
+                ],
                 "security": [
                     {
                         "BearerAuth": []
@@ -742,7 +780,9 @@
             "delete": {
                 "summary": "Deletar uma comanda",
                 "description": "Essa rota é responsável por deletar uma comanda",
-                "tags": ["comanda"],
+                "tags": [
+                    "comanda"
+                ],
                 "security": [
                     {
                         "BearerAuth": []
@@ -787,7 +827,9 @@
             "get": {
                 "summary": "Buscar o cardapio de um restaurante",
                 "description": "Essa rota é responsável por buscar todos os produtos de um restaurante",
-                "tags": ["cardapio"],
+                "tags": [
+                    "cardapio"
+                ],
                 "parameters": [
                     {
                         "name": "idRestaurante",
@@ -825,11 +867,13 @@
                 }
             }
         },
-        "/restaurante/cardapio/add":{
+        "/restaurante/cardapio/add": {
             "post": {
                 "summary": "Adicionar um produto",
                 "description": "Essa rota é responsável por criar um produto",
-                "tags": ["cardapio"],
+                "tags": [
+                    "cardapio"
+                ],
                 "security": [
                     {
                         "BearerAuth": []
@@ -904,12 +948,13 @@
             "delete": {
                 "summary": "Deletar um ou mais pratos por id",
                 "description": "Essa rota é responsável por deletar um ou mais produtos por id",
-                "tags": ["cardapio"],
+                "tags": [
+                    "cardapio"
+                ],
                 "requestBody": {
                     "content": {
                         "aplication/json": {
                             "schema": {
-                            
                                 "type": "array",
                                 "items": {
                                     "type": "integer",
@@ -935,7 +980,7 @@
                                             "type": "string",
                                             "example": "Pratos deletados"
                                         }
-                                    } 
+                                    }
                                 }
                             }
                         }
@@ -950,7 +995,9 @@
             "get": {
                 "summary": "Buscar as reservas do dia",
                 "description": "Essa rota é responsável por buscar todas as reservas do dia",
-                "tags": ["reserva"],
+                "tags": [
+                    "reserva"
+                ],
                 "security": [
                     {
                         "BearerAuth": []
@@ -989,7 +1036,9 @@
             "get": {
                 "summary": "Buscar uma reserva",
                 "description": "Essa rota é responsável por buscar uma reserva",
-                "tags": ["reserva"],
+                "tags": [
+                    "reserva"
+                ],
                 "security": [
                     {
                         "BearerAuth": []
@@ -1028,7 +1077,9 @@
             "post": {
                 "summary": "Adicionar uma reserva",
                 "description": "Essa rota é responsável por criar uma reserva",
-                "tags": ["reserva"],
+                "tags": [
+                    "reserva"
+                ],
                 "security": [
                     {
                         "BearerAuth": []
@@ -1059,7 +1110,7 @@
                                         "items": {
                                             "type": "object",
                                             "properties": {
-                                                "cod":{
+                                                "cod": {
                                                     "type": "integer"
                                                 },
                                                 "quantidade": {
@@ -1078,7 +1129,7 @@
                         "description": "OK",
                         "content": {
                             "aplication/json": {
-                                "schema":{
+                                "schema": {
                                     "type": "object",
                                     "properties": {
                                         "status": {
@@ -1104,7 +1155,9 @@
             "put": {
                 "summary": "Completar uma reserva",
                 "description": "Essa rota é responsável por trocar a prop isCompleted da reserva para true",
-                "tags": ["reserva"],
+                "tags": [
+                    "reserva"
+                ],
                 "security": [
                     {
                         "BearerAuth": []
@@ -1117,7 +1170,7 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                           "type": "string" 
+                            "type": "string"
                         }
                     }
                 ],
@@ -1125,7 +1178,7 @@
                     "200": {
                         "description": "OK",
                         "content": {
-                            "aplication/json":{
+                            "aplication/json": {
                                 "schema": {
                                     "type": "object",
                                     "properties": {
@@ -1152,10 +1205,12 @@
             "get": {
                 "summary": "Buscar todas as compras realizadas em um restaurante",
                 "description": "Essa rota é responsável por filtrar e buscar todas as compras realizadas em um restaurante, retornando a quantidade que foi comprada de cada produto",
-                "tags": ["financeiro"],
+                "tags": [
+                    "financeiro"
+                ],
                 "security": [
                     {
-                        "BearerAuth":[]
+                        "BearerAuth": []
                     }
                 ],
                 "responses": {
@@ -1178,7 +1233,7 @@
                                         },
                                         "filteredPurchases": {
                                             "type": "object",
-                                           "properties": {
+                                            "properties": {
                                                 "pratos": {
                                                     "type": "array",
                                                     "items": {
@@ -1197,22 +1252,22 @@
                                                         "$ref": "#/components/schemas/Cardapio"
                                                     }
                                                 }
-                                           } 
+                                            }
                                         },
                                         "porcentPurchases": {
                                             "type": "object",
                                             "properties": {
                                                 "pratos": {
-                                                   "type": "number" ,
-                                                   "example": 40
+                                                    "type": "number",
+                                                    "example": 40
                                                 },
                                                 "bebidas": {
-                                                    "type": "number" ,
+                                                    "type": "number",
                                                     "example": 40
                                                 },
                                                 "sobremesas": {
-                                                "type": "number" ,
-                                                "example": 20
+                                                    "type": "number",
+                                                    "example": 20
                                                 }
                                             }
                                         }
@@ -1243,7 +1298,7 @@
                     "id": {
                         "type": "integer"
                     },
-                    "nome_completo":{
+                    "nome_completo": {
                         "type": "string",
                         "maxLength": 40
                     },
@@ -1258,7 +1313,6 @@
                         "type": "string",
                         "nullable": false
                     }
-
                 }
             },
             "Restaurante": {
@@ -1331,7 +1385,7 @@
                     }
                 }
             },
-            "Cardapio":{
+            "Cardapio": {
                 "type": "object",
                 "properties": {
                     "codigo": {
@@ -1361,12 +1415,12 @@
                         "type": "integer",
                         "nullable": false
                     }
-                }	
+                }
             },
             "Categoria": {
                 "type": "object",
                 "properties": {
-                    "id":{
+                    "id": {
                         "type": "integer",
                         "nullable": false
                     },
@@ -1383,7 +1437,7 @@
                         "type": "integer",
                         "nullable": false
                     },
-                    "is_reserva":{
+                    "is_reserva": {
                         "type": "boolean",
                         "nullable": false
                     },
@@ -1413,7 +1467,7 @@
                         "type": "integer",
                         "nullable": false
                     },
-                    "reservas_ativas":{
+                    "reservas_ativas": {
                         "type": "boolean",
                         "nullable": false
                     },
@@ -1435,7 +1489,7 @@
                         "type": "integer",
                         "nullable": false
                     },
-                    "telefone_fixo":{
+                    "telefone_fixo": {
                         "type": "string",
                         "maxLength": 16,
                         "nullable": false
@@ -1475,7 +1529,7 @@
                         "type": "integer",
                         "nullable": false
                     },
-                    "data_compra":{
+                    "data_compra": {
                         "type": "string",
                         "nullable": false
                     },
@@ -1534,7 +1588,7 @@
                         "type": "integer",
                         "nullable": false
                     },
-                    "qr_code":{
+                    "qr_code": {
                         "type": "string",
                         "nullable": false
                     },
@@ -1602,7 +1656,7 @@
                         "type": "integer",
                         "nullable": false
                     },
-                    "data_entrada":{
+                    "data_entrada": {
                         "type": "string",
                         "nullable": false
                     },
@@ -1635,5 +1689,4 @@
             }
         }
     }
-
 }

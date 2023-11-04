@@ -91,7 +91,7 @@ class restauranteController {
 
         } catch (err) {
             console.log(err)
-            throw new CustomError("O servidor falhou em criar o restaurante", 400)
+            throw new CustomError("O servidor falhou em criar o restaurante", 500)
         }
 
     }
