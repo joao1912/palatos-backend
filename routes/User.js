@@ -10,7 +10,7 @@ router.get("/", authToken.execute, userController.getUsers)
 
 router.get("/auth", authToken.execute, userController.auth)
 
-router.get('/getUser/:id', userController.getUser)
+router.get('/getUser/:id', authToken.execute, userController.getUser)
 
 router.post("/newUser", userController.createUser)
 

@@ -1,3 +1,4 @@
+import { CustomError } from "../../Middlewares/erros.js";
 import Contato from "../models/Contato.js";
 import Favorito from "../models/Favorito.js";
 import Reserva from "../models/Reserva.js";
@@ -59,13 +60,17 @@ class userController {
 
         res.status(200).json({
             status:"success",
-            resultado: resultado
+            usuario: resultado
         })
     }
 
     async getUsers(req, res) {
 
         const usuarios= await Usuario.findAll()
+
+        if (!usuarios) {
+            throw new CustomError("O servidor falhou em buscar os usuários", 500)
+        }
 
         res.status(200).json({
             usuarios: usuarios || []

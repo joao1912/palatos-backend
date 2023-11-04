@@ -69,6 +69,9 @@
                     },
                     "401": {
                         "description": "Unauthorized"
+                    },
+                    "500": {
+                        "description": "Internal server error"
                     }
                 }
             }
@@ -103,6 +106,9 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
                     }
                 }
             }
@@ -112,6 +118,11 @@
                 "summary": "Buscar um usuário",
                 "description": "Essa rota vai buscar um usuário por id",
                 "tags": ["users"],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -131,41 +142,56 @@
                                 "schema": {
                                     "type": "object",
                                     "properties": {
-                                        "nome":{
+                                        "status": {
                                             "type": "string",
-                                            "maxLength": 40
+                                            "example": "success"
                                         },
-                                        "email": {
-                                            "type": "string",
-                                            "maxLength": 40
-                                        },
-                                        "foto": {
-                                            "type": "string",
-                                            "nullable": false
-                                        },
-                                        "tel": {
-                                            "type": "string",
-                                            "example": "+55 48 1234-5678"
-                                        },
-                                        "favoritos": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "object",
-                                                "$ref": "#/components/schemas/Favorito"
-                                            }
-                                        },
-                                        "reservas": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "object",
-                                                "$ref": "#/components/schemas/Reserva"
+                                        "usuario": {
+                                            "type": "object",
+                                            "properties": {
+                                                "nome":{
+                                                    "type": "string",
+                                                    "maxLength": 40
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "maxLength": 40
+                                                },
+                                                "foto": {
+                                                    "type": "string",
+                                                    "nullable": false
+                                                },
+                                                "tel": {
+                                                    "type": "string",
+                                                    "example": "+55 48 1234-5678"
+                                                },
+                                                "favoritos": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id_restaurante": {
+                                                                "type": "integer"
+                                                            },
+                                                            "foto": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "reservas": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "$ref": "#/components/schemas/Reserva"
+                                                    }
+                                                }
                                             }
                                         }
                                     }
                                 }
                             }
                         }
-                        
                     }
                 }
             }
@@ -186,7 +212,7 @@
                                         "type": "string",
                                         "example": "João Pedro Silva Teixeira"
                                     },
-                                    "foto": {
+                                    "file": {
                                         "type": "string",
                                         "format": "binary"
                                       
@@ -215,11 +241,11 @@
                             }
                         }
                     },
-                    "401":{
-                        "description": "Unauthorized"
-                    },
                     "400": {
                         "description": "O usuário ja existe"
+                    },
+                    "500": {
+                        "description": "Internal server error"
                     }
                 }
             }
