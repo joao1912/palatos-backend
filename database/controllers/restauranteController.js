@@ -5,43 +5,35 @@ import { CreateTokenAccess } from "../../utils/CreateTokenAccess.js";
 import Usuario from "../models/Usuario.js";
 import bcrypt from "bcrypt"
 import Cardapio from "../models/Cardapio.js";
+import {CustomError} from "../../Middlewares/erros.js"
 const createTokenAccess = new CreateTokenAccess()
 
 class restauranteController {
 
     async getRestaurant(req, res) {
 
-        const id = req.params.id;
+        const {id} = req.params;
         
         if (id) {
            
-            try {   
-                const result = await Restaurante.findByPk(id)
+            const result = await Restaurante.findByPk(id)
 
-                if (result == null) {
-                    res.status(404).json({
-                        status: 'failed',
-                        erro: 'Restaurante não encontrado.'
-                    })
-                } else {
-                    res.status(200).json({
-                        status: 'success',
-                        result
-                    })
-                }
-
-            } catch(err) {
-
-                throw new Error("Não foi possível encontrar um restaurante com este ID.")
-                
+            if (result == null) {
+                throw new CustomError("Não foi possível encontrar um restaurante com este ID.", 404)
+            } else {
+                res.status(200).json({
+                    status: 'success',
+                    result
+                })
             }
+
         } else {
            
             const everyRestaurants = await Restaurante.findAll()
 
             if (everyRestaurants == null) {
 
-                throw new Error("Restaurantes não encontrados.")
+                throw new CustomError("O servidor falhou em buscar os restaurantes", 500)
 
             }
 
@@ -99,7 +91,7 @@ class restauranteController {
 
         } catch (err) {
             console.log(err)
-            throw new Error("O servidor falhou em criar o restaurante")
+            throw new CustomError("O servidor falhou em criar o restaurante", 400)
         }
 
     }
@@ -125,7 +117,7 @@ class restauranteController {
         const restaurant = await Restaurante.findByPk(idRestaurante) 
 
         if (!restaurant) {
-            throw new Error("O servidor falhou em buscar o restaurante")
+            throw new CustomError("O servidor falhou em buscar o restaurante", 404)
         }
 
         restaurant.set({
@@ -174,7 +166,7 @@ class restauranteController {
             })
 
         } catch(err) {
-            throw new Error("O servidor falhou em deletar o restaurante")
+            throw new CustomError("O servidor falhou em deletar o restaurante", 500)
         }
         
     }
@@ -193,7 +185,7 @@ class restauranteController {
         })
 
         if (!usuario){
-            throw new Error("Email ou Senha incorretos.")
+            throw new CustomError("Email ou Senha incorretos.", 401)
         }
 
         try {
@@ -207,13 +199,9 @@ class restauranteController {
             })
 
         } catch (err) {
-            throw new Error("Email ou Senha incorretos.")
+            throw new CustomError("Email ou Senha incorretos.", 401)
         }
-
-        
-
     }
-
 }
 
 async function createContato(idUser, telefone, celular) {
@@ -224,7 +212,7 @@ async function createContato(idUser, telefone, celular) {
     })
 
     if (!contatoRest) {
-        throw new Error("Não foi possível criar o contato.")
+        throw new CustomError("Não foi possível criar o contato.", 400)
     }
 
     return contatoRest
@@ -238,7 +226,7 @@ async function createRestConfig(restauranteId,  reservas_ativas, tempo_toleranci
         fk_restaurante: restauranteId
     })
     if (!configRest) {
-        throw new Error("Não foi possível criar a configuração do restaurante.")
+        throw new CustomError("Não foi possível criar a configuração do restaurante.", 400)
     }
 
     return configRest
@@ -259,7 +247,7 @@ async function editConfigRest(restauranteId, reservas_ativas, tempo_tolerancia, 
     
     } catch(err) {
 
-        throw new Error("O servidor falhou em editar a configuração do restaurante")
+        throw new CustomError("O servidor falhou em editar a configuração do restaurante", 500)
                     
     }
 }
@@ -278,7 +266,7 @@ async function editContato(restauranteId, telefone_fixo, celular) {
     
     } catch(err) {
 
-        throw new Error("O servidor falhou em editar o contato do restaurante")
+        throw new CustomError("O servidor falhou em editar o contato do restaurante", 500)
                     
     }
 }

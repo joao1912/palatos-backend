@@ -32,7 +32,7 @@ class reservaController {
 
             const reservas = await Reserva.findAll()
             if (!reservas) {
-                throw new Error("O servidor falhou em buscar as reservas.")
+                throw new CustomError("O servidor falhou em buscar as reservas.", 500)
             }
             res.status(200).json({
                 status: 'success',
@@ -42,38 +42,27 @@ class reservaController {
     }
 
     async addReserva(req,res) {
-        const { userId, dataEntrada, idRestaurante, pedido} = req.body; 
+        const { id, dataEntrada, idRestaurante, pedido} = req.body; 
         // a data tera que vir completa com horario
 
-        if ( typeof userId === "number") {
-
-            const usuario = await Usuario.findByPk(userId);
-            if (!usuario) {
-                return res.status(404).json({
-                    status: 'failed',
-                    error: 'Usuário não encontrado' 
-                });
-            }
-
-        } else {
-
-            throw new Error("typeof error")
-
+        const usuario = await Usuario.findByPk(id);
+        if (!usuario) {
+            return res.status(404).json({
+                status: 'failed',
+                error: 'Usuário não encontrado' 
+            });
         }
+        
 
         const novaReserva = await Reserva.create({
             data_entrada: dataEntrada,
-            fk_usuario: userId,
+            fk_usuario: id,
             fk_restaurante: idRestaurante
         })
 
         if (!novaReserva) {
-            throw new Error("O servidor falhou em criar a reserva.")
+            throw new CustomError("O servidor falhou em criar a reserva.", 500)
         }
-
-        // const objeto={
-        //     codigo,observacoes,quantidade,fk_reserva,fk_cardapio
-        // }
 
         for(let produto of pedido){
            await PedidoReserva.create({
@@ -84,7 +73,6 @@ class reservaController {
            }) 
         }
 
-
         res.status(200).json({
             status: 'success',
             novaReserva
@@ -94,24 +82,18 @@ class reservaController {
 
     async editReserva(req, res) {
 
-        const cod = req.params.cod;
-
-        if (typeof cod != "number") {
-
-            throw new Error("typeof error")
-
-        }
+        const {cod} = req.params;
 
         const reserva = await Reserva.findByPk(cod)
 
         if (!reserva) {
-            throw new Error("falhou em buscar a reserva")
+            throw new CustomError("falhou em buscar a reserva", 400)
         }
 
         const completedOrNot = reserva.isCompleted
 
         if (completedOrNot) {
-            throw new Error("A reserva ja foi completada.")
+            throw new CustomError("A reserva ja foi completada.", 400)
         }
 
         reserva.set({

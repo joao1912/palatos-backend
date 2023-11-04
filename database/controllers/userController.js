@@ -67,7 +67,9 @@ class userController {
 
         const usuarios= await Usuario.findAll()
 
-        res.status(200).json({usuarios})
+        res.status(200).json({
+            usuarios: usuarios || []
+        })
 
     }
 
