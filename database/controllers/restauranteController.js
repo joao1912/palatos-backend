@@ -173,6 +173,7 @@ class restauranteController {
 
     async loginRestaurant(req,res){
 
+        console.log(req.body)
         const {
             email,
             senha
