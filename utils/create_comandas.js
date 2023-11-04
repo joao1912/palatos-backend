@@ -9,7 +9,7 @@ import Comanda from "../database/models/Comanda.js"
 import Restaurante from "../database/models/Restaurante.js";
 
 const userId = 10
-const idRestaurante = 43
+const idRestaurante = 2
 
 async function create_comandas() {
 
@@ -25,7 +25,7 @@ async function create_comandas() {
     console.log(`Id criado para mesa: ${idMesa}`)
 
     result = await ProdutoCarrinho.create({
-        fk_cardapio: 3000,
+        fk_cardapio: 4,
         fk_mesa: idMesa
 
     })

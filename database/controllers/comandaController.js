@@ -5,9 +5,9 @@ import { CustomError } from "../../Middlewares/erros.js"
 
 class comandaController {
     async getComandas(req, res) {
-       
+
         const { idRestaurante } = req.params
-        if(!idRestaurante) {
+        if (!idRestaurante) {
             throw new CustomError("Id do restaurante ausente", 400)
         }
 
@@ -17,14 +17,14 @@ class comandaController {
             for (let obj of listComandas) {
 
                 let id = -1
-               
+
 
                 let result = await ProdutoCarrinho.findByPk(obj.fk_produto_carrinho)
 
                 console.log(`Id retornado do produto carrinho: ${result.id}`)
                 console.log(`Id do objeto percorrido: ${obj.id}`)
-                
-                if(!result) {
+
+                if (!result) {
                     console.log("Resultado nulo")
                     console.log(result)
                 }
@@ -47,31 +47,31 @@ class comandaController {
             })
         }
 
-        
-     catch(err) {
-        throw new CustomError(`Erro ao obter comandas: ${err}`, 400)
+
+        catch (err) {
+            throw new CustomError(`Erro ao obter comandas: ${err}`, 400)
+        }
     }
-}
 
     async deleteComanda(req, res) {
 
-    const { id } = req.params;
-    try {
-        Comanda.destroy({
-            where: {
-                id: id
-            }
-        })
+        const { id } = req.params;
+        try {
+            Comanda.destroy({
+                where: {
+                    id: id
+                }
+            })
 
-        res.status(200).json({
-            status: "success",
-            message: "Comanda removida."
+            res.status(200).json({
+                status: "success",
+                message: "Comanda removida."
 
-        })
-    } catch (err) {
-        throw new CustomError("Erro ao deletar comanda.", 400)
+            })
+        } catch (err) {
+            throw new CustomError("Erro ao deletar comanda.", 400)
+        }
     }
-}
 }
 
 export default comandaController
