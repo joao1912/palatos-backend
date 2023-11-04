@@ -7,8 +7,6 @@ class cardapioController {
 
         const { idRestautante } = req.params;
 
-        console.log("chegou")
-
         const menu = await Cardapio.findAll({
             where: {
                 fk_restaurante: idRestautante
@@ -28,15 +26,15 @@ class cardapioController {
     }
 
      async getProdutoIndividual(req, res){
-        const {id}=req.params 
+        const {codigo}=req.params 
 
-        const produto= await Cardapio.findByPk(id)
+        const produto= await Cardapio.findByPk(codigo)
         
         if(!produto){
            throw new CustomError("Produto não encontrado",404)
         }
          res.status(200).json({
-            status:"Sucesso",
+            status:"success",
             produto:produto
          })
 
@@ -81,7 +79,7 @@ class cardapioController {
         
         } catch (err) {
 
-            throw new CustomError("O servidor falhou em criar o menu.", 400)
+            throw new CustomError("O servidor falhou em criar o menu.", 500)
         }
 
         res.status(200).json({

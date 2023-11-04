@@ -12,7 +12,7 @@ const CardapioController = new cardapioController()
 
 router.get("/:idRestautante", CardapioController.getCardapio)
 
-router.get ("/prato/:id",CardapioController.getProdutoIndividual)
+router.get ("/prato/:codigo",CardapioController.getProdutoIndividual)
 
 router.post("/add", authToken.execute, upload.single("file") ,CardapioController.createCardapio)
 

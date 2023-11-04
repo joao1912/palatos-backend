@@ -869,6 +869,54 @@
                                 }
                             }
                         }
+                    },
+                    "404": {
+                        "description": "Restaurant not found"
+                    }
+                }
+            }
+        },
+        "/restaurante/cardapio/prato/{codigo}": {
+            "get": {
+                "summary": "Buscar um item do cardapio",
+                "description": "Essa rota é responsável por buscar um item do cardapio de algum restaurante",
+                "tags": [
+                    "cardapio"
+                ],
+                "parameters": [
+                    {
+                        "name": "codigo",
+                        "in": "path",
+                        "required": true,
+                        "description": "Código do item do cardapio",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "aplication/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "produto": {
+                                            "type": "object",
+                                            "$ref": "#/components/schemas/Cardapio"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Product not found"
                     }
                 }
             }
@@ -990,9 +1038,6 @@
                                 }
                             }
                         }
-                    },
-                    "500": {
-                        "description": "Internal server error"
                     }
                 }
             }
