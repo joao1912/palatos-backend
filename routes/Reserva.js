@@ -10,7 +10,7 @@ const router = express.Router()
 router.get("/", authToken.execute, ReservaController.getReservas)
 router.get("/:id", authToken.execute, ReservaController.getReservas)
 
-router.post("/add/:id", authToken.execute, ReservaController.addReserva)
+router.post("/add", authToken.execute, ReservaController.addReserva)
 
 router.put("/completed/:cod", authToken.execute, ReservaController.editReserva)
 

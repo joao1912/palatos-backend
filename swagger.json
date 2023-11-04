@@ -1113,13 +1113,22 @@
                             "aplication/json": {
                                 "schema": {
                                     "type": "object",
-                                    "$ref": "#/components/schemas/Reserva"
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "reserva": {
+                                            "type": "object",
+                                            "$ref": "#/components/schemas/Reserva"
+                                        }
+                                    }
                                 }
                             }
                         }
                     },
-                    "500": {
-                        "description": "Internal server error"
+                    "404": {
+                        "description": "User not found"
                     }
                 }
             }
@@ -1134,17 +1143,6 @@
                 "security": [
                     {
                         "BearerAuth": []
-                    }
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "description": "Id do usuário"
                     }
                 ],
                 "requestBody": {
@@ -1198,6 +1196,9 @@
                     },
                     "500": {
                         "description": "Internal server error"
+                    },
+                    "404": {
+                        "description": "User not found"
                     }
                 }
             }

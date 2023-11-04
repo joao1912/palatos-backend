@@ -14,19 +14,13 @@ class reservaController {
             const reserva = await Reserva.findOne({where: {fk_usuario: idUser}})
 
             if (reserva == null) {
-
-                res.status(404).json({
-                    status: 'failed',
-                    erro: "O usuário não foi encontrado."
-                })
-
-            } else {
-
-                res.status(200).json({
-                    status: 'success',
-                    reserva
-                })
+                throw new CustomError("O usuário não foi encontrado", 404)
             }
+
+            res.status(200).json({
+                status: 'success',
+                reserva
+            })
             
         } else {
 
@@ -47,10 +41,7 @@ class reservaController {
 
         const usuario = await Usuario.findByPk(id);
         if (!usuario) {
-            return res.status(404).json({
-                status: 'failed',
-                error: 'Usuário não encontrado' 
-            });
+            throw new CustomError("Usuário não encontrado", 404)
         }
         
 
