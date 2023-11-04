@@ -1,4 +1,5 @@
 import Cardapio from "../models/Cardapio.js";
+import { CustomError } from "../../Middlewares/erros.js";
 
 class cardapioController {
 
@@ -22,7 +23,7 @@ class cardapioController {
             })
 
         } else {
-            throw new Error("Menu não pode ser encontrado")
+            throw new CustomError("Menu não pode ser encontrado", 404)
         }
     }
 
@@ -40,7 +41,7 @@ class cardapioController {
         const idRestautante = req.idRestaurante;
       
         if (idRestautante == null) {
-            throw new Error("token inválido")
+            throw new CustomError("token inválido", 401)
         }
         
         const path = `http://45.224.129.126:8085/files/${foto.filename}`
@@ -62,7 +63,7 @@ class cardapioController {
         
         } catch (err) {
 
-            throw new Error("O servidor falhou em criar o menu.")
+            throw new CustomError("O servidor falhou em criar o menu.", 400)
         }
 
         res.status(200).json({

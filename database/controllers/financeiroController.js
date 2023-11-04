@@ -1,11 +1,16 @@
 import Cardapio from "../models/Cardapio.js";
 import Financeiro from "../models/Financeiro.js"
+import { CustomError } from "../../Middlewares/erros.js";
 
 class financeiroController {
 
     async getAllPurchases(req, res) {
 
         const { idRestaurante } = req.body;
+
+        if (!idRestaurante) {
+            throw new CustomError("Token Inválido", 401)
+        }
 
         const allPurchases = await Financeiro.findAll({
             where: {
@@ -14,11 +19,24 @@ class financeiroController {
         })
 
         const allProducts = []
-        for (let i = 0 ; i < allPurchases.length ; i++) {
+        for (let i = 0; i < allPurchases.length; i++) {
 
             const product = await Cardapio.findByPk(allPurchases.fk_cardapio)
-            allProducts.push(product)
 
+            let found = false;
+
+            for (let obj of allProducts) {
+                if (product.fk_cardapio === obj.fk_cardapio) {
+                    obj.quantidade = (obj.quantidade || 0) + 1
+                    found = true
+                    break
+                }
+            }
+
+            if (!found) {
+                product.quantidade = 1;
+                allProducts.push(product);
+            }
         }
 
         const filteredPurchases = {
@@ -42,14 +60,11 @@ class financeiroController {
             })
         }
 
-        for (let i = 0 ; i < allPurchases.length; i++) {
+        for (let i = 0; i < allProducts.length; i++) {
 
-            //AQUI DEVE SER FEITO UM FILTRO PARA NAO TEAR REPITIDOS E SOMAR A QUANTIDADE DE CADA PRODUTO
+            const produto = allProducts[i]
 
-            const idPrato = allPurchases[i].fk_cardapio
-            const produto = await Cardapio.findByPk(idPrato)
-
-            switch(produto.tipo) {
+            switch (produto.tipo) {
 
                 case "Prato":
                     filteredPurchases.pratos.push(produto)
@@ -81,5 +96,3 @@ class financeiroController {
 }
 
 export default financeiroController
-
-//rota -> baseURL/financeiro/getAll (precisa do token)

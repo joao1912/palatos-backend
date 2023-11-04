@@ -1,7 +1,7 @@
 import Comanda from "../models/Comanda.js"
 import ProdutoCarrinho from "../models/ProdutoCarrinho.js"
 import Mesa from "../models/Mesa.js"
-import e from "cors"
+import { CustomError } from "../../Middlewares/erros.js"
 
 class comandaController {
     async getComandas(req, res) {
@@ -44,7 +44,7 @@ class comandaController {
 
         
      catch(err) {
-        throw new Error(`Erro ao obter comandas: ${err}`)
+        throw new CustomError(`Erro ao obter comandas: ${err}`, 400)
     }
 }
 
@@ -64,7 +64,7 @@ class comandaController {
 
         })
     } catch (err) {
-        throw new Error("Erro ao deletar comanda.")
+        throw new CustomError("Erro ao deletar comanda.", 400)
     }
 }
 }
