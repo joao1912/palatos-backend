@@ -190,8 +190,13 @@ class restauranteController {
 
         try {
             await bcrypt.compare(senha, usuario.senha)
+
+            const restaurante = await Restaurante.findOne({
+                where: {fk_usuario: usuario.id}
+            })
+
             const createTokenAccess= new CreateTokenAccess()
-            const token= await createTokenAccess.execute(usuario.id)
+            const token= await createTokenAccess.execute(usuario.id, restaurante.id)
 
             res.status(200).json({
                 status:"success",
