@@ -214,17 +214,13 @@
                 "requestBody": {
                     "required": true,
                     "content": {
-                        "multipart/form-data": {
+                        "application/json": {
                             "schema": {
                                 "type": "object",
                                 "properties": {
                                     "nome_completo": {
                                         "type": "string",
                                         "example": "João Pedro Silva Teixeira"
-                                    },
-                                    "file": {
-                                        "type": "string",
-                                        "format": "binary"
                                     },
                                     "email": {
                                         "type": "string",
