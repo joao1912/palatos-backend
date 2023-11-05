@@ -1666,7 +1666,7 @@
                     "observacoes": {
                         "type": "string"
                     },
-                    "quantidadea": {
+                    "quantidade": {
                         "type": "integer",
                         "example": 1
                     },
@@ -1686,6 +1686,13 @@
                     "id": {
                         "type": "integer",
                         "nullable": false
+                    },
+                    "observacoes": {
+                        "type": "string"
+                    },
+                    "quantidade": {
+                        "type": "integer",
+                        "example": 1
                     },
                     "fk_mesa": {
                         "type": "integer",
