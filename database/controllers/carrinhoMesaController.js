@@ -23,6 +23,42 @@ class CarrinhoMesaController {
         })
     }
 
+    async getAll(req,res){
+        const{idMesa}=req.params
+
+        const pratos= await ProdutoCarrinho.findAll({
+            where:{
+                fk_mesa:idMesa,
+            }
+        }) 
+
+        res.status(200).json({
+            status:'success',
+            pratos
+        })
+    }
+
+    async deleteItem(req,res){
+        const{idMesa}=req.params
+        const{idProduto}=req.body
+
+        try {
+            await ProdutoCarrinho.destroy({
+                where:{
+                    id:idProduto,
+                    fk_mesa:idMesa
+                }
+            })
+        } catch (error) {
+            throw new CustomError("O servidor não conseguiu excluir o produto",500)
+        }
+
+        res.status(200).json({
+            status:'success',
+            message:'Produto removido do carrinho'
+        })
+    }
+
 }
 
 export default CarrinhoMesaController

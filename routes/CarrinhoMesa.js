@@ -9,6 +9,9 @@ const router = express.Router()
 
 router.post("/addItem", carrinhoMesaController.addItem)
 
+router.get("/getAll/:idMesa",carrinhoMesaController.getAll)
+
+router.delete("/deleteItem/:idMesa",carrinhoMesaController.deleteItem)
 
 
 export default router
