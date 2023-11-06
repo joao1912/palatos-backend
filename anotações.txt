@@ -1,0 +1,2 @@
+1. Finalizar compra
+O usuário selecionou os produtos e clicou em finalizar compra. Após isso, os itens serão removidos da 'produtos_carrinho' e irão para 'comanda'.

@@ -17,7 +17,6 @@ Financeiro.init(
             allowNull:false,
         },
 
-
     },
     {
         sequelize:database,
