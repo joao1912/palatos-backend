@@ -14,6 +14,8 @@ async function create_comandas() {
         is_reserva: false,
         data_entrada: new Date().getTime() + 7,
         chegou: false,
+    }, {
+        logging: true
     })
 
     const idComanda = result.id
@@ -24,6 +26,8 @@ async function create_comandas() {
         quantidade: 2,
         observacoes: "Bem fritinho!",
         fk_comanda: idComanda
+    }, {
+        logging: true
     })
 
     console.log(result)

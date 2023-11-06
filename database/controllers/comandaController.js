@@ -12,33 +12,11 @@ class comandaController {
         }
 
         try {
-            const listComandas = await Comanda.findAll()
-
-            for (let obj of listComandas) {
-
-                let id = -1
-
-
-                let result = await ProdutoCarrinho.findByPk(obj.fk_produto_carrinho)
-
-                console.log(`Id retornado do produto carrinho: ${result.id}`)
-                console.log(`Id do objeto percorrido: ${obj.id}`)
-
-                if (!result) {
-                    console.log("Resultado nulo")
-                    console.log(result)
+            const listComandas = await Comanda.findAll({
+                include: {
+                    ProdutoComanda: true
                 }
-                if (result.id) {
-                    id = result.fk_mesa
-                    console.log("Primeiro passo")
-
-                    result = await Mesa.findByPk(id)
-                    if (result.id) {
-                        console.log("segundo passo")
-                        obj.identificacao_mesa = result.identificacao_mesa
-                    }
-                }
-            }
+            })
 
             res.status(200).json({
                 status: "success",
