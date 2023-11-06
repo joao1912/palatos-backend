@@ -18,6 +18,7 @@ import reservaRoutes from "./routes/Reserva.js"
 import cardapioRoutes from "./routes/Cardapio.js"
 import comandaRoutes from "./routes/Comanda.js"
 import financeiroRoutes from "./routes/Financeiro.js"
+import carrinhoMesaRoutes from "./routes/CarrinhoMesa.js"
 
 import { CustomError, errorHandler } from "./Middlewares/erros.js"
 
@@ -50,6 +51,8 @@ app.post("/createToken", async (req, res) => {
 app.use("/files", express.static("uploads")) 
 
 app.use("/users", userRoutes)
+
+app.use("/users/carrinhoMesa",carrinhoMesaRoutes)
 
 app.use("/restaurante/reserva", reservaRoutes)
 
