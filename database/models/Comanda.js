@@ -19,7 +19,7 @@ Comanda.init({
     chegou: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
-    }
+    },
 }, {
     sequelize: database,
     timestamps: false,
@@ -28,9 +28,12 @@ Comanda.init({
 }
 )
 
-Comanda.hasMany(Financeiro, {
-    constraints: true,
-    foreignKey: "fk_comanda"
-})
+// Comanda.hasMany(Financeiro, {
+//     constraints: true,
+//     foreignKey: "fk_comanda"
+// })
+
+
+
 
 export default Comanda
