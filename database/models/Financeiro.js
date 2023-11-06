@@ -4,6 +4,7 @@ import database from "../db.js"
 import Usuario from "./Usuario.js"
 import Cardapio from "./Cardapio.js"
 import Restaurante from "./Restaurante.js"
+import Comanda from "./Comanda.js"
 
 
 class Financeiro extends Sequelize.Model { }
@@ -47,6 +48,6 @@ Financeiro.belongsTo(
     }
 )
 
-export default Financeiro 
+export default Financeiro
 
 

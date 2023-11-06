@@ -3,6 +3,7 @@ import Sequelize from "sequelize";
 import database from "../db.js";
 import ProdutoCarrinho from "./ProdutoCarrinho.js"
 import PedidoReserva from "./PedidoReserva.js"
+import Financeiro from "./Financeiro.js";
 
 class Comanda extends Sequelize.Model { }
 
@@ -27,15 +28,9 @@ Comanda.init({
 }
 )
 
-
-Comanda.belongsTo(ProdutoCarrinho, {
+Comanda.hasMany(Financeiro, {
     constraints: true,
-    foreignKey: "fk_produto_carrinho",
-})
-
-Comanda.belongsTo(PedidoReserva, {
-    constraints: true,
-    foreignKey: "fk_pedido_reserva"
+    foreignKey: "fk_comanda"
 })
 
 export default Comanda
