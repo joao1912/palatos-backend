@@ -24,7 +24,7 @@ class comandaController {
             listComandas = await Comanda.findAll({
                 where: {
                     data_entrada: {
-                        [op.between]: [inicioDia, fimDia]
+                        [Op.between]: [inicioDia, fimDia]
                     }
                 },
                 include: [{
