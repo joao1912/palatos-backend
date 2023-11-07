@@ -32,20 +32,14 @@ class comandaController {
                 })
             }
 
+            listComandas.foreach((comanda => {
+                comanda.ProdutoComanda.foreach((produto => {
+                    produto.dataValues.nome_produto = produto.Cardapio.nome_produto
+                    delete produto.dataValues.Cardapio
+                }))
+            }))
 
-            listComandas = listComandas.map(comanda => {
-                const produtos = comanda.ProdutoComandas.map(produto => {
-                    return {
-                        ...produto.dataValues,
-                        nome_produto: produto.Cardapio.nome_produto,
-                        Cardapio: undefined
-                    }
-                })
-                return {
-                    ...comanda.dataValues,
-                    produtos: produtos
-                }
-            })
+            
             res.status(200).json({
                 status: "success",
                 message: "Lista de comandas",
