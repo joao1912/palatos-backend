@@ -134,9 +134,43 @@ class userController {
     }
 
     async login(req, res) {
-        //verificar se o usuario ja existe no banco
-
         
+        const{
+            email,
+            senha
+        }=req.body
+
+        const emailUsuario= await Usuario.findOne({
+            where: {
+                email:email
+            }
+        })
+    
+        if (!emailUsuario) {
+            throw new CustomError('Email ou senha incorreto',401)
+        }
+
+        try {
+            bcrypt.compare(senha,emailUsuario.senha,(err,res)=>{
+                if(err){
+                    throw new CustomError(err,500)
+                }
+                if (!res){
+                    throw new CustomError("Email ou senha incorreto",401)
+                }
+            })
+        
+        } catch (error) {
+            throw new CustomError("O servidor falhou logar o usuário", 500)
+        }
+
+        const createTokenAccess = CreateTokenAccess()
+        const token=await createTokenAccess.execute(emailUsuario.id)
+        res.status(200).json({
+            status:"success",
+            token
+        })
+
     }
 
 }
