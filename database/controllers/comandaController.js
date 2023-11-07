@@ -24,6 +24,28 @@ class comandaController {
                 }]
             })
 
+            if(!listComandas){
+                return res.status(200).json({
+                    status: "success",
+                    message: "Não há comandas cadastradas.",
+                    ListaComandas: []
+                })
+            }
+
+
+            listComandas = listComandas.map(comanda => {
+                const produtos = comanda.ProdutoComandas.map(produto => {
+                    return {
+                        ...produto.dataValues,
+                        nome_produto: produto.Cardapio.nome_produto,
+                        Cardapio: undefined
+                    }
+                })
+                return {
+                    ...comanda.dataValues,
+                    produtos: produtos
+                }
+            })
             res.status(200).json({
                 status: "success",
                 message: "Lista de comandas",
