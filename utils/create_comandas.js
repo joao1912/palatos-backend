@@ -19,6 +19,7 @@ async function create_comandas() {
     })
 
     const idComanda = result.id
+
     console.log(`Id criado para comanda: ${result.id}`)
 
     result = await ProdutoComanda.create({

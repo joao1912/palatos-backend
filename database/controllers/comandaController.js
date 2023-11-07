@@ -33,12 +33,12 @@ class comandaController {
             }
 
 
-            // listComandas.forEach((comanda => {
-            //     comanda.ProdutoComandas.forEach((produto => {
-            //         produto.dataValues.nome_produto = produto.Cardapio.nome_produto
-            //         delete produto.dataValues.Cardapio
-            //     }))
-            // }))
+            listComandas.forEach((comanda => {
+                comanda.ProdutoComandas.forEach((produto => {
+                    produto.dataValues.nome_produto = produto.Cardapio.nome_produto
+                    delete produto.dataValues.Cardapio
+                }))
+            }))
 
 
             res.status(200).json({
