@@ -12,7 +12,7 @@ class comandaController {
         //     throw new CustomError("Id do restaurante ausente", 400)
         // }
 
-        let ListComandas
+        let listComandas
         try {
             listComandas = await Comanda.findAll({
                 include: [{
