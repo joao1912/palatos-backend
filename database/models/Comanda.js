@@ -31,9 +31,7 @@ Comanda.init({
 Comanda.hasMany(ProdutoComanda, {
     constraints: true,
     foreignKey: "fk_comanda"
-// })
-
-
+})
 
 
 export default Comanda
