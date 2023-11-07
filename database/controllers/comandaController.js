@@ -1,5 +1,5 @@
 import Comanda from "../models/Comanda.js"
-import ProdutoComanda from "../models/ProdutoCarrinho.js"
+import ProdutoComanda from "../models/ProdutoComanda.js"
 import Mesa from "../models/Mesa.js"
 import { CustomError } from "../../Middlewares/erros.js"
 
