@@ -33,7 +33,7 @@ class comandaController {
             }
 
             listComandas.forEach((comanda => {
-                comanda.ProdutoComanda.forEach((produto => {
+                comanda.ProdutoComandas.forEach((produto => {
                     produto.dataValues.nome_produto = produto.Cardapio.nome_produto
                     delete produto.dataValues.Cardapio
                 }))
