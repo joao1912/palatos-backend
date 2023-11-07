@@ -18,7 +18,7 @@ class comandaController {
                 include: [{
                     model: ProdutoComanda,
                     include: [{
-                        model: Cardapio
+                        model: Cardapio,
                         attributes: ['nome']
                     }]
                 }]
