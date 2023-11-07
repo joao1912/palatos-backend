@@ -32,8 +32,8 @@ class comandaController {
                 })
             }
 
-            listComandas.foreach((comanda => {
-                comanda.ProdutoComanda.foreach((produto => {
+            listComandas.forEach((comanda => {
+                comanda.ProdutoComanda.forEach((produto => {
                     produto.dataValues.nome_produto = produto.Cardapio.nome_produto
                     delete produto.dataValues.Cardapio
                 }))
