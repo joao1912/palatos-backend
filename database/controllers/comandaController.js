@@ -3,6 +3,7 @@ import ProdutoComanda from "../models/ProdutoComanda.js"
 import Mesa from "../models/Mesa.js"
 import { CustomError } from "../../Middlewares/erros.js"
 import Cardapio from "../models/Cardapio.js"
+import database from "../db.js"
 
 class comandaController {
     async getComandas(req, res) {
@@ -14,7 +15,18 @@ class comandaController {
 
         let listComandas
         try {
+
+            let inicioDia = new Date()
+            inicioDia.setHours(0, 0, 0, 0)
+            let fimDia = new Date(inicioDia)
+            fimDia.setHours(23, 59, 59, 999)
+
             listComandas = await Comanda.findAll({
+                where: {
+                    data_entrada: {
+                        [database.between]: [inicioDia, fimDia]
+                    }
+                },
                 include: [{
                     model: ProdutoComanda,
                     include: [{
