@@ -3,7 +3,7 @@ import ProdutoComanda from "../models/ProdutoComanda.js"
 import Mesa from "../models/Mesa.js"
 import { CustomError } from "../../Middlewares/erros.js"
 import Cardapio from "../models/Cardapio.js"
-import database from "../db.js"
+import { Op } from "sequelize"
 
 class comandaController {
     async getComandas(req, res) {
@@ -24,7 +24,7 @@ class comandaController {
             listComandas = await Comanda.findAll({
                 where: {
                     data_entrada: {
-                        [database.between]: [inicioDia, fimDia]
+                        [op.between]: [inicioDia, fimDia]
                     }
                 },
                 include: [{
