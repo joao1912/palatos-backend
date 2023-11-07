@@ -45,6 +45,10 @@ class userController {
             }
         })
 
+        const usuarioReserva= await Usuario.findByPk(id)
+
+        reservas.nome_completo=usuarioReserva.nome_completo
+
         const contato= await Contato.findOne({
             where:{
                 fk_usuario:id
