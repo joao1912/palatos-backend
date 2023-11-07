@@ -2,8 +2,6 @@ import { DataTypes } from "sequelize";
 import Sequelize from "sequelize";
 import database from "../db.js";
 import ProdutoComanda from "./ProdutoComanda.js"
-import PedidoReserva from "./PedidoReserva.js"
-import Financeiro from "./Financeiro.js";
 
 class Comanda extends Sequelize.Model { }
 
@@ -27,11 +25,6 @@ Comanda.init({
     tableName: "Comandas"
 }
 )
-
-Comanda.hasMany(ProdutoComanda, {
-    constraints: true,
-    foreignKey: "fk_comanda"
-})
 
 
 export default Comanda

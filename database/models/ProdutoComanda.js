@@ -22,18 +22,5 @@ ProdutoComanda.init({
 }
 )
 
-ProdutoComanda.belongsTo(Comanda,
-    {
-        constraints: true,
-        foreignKey: "fk_comanda"
-    }
-)
-
-ProdutoComanda.belongsTo(Cardapio,
-    {
-        constraints: true,
-        foreignKey: "fk_cardapio"
-    }
-)
 
 export default ProdutoComanda
