@@ -2,6 +2,7 @@ import Comanda from "../models/Comanda.js"
 import ProdutoComanda from "../models/ProdutoComanda.js"
 import Mesa from "../models/Mesa.js"
 import { CustomError } from "../../Middlewares/erros.js"
+import Cardapio from "../models/Cardapio.js"
 
 class comandaController {
     async getComandas(req, res) {
@@ -11,10 +12,15 @@ class comandaController {
         //     throw new CustomError("Id do restaurante ausente", 400)
         // }
 
+        let ListComandas
         try {
-            const listComandas = await Comanda.findAll({
+            listComandas = await Comanda.findAll({
                 include: [{
                     model: ProdutoComanda,
+                    include: [{
+                        model: Cardapio
+                        attributes: ['nome']
+                    }]
                 }]
             })
 
