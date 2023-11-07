@@ -14,7 +14,8 @@ class comandaController {
         try {
             const listComandas = await Comanda.findAll({
                 include: [{
-                    model: ProdutoComanda
+                    model: ProdutoComanda,
+                    as: 'produtos'
                 }]
             })
 
