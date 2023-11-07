@@ -4,6 +4,8 @@ import Favorito from "../models/Favorito.js";
 import Reserva from "../models/Reserva.js";
 import Restaurante from "../models/Restaurante.js";
 import Usuario from "../models/Usuario.js";
+import bcrypt from "bcrypt";
+import {CreateTokenAccess} from "../../utils/CreateTokenAccess.js"
 
 
 class userController {
@@ -87,8 +89,48 @@ class userController {
     }
 
     async createUser(req, res) {
-        //cria e retora no user
-        //chamar aqui o token e o refresh token tambem
+       const {
+            email,
+            senha
+       } = req.body
+
+       const emailJaExiste= await Usuario.findOne({
+        where: {
+            email:email
+        }
+       })
+
+       if (emailJaExiste) {
+        throw new CustomError("Este email já existe",400)
+       }
+
+       let id
+
+       try {
+
+        const salt = "12"
+        const senhaEscondida =bcrypt.hash(senha,salt)
+        .then(novaSenha => {return novaSenha})
+
+        const usuario = await Usuario.create({
+            email,
+            senha:senhaEscondida
+        }) 
+
+        id=usuario.id
+
+       } catch (error) {
+        throw new CustomError("O servidor falhou criar o usuário", 500)
+       }
+
+       const createTokenAccess = CreateTokenAccess()
+       const token=await createTokenAccess.execute(id)
+
+       res.status(200).json({
+        status:"success",
+        token
+       })
+
     }
 
     async login(req, res) {
