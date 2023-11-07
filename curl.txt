@@ -1,0 +1,1 @@
+curl -X POST -H "Content-Type: application/json" -d"{\"email\":\"test@gmail.com\",\"senha\":\"senhA123\"}" http://palatos.renovagames.com:8085/restaurante/login

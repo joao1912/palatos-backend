@@ -1,5 +1,5 @@
 import Comanda from "../models/Comanda.js"
-import ProdutoCarrinho from "../models/ProdutoCarrinho.js"
+import ProdutoComanda from "../models/ProdutoCarrinho.js"
 import Mesa from "../models/Mesa.js"
 import { CustomError } from "../../Middlewares/erros.js"
 
@@ -13,9 +13,9 @@ class comandaController {
 
         try {
             const listComandas = await Comanda.findAll({
-                include: {
-                    ProdutoComanda: true
-                }
+                include: [{
+                    model: ProdutoComanda
+                }]
             })
 
             res.status(200).json({
