@@ -11,7 +11,7 @@ async function create_comandas() {
 
 
     let result = await Comanda.create({
-        is_reserva: false,
+        is_reserva: true,
         data_entrada: new Date().getTime() + 7,
         chegou: false
     }, {
