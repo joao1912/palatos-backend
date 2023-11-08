@@ -23,7 +23,7 @@ class AuthToken {
             if (decode.idRestaurante) {
                 req.idRestaurante = decode.idRestaurante; 
             }
-            console.log("ue")
+    
             next()
         })   
     }

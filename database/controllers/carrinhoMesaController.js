@@ -1,4 +1,5 @@
 import { CustomError } from "../../Middlewares/erros.js";
+import Cardapio from "../models/Cardapio.js";
 import ProdutoCarrinho from "../models/ProdutoCarrinho.js";
 
 class CarrinhoMesaController {
@@ -32,9 +33,19 @@ class CarrinhoMesaController {
             }
         }) 
 
+        const carrinho=[]
+
+        for(let obj of pratos){
+            const produto = await Cardapio.findByPk(obj.fk_cardapio)
+            const {nome_produto,preco}=produto
+            obj.nome_produto=nome_produto
+            obj.preco=preco
+            carrinho.push(obj)
+        }
+
         res.status(200).json({
             status:'success',
-            pratos
+            carrinho
         })
     }
 

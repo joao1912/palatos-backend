@@ -20,6 +20,7 @@ import cardapioRoutes from "./routes/Cardapio.js"
 import comandaRoutes from "./routes/Comanda.js"
 import financeiroRoutes from "./routes/Financeiro.js"
 import carrinhoMesaRoutes from "./routes/CarrinhoMesa.js"
+import carrinhoReservaRoutes from "./routes/CarrinhoReserva.js"
 
 import { CustomError, errorHandler } from "./Middlewares/erros.js"
 
@@ -54,6 +55,8 @@ app.use("/files", express.static("uploads"))
 app.use("/users", userRoutes)
 
 app.use("/users/carrinhoMesa",carrinhoMesaRoutes)
+
+app.use("/users/carrinhoReserva",carrinhoReservaRoutes)
 
 app.use("/restaurante/reserva", reservaRoutes)
 
