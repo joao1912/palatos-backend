@@ -13,19 +13,21 @@ async function create_comandas() {
     let result = await Comanda.create({
         is_reserva: false,
         data_entrada: new Date().getTime() + 7,
-        chegou: false,
+        chegou: false
     }, {
         logging: true
     })
 
     const idComanda = result.id
 
-    console.log(`Id criado para comanda: ${result.id}`)
+    if(!idComanda) {
+        throw new Error("Não foi possível criar id para comanda")
+    }
 
     result = await ProdutoComanda.create({
-        fk_cardapio: 4,
         quantidade: 2,
         observacoes: "Bem fritinho!",
+        fk_cardapio: 4,
         fk_comanda: idComanda
     }, {
         logging: true
