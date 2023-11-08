@@ -3,6 +3,7 @@ import express from "express"
 import cors from "cors"
 import 'express-async-errors'
 import swaggerUi from "swagger-ui-express"
+import './database/assossiations.js'
 
 ;(async function(){
     await database.sync()
