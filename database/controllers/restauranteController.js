@@ -5,6 +5,8 @@ import { CreateTokenAccess } from "../../utils/CreateTokenAccess.js";
 import Usuario from "../models/Usuario.js";
 import bcrypt from "bcrypt"
 import Cardapio from "../models/Cardapio.js";
+import ListaCategoria from "../models/listaCategoria.js"
+import Categoria from "../models/Categoria.js"
 import {CustomError} from "../../Middlewares/erros.js"
 const createTokenAccess = new CreateTokenAccess()
 
@@ -17,13 +19,60 @@ class restauranteController {
         if (id) {
            
             const result = await Restaurante.findByPk(id)
+            const {
+                id,
+                nome,
+                descricao,
+                foto,
+                plano,
+                endereco,
+                cep,
+                rua
+            } = result
+
+            const contato = await Contato.findByPk(result.fk_contato) 
+
+            const idCategorias = await ListaCategoria.findAll({
+                where: {
+                    fk_restaurante: id
+                }
+            })
+
+            const categorias = []
+
+            for (let obj of idCategorias) {
+                const categoria = await Categoria.findByPk(obj.fk_categoria)
+                categorias.push(categoria.nome)
+            }
+
+            const configRest = await ConfiguracoesRestaurantes.findOne({
+                where: {
+                    fk_restaurante: id
+                }
+            })
+
+            const restaurante = {
+                id,
+                nome,
+                descricao,
+                foto,
+                plano,
+                endereco,
+                cep,
+                rua,
+                celular: contato.celular,
+                telefone_fixo: contato.telefone_fixo,
+                cetegorias: categorias,
+                reservasAtivas: configRest.reservas_ativas,
+                tempoTolerancia: configRest.tempo_tolerancia
+            }
 
             if (result == null) {
                 throw new CustomError("Não foi possível encontrar um restaurante com este ID.", 404)
             } else {
                 res.status(200).json({
                     status: 'success',
-                    result
+                    result: restaurante
                 })
             }
 
@@ -63,6 +112,7 @@ class restauranteController {
                 tempoTolerancia,
                 telefone,
                 celular,
+                categorias
             } = req.body;
 
             const contatoRest = await createContato(idUser, telefone, celular)
@@ -78,6 +128,19 @@ class restauranteController {
                 fk_usuario: idUser,
                 fk_contato:contatoRest.id
             })
+
+            for(let nomeCategoria of categorias) {
+                const categoria = await Categoria.findOne({
+                    where: {
+                        nome: nomeCategoria
+                    }
+                })
+
+                await ListaCategoria.create({
+                    fk_categoria: categoria.id,
+                    fk_restaurante: resultRestaurant.id
+                })
+            }
 
             await createRestConfig(resultRestaurant.id, reservasAtivas, tempoTolerancia)
 
@@ -101,16 +164,17 @@ class restauranteController {
         const {
             nome,
             descricao,
-            foto,
-            plano,
             endereco,
             cep,
             rua,
             reservasAtivas,
             tempoTolerancia, 
             telefone,
-            celular, 
+            celular,
+            categorias
         } = req.body;
+
+        const nomeFoto = req.file
 
         const {idRestaurante} = req.params;
 
@@ -121,20 +185,81 @@ class restauranteController {
         }
 
         restaurant.set({
-            nome,
-            descricao,
-            foto,
-            plano,
-            endereco,
-            cep,
-            rua
+            nome: nome || restaurant.nome,
+            descricao: descricao || restaurant.descricao,
+            endereco: endereco || restaurant.endereco,
+            cep: cep || restaurant.cep,
+            rua: rua || restaurant.rua,
         })
+
+        const listaCategorias = await ListaCategoria.findAll({
+            where: {
+                fk_restaurante: restaurant.id
+            }
+        })
+
+        const categoriasRestaurante = []
+        const nomeCategorias = []
+        for(let categoria of listaCategorias) {
+            const categoriaCompleta = await Categoria.findByPk(categoria.fk_categoria)
+            categoriasRestaurante.push(categoriaCompleta)
+            nomeCategorias.push(categoriaCompleta.nome)
+        }
+
+    
+        const categoriasAdicionadas = categorias.filter(categoria => !nomeCategorias.includes(categoria));
+
+        const categoriasRemovidas = nomeCategorias.filter(categoria => !categorias.includes(categoria));
+
+        if (categoriasAdicionadas) {
+
+            for (let novaCategoria of categoriasAdicionadas) {
+
+                const idCategoria = await Categoria.findOne({
+                    where: {
+                        nome: novaCategoria
+                    }
+                })
+
+                await ListaCategoria.create({
+                    fk_categoria: idCategoria.id,
+                    fk_restaurante: restaurant.id
+                })
+            }
+        }
+
+        if (categoriasRemovidas) {
+
+            for (let oldCategoria of categoriasRemovidas) {
+
+                const idCategoria = await Categoria.findOne({
+                    where: {
+                        nome: oldCategoria
+                    }
+                })
+
+                await ListaCategoria.destroy({
+                    where: {
+                        fk_categoria: idCategoria.id,
+                        fk_restaurante: restaurant.id
+                    }
+                })
+            }
+        }
+
+        if (nomeFoto) {
+
+            restaurant.set({
+                foto: `http://45.224.129.126:8085/files/${nomeFoto.filename}`
+            })
+
+        }
 
         restaurant.save()
 
-        await editConfigRest(restaurant.id, reservasAtivas, tempoTolerancia)
+        await editConfigRest(restaurant, reservasAtivas, tempoTolerancia)
 
-        await editContato(restaurant.id, telefone, celular)
+        await editContato(restaurant, telefone, celular)
 
         res.status(200).json({
             status: 'success',
@@ -242,15 +367,14 @@ async function createRestConfig(restauranteId,  reservas_ativas, tempo_toleranci
     return configRest
 }
 
-async function editConfigRest(restauranteId, reservas_ativas, tempo_tolerancia, avaliacao_comida) {
+async function editConfigRest(restaurante, reservas_ativas, tempo_tolerancia) {
     try {
             
-        const configRest = await ConfiguracoesRestaurantes.findOne({where: {fk_restaurante: restauranteId}}) 
+        const configRest = await ConfiguracoesRestaurantes.findOne({where: {fk_restaurante: restaurante.id}}) 
 
         configRest.set({
             reservas_ativas,
-            tempo_tolerancia,
-            avaliacao_comida
+            tempo_tolerancia: tempo_tolerancia || configRest.tempo_tolerancia
         })
 
         configRest.save()
@@ -262,14 +386,14 @@ async function editConfigRest(restauranteId, reservas_ativas, tempo_tolerancia, 
     }
 }
 
-async function editContato(restauranteId, telefone_fixo, celular) {
+async function editContato(restaurante, telefone_fixo, celular) {
     try {
             
-        const contatoRest = await Contato.findOne({where: {fk_restaurante: restauranteId}}) //talvez tenha que converter para numerico
+        const contatoRest = await Contato.findOne({where: {fk_restaurante: restaurante.id}}) 
 
         contatoRest.set({
-           telefone_fixo,
-           celular
+           telefone_fixo: telefone_fixo || contatoRest.telefone_fixo,
+           celular: celular || contatoRest.celular
         })
 
         contatoRest.save()
