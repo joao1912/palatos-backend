@@ -12,8 +12,8 @@ Comanda.init({
     },
     data_entrada: {
         type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
-        allowNull: false
+        allowNull: false,
+        defaultValue: Sequelize.fn('NOW')
     },
     chegou: {
         type: DataTypes.BOOLEAN,

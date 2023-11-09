@@ -11,7 +11,8 @@ Reserva.init(
         cod: {
             type: DataTypes.INTEGER,
             primaryKey: true,
-            allowNull: false
+            allowNull: false,
+            autoIncrement:true
         },
         
         data_entrada: {
