@@ -12,6 +12,7 @@ Comanda.init({
     },
     data_entrada: {
         type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
         allowNull: false
     },
     chegou: {
