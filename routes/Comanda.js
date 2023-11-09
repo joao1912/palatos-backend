@@ -9,6 +9,11 @@ const router = express.Router()
 
 
 router.get("/", authToken.execute, ComandaController.getComandas)
+
+router.post("/createComanda", ComandaController.criarComandas)
+
+router.post("/createComanda/reserva",authToken.execute, ComandaController.criarComandas)
+
 router.delete("/delete/:id", authToken.execute, ComandaController.deleteComanda)
 
 
