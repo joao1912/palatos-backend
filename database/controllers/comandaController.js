@@ -75,8 +75,7 @@ class comandaController {
         const id=req.id
         const {
             idMesa,
-            data_entrada,
-            idRestaurante
+            data_entrada
         }=req.body
 
         if(id){
@@ -89,10 +88,18 @@ class comandaController {
                     is_reserva:true
                 })
 
+                const pedido= await ReservaCarrinho.findOne({
+                    where:{
+                        fk_usuario:id
+                    }
+                })
+
+                const produto= await Cardapio.findByPk(pedido.fk_cardapio)
+
                 reserva= await Reserva.create({
                     data_entrada:data_entrada,
                     fk_usuario:id,
-                    fk_restaurante:idRestaurante
+                    fk_restaurante:produto.fk_restaurante
                 })
 
                 const produtos= await ReservaCarrinho.findAll({
