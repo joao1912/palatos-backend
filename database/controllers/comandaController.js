@@ -180,10 +180,21 @@ class comandaController {
     async deleteComanda(req, res) {
 
         const { id } = req.params;
+
+        if(!id) {
+            throw new CustomError("Id não especificado.", 400)
+        }
+        
         try {
             Comanda.destroy({
                 where: {
                     id: id
+                }
+            })
+
+            ProdutoComanda.destroy({
+                where: {
+                    fk_comanda: id
                 }
             })
 
@@ -193,7 +204,7 @@ class comandaController {
 
             })
         } catch (err) {
-            throw new CustomError("Erro ao deletar comanda.", 400)
+            throw new CustomError("Erro ao deletar comanda.", 500)
         }
     }
 }

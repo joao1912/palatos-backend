@@ -1,6 +1,6 @@
-import { CustomError } from "../../Middlewares/erros"
-import Cardapio from "../models/Cardapio"
-import ReservaCarrinho from "../models/ReservaCarrinho"
+import { CustomError } from "../../Middlewares/erros.js"
+import Cardapio from "../models/Cardapio.js"
+import ReservaCarrinho from "../models/ReservaCarrinho.js"
 
 
 class CarrinhoReservaController{
