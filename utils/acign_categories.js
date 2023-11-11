@@ -1,16 +1,16 @@
 import database from "../database/db.js";
-import Categorias from "../models/Categorias.js";
-import ListaCategorias from "../models/ListaCategorias.js";
+import Categoria from "../models/Categoria.js";
+import ListaCategoria from "../models/ListaCategorias.js";
 
 async function acign_categorias() {
 
-    const lista = await Categorias.findAll()
+    const lista = await Categoria.findAll()
 
     if(!lista) {
         throw new Error("Erro ao listar categorias do banco")
     }
 
-    let result = await ListaCategorias.create({
+    let result = await ListaCategoria.create({
         fk_restaurante: 1,
         fk_categoria: lista[0].id
     })
@@ -18,7 +18,7 @@ async function acign_categorias() {
         console.log("Categoria criada")
     }
 
-    result = await ListaCategorias.create({
+    result = await ListaCategoria.create({
         fk_restaurante: 1,
         fk_categoria: lista[2].id
     })
