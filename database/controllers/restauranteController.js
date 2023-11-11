@@ -116,7 +116,7 @@ class restauranteController {
                 categorias
             } = req.body;
 
-            console.log(categorias)
+            console.log(typeof categorias)
 
             const contatoRest = await createContato(idUser, telefone, celular)
 
