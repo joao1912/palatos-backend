@@ -80,6 +80,10 @@ app.post("/loadImage", upload.single('file'), function(req,res) {
     res.status(200).send("teste")
 })
 
+import setCategorias from "./utils/create_categorias.js"
+
+setCategorias()
+
 app.use(errorHandler)
 
 app.listen(8085, () => {

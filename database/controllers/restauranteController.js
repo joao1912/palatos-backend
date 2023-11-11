@@ -133,13 +133,12 @@ class restauranteController {
             })
 
             for(let nomeCategoria of categorias) {
+                
                 const categoria = await Categoria.findOne({
                     where: {
                         nome: nomeCategoria
                     }
                 })
-
-                console.log("categoria: "+ categoria)
 
                 await ListaCategoria.create({
                     fk_categoria: categoria.id,
