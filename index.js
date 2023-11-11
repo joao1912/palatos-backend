@@ -21,6 +21,7 @@ import comandaRoutes from "./routes/Comanda.js"
 import financeiroRoutes from "./routes/Financeiro.js"
 import carrinhoMesaRoutes from "./routes/CarrinhoMesa.js"
 import carrinhoReservaRoutes from "./routes/CarrinhoReserva.js"
+import categoriaRoutes from "./routes/Categoria.js"
 
 import { CustomError, errorHandler } from "./Middlewares/erros.js"
 
@@ -69,6 +70,8 @@ app.use("/restaurante/financeiro", financeiroRoutes)
 app.use("/restaurante", restaurantRoutes)
 
 app.use("/search", searchRoutes)
+
+app.use("/categoria", categoriaRoutes)
 
 import multer from "multer"
 import { storage } from "./Middlewares/MulterConfig.js"
