@@ -146,10 +146,10 @@ class restauranteController {
 
                 console.log(categoria)
 
-                await ListaCategoria.create({
+                /* await ListaCategoria.create({
                     fk_categoria: categoria.id,
                     fk_restaurante: resultRestaurant.id
-                })
+                }) */
             }
 
             await createRestConfig(resultRestaurant.id, reservasAtivas, tempoTolerancia)
