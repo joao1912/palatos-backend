@@ -132,13 +132,15 @@ class restauranteController {
                 fk_contato:contatoRest.id
             })
 
-            for(let nomeCategoria of categorias) {
+            const nomeCategorias = categorias.split(",")
 
-                console.log(nomeCategoria)
+            for(let nome of nomeCategorias) {
+
+                console.log(nome)
                 
                 const categoria = await Categoria.findOne({
                     where: {
-                        nome: nomeCategoria
+                        nome
                     }
                 })
 
