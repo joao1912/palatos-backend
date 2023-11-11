@@ -116,6 +116,8 @@ class restauranteController {
                 categorias
             } = req.body;
 
+            console.log(categorias)
+
             const contatoRest = await createContato(idUser, telefone, celular)
 
             const resultRestaurant = await Restaurante.create({
