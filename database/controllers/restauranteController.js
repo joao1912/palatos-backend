@@ -135,8 +135,6 @@ class restauranteController {
             const nomeCategorias = categorias.split(",")
 
             for(let nome of nomeCategorias) {
-
-                console.log(nome)
                 
                 const categoria = await Categoria.findOne({
                     where: {
@@ -144,7 +142,8 @@ class restauranteController {
                     }
                 })
 
-                console.log(categoria)
+                console.log("Id categoria: "+ categoria.id)
+                console.log("Id restaurante: "+ resultRestaurant.id)
 
                 /* await ListaCategoria.create({
                     fk_categoria: categoria.id,
