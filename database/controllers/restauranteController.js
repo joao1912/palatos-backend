@@ -139,6 +139,8 @@ class restauranteController {
                     }
                 })
 
+                console.log("categoria: "+ categoria)
+
                 await ListaCategoria.create({
                     fk_categoria: categoria.id,
                     fk_restaurante: resultRestaurant.id
