@@ -18,7 +18,7 @@ async function acign_categorias() {
         console.log("Categoria criada")
     }
 
-    let result = await ListaCategorias.create({
+    result = await ListaCategorias.create({
         fk_restaurante: 1,
         fk_categoria: lista[2].id
     })
