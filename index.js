@@ -70,6 +70,14 @@ app.use("/restaurante", restaurantRoutes)
 
 app.use("/search", searchRoutes)
 
+import { storage } from "../Middlewares/MulterConfig.js"
+const upload = multer({storage: storage})
+
+app.post("/loadImage", upload.single('file'), function(req,res) {
+    console.log(req.file)
+    res.status(200).send("teste")
+})
+
 app.use(errorHandler)
 
 app.listen(8085, () => {
