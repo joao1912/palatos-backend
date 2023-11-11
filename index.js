@@ -70,7 +70,7 @@ app.use("/restaurante", restaurantRoutes)
 
 app.use("/search", searchRoutes)
 
-import { storage } from "../Middlewares/MulterConfig.js"
+import { storage } from "./Middlewares/MulterConfig.js"
 const upload = multer({storage: storage})
 
 app.post("/loadImage", upload.single('file'), function(req,res) {
