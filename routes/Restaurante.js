@@ -19,7 +19,7 @@ router.post("/add", authToken.execute, upload.single("file") ,RestauranteControl
 
 router.post("/login",  RestauranteController.loginRestaurant)
 
-router.put("/edit/:idRestaurante", authToken.execute, RestauranteController.editRestaurant)
+router.put("/edit/:idRestaurante", authToken.execute, upload.single("file") ,RestauranteController.editRestaurant)
 
 router.delete("/delete/:idRestaurante",authToken.execute, RestauranteController.deleteRestaurant)
 
