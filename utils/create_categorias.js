@@ -1,5 +1,5 @@
-import database from "../database/db";
-import Categoria from "../database/models/Categoria";
+import database from "../database/db.js";
+import Categoria from "../database/models/Categoria.js";
 
 async function setCategorias() {
 
