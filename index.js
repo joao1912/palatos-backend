@@ -70,6 +70,7 @@ app.use("/restaurante", restaurantRoutes)
 
 app.use("/search", searchRoutes)
 
+import multer from "multer"
 import { storage } from "./Middlewares/MulterConfig.js"
 const upload = multer({storage: storage})
 
