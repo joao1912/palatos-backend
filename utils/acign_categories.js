@@ -1,6 +1,6 @@
 import database from "../database/db.js";
-import Categoria from "../models/Categoria.js";
-import ListaCategoria from "../models/ListaCategorias.js";
+import Categoria from "../database/models/Categoria.js";
+import ListaCategoria from "../database/models/ListaCategoria.js";
 
 async function acign_categorias() {
 
