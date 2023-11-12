@@ -1,4 +1,5 @@
 import database from "../database/db.js";
+import Restaurante from "../database/models/Restaurante.js";
 import Categoria from "../database/models/Categoria.js";
 import ListaCategoria from "../database/models/ListaCategoria.js";
 
@@ -29,4 +30,4 @@ async function acign_categorias() {
 
 }
 
-export default acygn_categorias
+export default acign_categorias

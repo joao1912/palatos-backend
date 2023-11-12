@@ -55,19 +55,17 @@ Restaurante.belongsTo(Usuario, {
 Restaurante.belongsToMany(
     Categoria,
     {
-        through: {
-            model: ListaCategoria
-        },
-        foreignKey: "fk_categoria",
+        through: ListaCategoria,
+        foreignKey: "fk_restaurante",
+        otherKey: "fk_categoria",
         constraints: true
     }
 )
 
 Categoria.belongsToMany(Restaurante,{
-    through: {
-        model: ListaCategoria
-    },
-    foreignKey: "fk_restaurante",
+    through: ListaCategoria,
+    foreignKey: "fk_categoria",
+    otherKey: "fk_restaurante",
     constraints: true
 })
 

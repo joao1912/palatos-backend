@@ -11,6 +11,22 @@ ListaCategoria.init(
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
+        },
+        fk_restaurante: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: "Restaurantes",
+                id: 'id'
+            }
+        },
+        fk_categoria: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: "Categorias",
+                id: 'id'
+            }
         }
     },
     {

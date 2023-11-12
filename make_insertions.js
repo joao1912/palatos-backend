@@ -9,6 +9,6 @@ import './database/assossiations.js'
     await database.sync()
 })()
 
-import create_comandas from "./utils/create_comandas.js"
+import create_categorias from "./utils/create_categorias.js"
 
-create_comandas()
+create_categorias()
