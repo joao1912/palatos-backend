@@ -47,7 +47,6 @@ class cardapioController {
         
         const foto = req.file;
         
-        console.log(foto.type)
         const {
             nome,
             descricao,
