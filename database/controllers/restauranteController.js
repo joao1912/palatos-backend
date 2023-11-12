@@ -116,8 +116,6 @@ class restauranteController {
                 categorias
             } = req.body;
 
-            console.log(typeof categorias)
-
             const contatoRest = await createContato(idUser, telefone, celular)
 
             const resultRestaurant = await Restaurante.create({
@@ -132,7 +130,14 @@ class restauranteController {
                 fk_contato:contatoRest.id
             })
 
-            const nomeCategorias = categorias.split(",")
+            let nomeCategorias
+
+            if (categorias.indexOf(",")) {
+                nomeCategorias = categorias.split(",")
+            } else {
+                nomeCategorias = [categorias]
+            }
+           
 
             for(let nome of nomeCategorias) {
                 
