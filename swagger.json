@@ -445,6 +445,10 @@
                                         "type": "string",
                                         "example": "4998335567"
                                     },
+                                    "categorias":{
+                                        "type": "string",
+                                        "example": "Massas, Carnes"
+                                    },
                                     "file": {
                                         "type": "string",
                                         "format": "binary"
@@ -637,6 +641,10 @@
                                     "celular": {
                                         "type": "string",
                                         "example": "4998335567"
+                                    },
+                                    "categorias": {
+                                        "type": "string",
+                                        "example": "Massas"
                                     },
                                     "file": {
                                         "type": "string",
