@@ -81,7 +81,7 @@ const upload = multer({storage: storage})
 app.post("/loadImage", upload.single('fileData'), function(req,res) {
     console.log(req.file)
     //console.log(req.body)
-    res.status(200).send({message: "oi", nome: req.file.filename})
+    res.status(200).send(req.file)
 })
 
 app.use(errorHandler)
