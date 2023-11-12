@@ -73,14 +73,15 @@ app.use("/search", searchRoutes)
 
 app.use("/categoria", categoriaRoutes)
 
+import { TrataMulter } from "./Middlewares/baraca.js"
 import multer from "multer"
 import { storage } from "./Middlewares/MulterConfig.js"
 const upload = multer({storage: storage})
 
-app.post("/loadImage", upload.single('file'), function(req,res) {
-    console.log(req.file)
-    console.log(req.body)
-    res.status(200).send("teste")
+app.post("/loadImage", TrataMulter, upload.single('file'), function(req,res) {
+    //console.log(req.file)
+    //console.log(req.body)
+    res.status(200).send({message: "oi", nome: req.file.filename})
 })
 
 app.use(errorHandler)
