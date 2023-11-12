@@ -73,9 +73,6 @@ app.use("/search", searchRoutes)
 
 app.use("/categoria", categoriaRoutes)
 
-import setCategorias from "./utils/create_categorias.js"
-setCategorias()
-
 import multer from "multer"
 import { storage } from "./Middlewares/MulterConfig.js"
 const upload = multer({storage: storage})
