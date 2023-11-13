@@ -10,5 +10,6 @@ import './database/assossiations.js'
 })()
 
 import create_categorias from "./utils/create_categorias.js"
+import create_comandas from "./utils/create_comandas.js"
 
-create_categorias()
+create_comandas()
