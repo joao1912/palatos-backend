@@ -15,9 +15,9 @@ Comanda.init({
         allowNull: false,
         defaultValue: Sequelize.fn('NOW')
     },
-    chegou: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false
+    numeroMesa: {
+        type: DataTypes.INTEGER,
+        defaultValue: null,
     },
 }, {
     sequelize: database,
