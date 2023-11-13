@@ -22,6 +22,7 @@ import financeiroRoutes from "./routes/Financeiro.js"
 import carrinhoMesaRoutes from "./routes/CarrinhoMesa.js"
 import carrinhoReservaRoutes from "./routes/CarrinhoReserva.js"
 import categoriaRoutes from "./routes/Categoria.js"
+import mesaRoutes from "./routes/Mesa.js"
 
 import { CustomError, errorHandler } from "./Middlewares/erros.js"
 
@@ -58,6 +59,8 @@ app.use("/users", userRoutes)
 app.use("/users/carrinhoMesa",carrinhoMesaRoutes)
 
 app.use("/users/carrinhoReserva",carrinhoReservaRoutes)
+
+app.use("/restaurante/mesa",mesaRoutes)
 
 app.use("/restaurante/reserva", reservaRoutes)
 
