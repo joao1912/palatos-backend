@@ -9,9 +9,6 @@ import "./database/assossiations.js"
     await database.sync()
 })()
 
-import create_comandas from "./utils/create_comandas.js"
-
-//create_comandas()
 import restaurantRoutes from "./routes/Restaurante.js"
 import userRoutes from "./routes/User.js"
 import searchRoutes from "./routes/search.js"
@@ -73,14 +70,13 @@ app.use("/search", searchRoutes)
 
 app.use("/categoria", categoriaRoutes)
 
-import { TrataMulter } from "./Middlewares/baraca.js"
 import multer from "multer"
 import { storage } from "./Middlewares/MulterConfig.js"
 const upload = multer({storage: storage})
 
-app.post("/loadImage", upload.single('fileData'), function(req,res) {
+app.post("/loadImage", upload.single('file'), function(req,res) {
     console.log(req.file)
-    //console.log(req.body)
+    console.log(req.body)
     res.status(200).send(req.file)
 })
 
