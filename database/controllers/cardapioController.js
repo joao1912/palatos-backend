@@ -46,7 +46,7 @@ class cardapioController {
     async createCardapio(req, res) {
         
         const foto = req.body.file;
-        console.log(foto)
+        console.log("Foto: " + foto)
         
         const {
             nome,
