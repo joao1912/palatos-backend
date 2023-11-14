@@ -1337,6 +1337,239 @@
                     }
                 }
             }
+        },
+        "/restaurante/mesa/{idRestaurante}": {
+            "get": {
+                "summary": "Buscar todas as mesas de um restaurante",
+                "description": "Essa rota é responsável por buscar todas as mesas de um restaurante por id",
+                "tags": ["mesa"],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "idRestaurante",
+                        "in": "path",
+                        "description": "Id do restaurante",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "mesas": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Mesa"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/restaurante/mesa/add/{idRestaurante}": {
+            "post": {
+                "summary": "Criar uma nova mesa",
+                "description": "Essa rota é responsável por criar uma mesa em um restaurante por id",
+                "tags": ["mesa"],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "idRestaurante",
+                        "in": "path",
+                        "description": "Id do restaurante",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "qrcode": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "mesa": {
+                                            "type": "object",
+                                            "$ref": "#/components/schemas/Mesa"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/restaurante/mesa/toggleOccupied/{idMesa}": {
+            "put": {
+                "summary": "Trocar a prop 'ocupado' das mesas",
+                "description": "Essa rota é responsável tornar uma mesa ocupada ou liberá-la",
+                "tags": ["mesa"],
+                "parameters": [
+                    {
+                        "name": "idMesa",
+                        "in": "path",
+                        "required": true,
+                        "description": "Id da mesa",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "isOccupied": {
+                                        "type": "boolean"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Troca efetuada"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/restaurante/mesa/delete/{idMesa}": {
+            "delete": {
+                "summary": "Deletar um mesa",
+                "description": "Essa rota é responsável por deletar uma mesa por id",
+                "tags": ["mesa"],
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "idMesa",
+                        "in": "path",
+                        "description": "Id da mesa",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Mesa deleta com sucesso!"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
