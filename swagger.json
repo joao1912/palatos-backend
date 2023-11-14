@@ -1892,7 +1892,6 @@
                     },
                     "identificacao_mesa": {
                         "type": "string",
-                        "nullable": false,
                         "maxLength": 10
                     }
                 }
