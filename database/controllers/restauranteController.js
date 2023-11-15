@@ -98,7 +98,7 @@ class restauranteController {
 
         const idUser = req.id;
         const nomeFoto = req.body.file;
-        console.log(req)
+       
 
         try {
             let plano = 3
@@ -113,8 +113,12 @@ class restauranteController {
                 tempoTolerancia,
                 telefone,
                 celular,
-                categorias
+                categorias,
+                file
             } = req.body;
+
+            console.log(nome)
+            console.log(file)
 
             const contatoRest = await createContato(idUser, telefone, celular)
 
