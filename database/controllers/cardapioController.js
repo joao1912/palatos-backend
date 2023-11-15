@@ -53,7 +53,7 @@ class cardapioController {
             descricao,
             preco,
             tipo
-        } = req.body;
+        } = req;
 
         const idRestautante = req.idRestaurante;
       
