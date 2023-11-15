@@ -97,15 +97,14 @@ class restauranteController {
     async createRestaurant(req, res) {
 
         const idUser = req.id;
-        const nomeFoto = req.body.file;
-       
+        const nomeFoto = req.file;
+        console.log(nomeFoto)
 
         try {
-            let plano = 3
             const {
                 nome,
                 descricao,
-               // plano, 
+                plano, 
                 endereco,
                 cep,
                 rua,
@@ -113,12 +112,10 @@ class restauranteController {
                 tempoTolerancia,
                 telefone,
                 celular,
-                categorias,
-                file
+                categorias
             } = req.body;
 
             console.log(nome)
-            console.log(file)
 
             const contatoRest = await createContato(idUser, telefone, celular)
 
