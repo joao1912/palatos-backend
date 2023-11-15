@@ -97,7 +97,7 @@ class restauranteController {
     async createRestaurant(req, res) {
 
         const idUser = req.id;
-        const nomeFoto = req.file;
+        const nomeFoto = req.body.file;
         console.log(nomeFoto)
 
         try {

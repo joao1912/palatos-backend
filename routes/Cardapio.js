@@ -14,7 +14,7 @@ router.get("/:idRestautante", CardapioController.getCardapio)
 
 router.get ("/prato/:codigo",CardapioController.getProdutoIndividual)
 
-router.post("/add", authToken.execute, CardapioController.createCardapio)
+router.post("/add", authToken.execute, upload.single("file"), CardapioController.createCardapio)
 
 router.delete("/delete", authToken.execute, CardapioController.deleteCardapio)
 

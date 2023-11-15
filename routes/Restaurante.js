@@ -15,7 +15,7 @@ router.get("/", RestauranteController.getRestaurant)
 
 router.get("/search/:id", RestauranteController.getRestaurant)
 
-router.post("/add", authToken.execute, upload.single("file") ,RestauranteController.createRestaurant)
+router.post("/add", authToken.execute, RestauranteController.createRestaurant)
 
 router.post("/login",  RestauranteController.loginRestaurant)
 
