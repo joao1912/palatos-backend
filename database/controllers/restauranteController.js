@@ -98,7 +98,7 @@ class restauranteController {
 
         const idUser = req.id;
         const nomeFoto = req.body.file;
-        console.log(nomeFoto)
+        console.log(req.body)
 
         try {
             let plano = 3
