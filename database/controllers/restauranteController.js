@@ -98,7 +98,6 @@ class restauranteController {
 
         const idUser = req.id;
         const nomeFoto = req.file;
-        console.log(nomeFoto)
 
         try {
             const {
@@ -122,7 +121,7 @@ class restauranteController {
             const resultRestaurant = await Restaurante.create({
                 nome,
                 descricao,
-                /* foto: `http://45.224.129.126:8085/files/${nomeFoto.filename}`, */
+                foto: `http://45.224.129.126:8085/files/${nomeFoto.filename}`,
                 plano,
                 endereco,
                 cep,
