@@ -14,11 +14,11 @@ class restauranteController {
 
     async getRestaurant(req, res) {
 
-        const {id} = req.params;
+        const idRestaurante = req.params.id;
         
-        if (id) {
+        if (idRestaurante) {
            
-            const result = await Restaurante.findByPk(id)
+            const result = await Restaurante.findByPk(idRestaurante)
             const {
                 id,
                 nome,
