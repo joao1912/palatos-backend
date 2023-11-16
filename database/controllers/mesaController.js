@@ -15,10 +15,10 @@ class mesaController {
             }
         })
 
-        if (!listaMesas) {
+        if (!listaMesas || listaMesas.length == 0) {
             throw new CustomError("Este restaurante não possui mesas.", 404)
         }
-
+        
         const mesas=[]
 
         for(let obj of listaMesas) {
