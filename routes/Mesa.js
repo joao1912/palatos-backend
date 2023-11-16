@@ -7,6 +7,7 @@ const MesaController = new mesaController()
 
 const router = express.Router()
 
-router.get("/add/:idRestaurante", authToken.execute, MesaController.criarMesa) //precisa do multer
+router.get("/:idRestaurante", authToken.execute, MesaController.pegarMesas)
+
 
 export default router
