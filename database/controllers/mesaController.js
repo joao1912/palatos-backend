@@ -15,7 +15,7 @@ class mesaController {
             }
         })
 
-        if (!ListaMesa) {
+        if (!listaMesas) {
             throw new CustomError("Este restaurante não possui mesas.")
         }
 
