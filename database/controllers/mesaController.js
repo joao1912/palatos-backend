@@ -16,7 +16,7 @@ class mesaController {
         })
 
         if (!listaMesas) {
-            throw new CustomError("Este restaurante não possui mesas.")
+            throw new CustomError("Este restaurante não possui mesas.", 404)
         }
 
         const mesas=[]
