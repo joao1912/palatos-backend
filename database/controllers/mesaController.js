@@ -37,6 +37,8 @@ class mesaController {
 
     async criarMesa(req, res) {
         const { idRestaurante } = req.params
+        console.log(req.header)
+        console.log(req)
 
         let mesa
 
