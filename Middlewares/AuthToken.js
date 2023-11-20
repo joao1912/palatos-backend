@@ -8,8 +8,7 @@ class AuthToken {
         const tokenNotFilter = req.header("Authorization")
         
         if (!tokenNotFilter) {
-            //throw new CustomError("Token ausente", 401)
-            req.tokenEstranho = tokenNotFilter
+            throw new CustomError("Token ausente", 401)
         }
 
         const token = cutBearer(tokenNotFilter)
