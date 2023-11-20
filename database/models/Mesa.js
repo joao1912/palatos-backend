@@ -9,18 +9,17 @@ Mesa.init(
 
 {
     qr_code: {
-        type: DataTypes.TEXT,
-        allowNull:false,
+        type: DataTypes.TEXT
     },
 
     ocupada:{
         type: DataTypes.BOOLEAN,
-        allowNull:false,
+        defaultValue: false
     },
 
     conta:{
         type: DataTypes.DECIMAL,
-        allowNull:false,
+        defaultValue: 0
     },
     identificacao_mesa:{
         type: DataTypes.STRING(10),
