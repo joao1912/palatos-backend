@@ -114,14 +114,20 @@ class restauranteController {
                 categorias
             } = req.body;
 
-            console.log(nome)
+            let foto
+
+            if (nomeFoto) {
+                foto = `http://45.224.129.126:8085/files/${nomeFoto.filename}`
+            } else {
+                `http://45.224.129.126:8085/files/restaurante`
+            }
 
             const contatoRest = await createContato(idUser, telefone, celular)
 
             const resultRestaurant = await Restaurante.create({
                 nome,
                 descricao,
-                foto: `http://45.224.129.126:8085/files/${nomeFoto.filename}`,
+                foto: foto,
                 plano,
                 endereco,
                 cep,
