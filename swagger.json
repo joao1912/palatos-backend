@@ -1415,13 +1415,20 @@
                 "requestBody": {
                     "required": true,
                     "content": {
-                        "multipart/form-data": {
+                        "application/json": {
                             "schema": {
                                 "type": "object",
                                 "properties": {
-                                    "qrcode": {
-                                        "type": "string",
-                                        "format": "binary"
+                                    "jsonMesa": {
+                                        "type": "object",
+                                        "properties": {
+                                            "idRestaurante": {
+                                                "type": "integer"
+                                            },
+                                            "idMesa": {
+                                                "type": "integer"
+                                            }
+                                        }
                                     }
                                 }
                             }
