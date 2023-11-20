@@ -37,13 +37,11 @@ class mesaController {
 
     async criarMesa(req, res) {
         const { idRestaurante } = req.params
-        const qrcode = req.file
 
         let mesa
 
         try {
             mesa = await Mesa.create({
-                qr_code: `http://45.224.129.126:8085/files/${qrcode.filename}`,
                 conta: 0
             })
 
@@ -61,6 +59,30 @@ class mesaController {
             status: "success",
             mesa:mesa
         })
+    }
+
+    async adicionarQrCode(req, res) {
+
+        const { idMesa } = req.params;
+        const qrcode = req.file;
+        let mesa
+
+        try {
+            mesa = Mesa.findByPk(idMesa)
+            mesa.set({
+                qr_code: `http://45.224.129.126:8085/files/${qrcode.filename}`,
+            })
+            mesa.save()
+
+        } catch (error) {
+            throw new CustomError("Erro ao adicionar os qrcodes", 500)            
+        }
+        
+        res.status(200).json({
+            status: "success",
+            mesa: mesa
+        })
+
     }
 
     async trocarOcupado(req,res){
