@@ -6,12 +6,8 @@ class AuthToken {
 
     async execute(req, res, next) {
         const tokenNotFilter = req.header("Authorization")
-
-        console.log(req)
-        console.log(tokenNotFilter)
-        console.log(req.header("Authorization"))
         
-        if (!tokenNotFilter) {
+        if (typeof tokenNotFilter != "string") {
             throw new CustomError("Token ausente", 401)
         }
 
@@ -28,7 +24,7 @@ class AuthToken {
                 req.idRestaurante = decode.idRestaurante; 
             }
     
-            //next()
+            next()
         })   
     }
 

@@ -135,7 +135,7 @@ class restauranteController {
                 fk_usuario: idUser,
                 fk_contato:contatoRest.id
             })
-
+            
             let nomeCategorias
 
             if (categorias.indexOf(",")) {
