@@ -14,7 +14,7 @@ const router = express.Router()
 
 router.get("/:idRestaurante", authToken.execute, MesaController.pegarMesas)
 
-router.post("/add/:idRestaurante", authToken.execute, MesaController.criarMesa)
+router.post("/add/:idRestaurante", MesaController.criarMesa)
 
 router.put("/addQrCode/:idMesa", authToken.execute, MesaController.adicionarQrCode)
 
