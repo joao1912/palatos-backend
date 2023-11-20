@@ -44,6 +44,17 @@ class mesaController {
             mesa = await Mesa.create({
                 conta: 0
             })
+            
+            const jsonMesa = JSON.stringify({
+                idRestaurante: idRestaurante,
+                idMesa: mesa.id
+            })
+
+            mesa.set({
+                qr_code: jsonMesa
+            })
+
+            mesa.save()
 
             await ListaMesa.create({
                 fk_restaurante: idRestaurante,
@@ -64,13 +75,13 @@ class mesaController {
     async adicionarQrCode(req, res) {
 
         const { idMesa } = req.params;
-        const qrcode = req.file;
+        const {jsonMesa} = req.body;
         let mesa
 
         try {
             mesa = Mesa.findByPk(idMesa)
             mesa.set({
-                qr_code: `http://45.224.129.126:8085/files/${qrcode.filename}`,
+                qr_code: jsonMesa,
             })
             mesa.save()
 

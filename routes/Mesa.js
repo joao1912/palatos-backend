@@ -16,7 +16,7 @@ router.get("/:idRestaurante", authToken.execute, MesaController.pegarMesas)
 
 router.post("/add/:idRestaurante", authToken.execute, MesaController.criarMesa)
 
-router.put("/addQrCode/:idMesa", authToken.execute, upload.single('qrcode') , MesaController.adicionarQrCode)
+router.put("/addQrCode/:idMesa", authToken.execute, MesaController.adicionarQrCode)
 
 router.put("/toggleOccupied/:idMesa", authToken.execute, MesaController.trocarOcupado)
 
