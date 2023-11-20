@@ -62,6 +62,7 @@ class mesaController {
             })
 
         } catch (error) {
+            console.log(error)
             throw new CustomError("O servidor falhou em criar a mesa", 500)
         }
 
