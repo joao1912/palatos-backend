@@ -17,7 +17,8 @@ Contato.init(
             type: DataTypes.STRING(16)
         },
         celular: {
-            type: DataTypes.STRING(16)
+            type: DataTypes.STRING(16),
+            allowNull: false
         },
     },
     {
