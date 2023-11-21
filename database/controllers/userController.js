@@ -94,6 +94,7 @@ class userController {
 
     async createUser(req, res) {
        const {
+            nome_completo,
             email,
             senha
        } = req.body
@@ -112,13 +113,13 @@ class userController {
 
        try {
 
-        const salt = "12"
-        const senhaEscondida =bcrypt.hash(senha,salt)
-        .then(novaSenha => {return novaSenha})
+        const salt = 8
+        const senhaEscondida = await bcrypt.hash(senha,salt)
 
         const usuario = await Usuario.create({
             email,
-            senha:senhaEscondida
+            senha:senhaEscondida,
+            nome_completo
         }) 
 
         id=usuario.id
