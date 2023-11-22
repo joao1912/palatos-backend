@@ -197,7 +197,7 @@ class userController {
             throw new CustomError("O servidor falhou logar o usuário", 500)
         }
 
-        const createTokenAccess = CreateTokenAccess()
+        const createTokenAccess = new CreateTokenAccess()
         const token=await createTokenAccess.execute(emailUsuario.id)
         res.status(200).json({
             status:"success",
