@@ -111,22 +111,45 @@ class userController {
 
        let id
 
-       try {
+       bcrypt.genSalt(10, function(err, salt) {
 
-        const salt = 8
-        const senhaEscondida = await bcrypt.hash(senha,salt)
+            if (err) {
+                throw new CustomError("Erro ao tentar obter o salt", 500)
+            }
 
-        const usuario = await Usuario.create({
-            email,
-            senha:senhaEscondida,
-            nome_completo
-        }) 
+            bcrypt.hash(senha, salt, async function(err, hash) {
 
-        id=usuario.id
+                if (err) {
+                    throw new CustomError("Erro ao tentar esconder a senha", 404)
+                }
+                
+                
+            });
+       });
 
-       } catch (error) {
-        throw new CustomError("O servidor falhou criar o usuário", 500)
-       }
+       bcrypt.genSalt(10)
+        .then(
+            salt => {
+                bcrypt.hash(senha, salt)
+                    .then(hash => {
+
+                        try {
+                            const usuario = Usuario.create({
+                                email,
+                                senha:hash,
+                                nome_completo
+                            }) 
+            
+                            id=usuario.id
+                        } catch (err) {
+                            throw new CustomError("O servidor falhou criar o usuário", 500)
+                        }
+                    });
+                }
+        ).catch(err => {
+            console.log(err)
+            throw new CustomError("Erro ao tentar enconder a senha", 500)
+        });
 
        const createTokenAccess = CreateTokenAccess()
        const token=await createTokenAccess.execute(id)
