@@ -10,7 +10,7 @@ Usuario.init(
             type: DataTypes.STRING(40),
         },
         senha: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false
         },
         email: {
