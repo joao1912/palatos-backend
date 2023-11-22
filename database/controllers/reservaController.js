@@ -3,6 +3,7 @@ import { random } from "../../utils/functions.js"
 import PedidoReserva from "../models/PedidoReserva.js";
 import Reserva from "../models/Reserva.js"
 import Usuario from "../models/Usuario.js";
+import Mesa from "../models/Mesa.js"
 
 class reservaController {
 
@@ -85,7 +86,8 @@ class reservaController {
 
     async editReserva(req, res) {
 
-        const {cod} = req.params;
+        const {cod, idMesa} = req.params;
+
 
         const reserva = await Reserva.findByPk(cod)
 
@@ -99,12 +101,24 @@ class reservaController {
             throw new CustomError("A reserva ja foi completada.", 400)
         }
 
+        const mesa = await Mesa.findByPk(idMesa)
+        if(!mesa) {
+            throw new CustomError("Mesa não existe.", 400)
+        }
+        if(mesa.ocupada) {
+            throw new CustomError("Esta mesa já está sendo usada.", 401)
+        }
+
         reserva.set({
             isCompleted: true
         })
 
         reserva.save()
 
+        mesa.set({
+            ocupada: true
+        })
+        mesa.save()
         res.status(200).json({
             status: 'success',
             message: "A reserva foi completada."
