@@ -134,6 +134,7 @@ class userController {
                     .then(hash => {
 
                         async function createNewUserWithHash() {
+                            
                             try {
                                 const usuario = await Usuario.create({
                                     email,
@@ -141,8 +142,7 @@ class userController {
                                     nome_completo
                                 }) 
                 
-                                console.log(usuario)
-                                console.log(usuario.id)
+                                id = usuario.id
                             } catch (err) {
                                 throw new CustomError("O servidor falhou criar o usuário", 500)
                             }
