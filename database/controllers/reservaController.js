@@ -1,4 +1,5 @@
 import { CustomError } from "../../Middlewares/erros.js";
+import { random } from "../../utils/functions.js"
 import PedidoReserva from "../models/PedidoReserva.js";
 import Reserva from "../models/Reserva.js"
 import Usuario from "../models/Usuario.js";
@@ -44,8 +45,19 @@ class reservaController {
             throw new CustomError("Usuário não encontrado", 404)
         }
         
+        let num = 0
+        while(true) {
+            num = random(10000000, 99999999)
+            const reserva = await Reserva.findOne({
+                where: {
+                    cod: num
+                }
+            })
+            if(!reserva) break
+        }
 
         const novaReserva = await Reserva.create({
+            cod: num,
             data_entrada: dataEntrada,
             fk_usuario: id,
             fk_restaurante: idRestaurante
