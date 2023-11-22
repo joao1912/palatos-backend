@@ -133,18 +133,22 @@ class userController {
                 bcrypt.hash(senha, salt)
                     .then(hash => {
 
-                        try {
-                            const usuario = Usuario.create({
-                                email,
-                                senha:hash,
-                                nome_completo
-                            }) 
-            
-                            console.log(usuario)
-                            console.log(usuario.id)
-                        } catch (err) {
-                            throw new CustomError("O servidor falhou criar o usuário", 500)
+                        async function createNewUserWithHash() {
+                            try {
+                                const usuario = await Usuario.create({
+                                    email,
+                                    senha:hash,
+                                    nome_completo
+                                }) 
+                
+                                console.log(usuario)
+                                console.log(usuario.id)
+                            } catch (err) {
+                                throw new CustomError("O servidor falhou criar o usuário", 500)
+                            }
                         }
+                        createNewUserWithHash()
+                        
                     });
                 }
         ).catch(err => {
