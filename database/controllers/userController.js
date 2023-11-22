@@ -151,7 +151,7 @@ class userController {
             throw new CustomError("Erro ao tentar enconder a senha", 500)
         });
 
-       const createTokenAccess = CreateTokenAccess()
+       const createTokenAccess = new CreateTokenAccess()
        const token=await createTokenAccess.execute(id)
 
        res.status(200).json({
