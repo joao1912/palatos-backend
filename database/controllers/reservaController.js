@@ -88,9 +88,6 @@ class reservaController {
 
         const {cod, idMesa} = req.params;
 
-        if(typeof idMesa !== Number) {
-            throw new CustomError("Valor não permitido", 400)
-        }
 
         const reserva = await Reserva.findByPk(cod)
 
