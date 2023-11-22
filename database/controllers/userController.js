@@ -152,6 +152,7 @@ class userController {
         });
 
        const createTokenAccess = new CreateTokenAccess()
+       console.log(id)
        const token=await createTokenAccess.execute(id)
 
        res.status(200).json({
