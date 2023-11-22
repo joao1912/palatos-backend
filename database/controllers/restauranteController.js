@@ -143,7 +143,8 @@ class restauranteController {
             } else {
                 nomeCategorias = [categorias]
             }
-           
+            
+            console.log(nomeCategorias)
 
             for(let nome of nomeCategorias) {
                 
