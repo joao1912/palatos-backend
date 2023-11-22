@@ -134,7 +134,7 @@ class userController {
                     .then(hash => {
 
                         async function createNewUserWithHash() {
-                            
+
                             try {
                                 const usuario = await Usuario.create({
                                     email,
@@ -142,7 +142,15 @@ class userController {
                                     nome_completo
                                 }) 
                 
-                                id = usuario.id
+                                const createTokenAccess = new CreateTokenAccess()
+       
+                                const token= await createTokenAccess.execute(usuario.id)
+
+                                res.status(200).json({
+                                    status:"success",
+                                    token
+                                })
+
                             } catch (err) {
                                 throw new CustomError("O servidor falhou criar o usuário", 500)
                             }
@@ -155,15 +163,6 @@ class userController {
             console.log(err)
             throw new CustomError("Erro ao tentar enconder a senha", 500)
         });
-
-       const createTokenAccess = new CreateTokenAccess()
-       
-       const token=await createTokenAccess.execute(id)
-
-       res.status(200).json({
-        status:"success",
-        token
-       })
 
     }
 
