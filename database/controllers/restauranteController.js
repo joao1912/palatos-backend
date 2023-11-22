@@ -62,7 +62,7 @@ class restauranteController {
                 rua,
                 celular: contato.celular,
                 telefone_fixo: contato.telefone_fixo,
-                cetegorias: categorias,
+                categorias: categorias,
                 reservasAtivas: configRest.reservas_ativas,
                 tempoTolerancia: configRest.tempo_tolerancia
             }
