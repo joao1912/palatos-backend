@@ -6,7 +6,7 @@ import swaggerUi from "swagger-ui-express"
 import "./database/assossiations.js"
 
 ;(async function(){
-    await database.sync()
+    await database.sync({force: true})
 })()
 
 import restaurantRoutes from "./routes/Restaurante.js"
