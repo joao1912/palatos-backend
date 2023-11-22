@@ -12,6 +12,6 @@ router.get("/:id", authToken.execute, ReservaController.getReservas)
 
 router.post("/add", authToken.execute, ReservaController.addReserva)
 
-router.put("/completed/:cod/:idRestaurante", authToken.execute, ReservaController.editReserva)
+router.put("/completed/:cod/:idMesa", authToken.execute, ReservaController.editReserva)
 
 export default router
