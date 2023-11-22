@@ -139,9 +139,9 @@ class restauranteController {
             let nomeCategorias
 
             if (categorias.indexOf(",")) {
-                nomeCategorias = categorias.split(",")
+                nomeCategorias = (categorias.split(",")).trim()
             } else {
-                nomeCategorias = [categorias]
+                nomeCategorias = [(categorias).trim()]
             }
             
             console.log(nomeCategorias)
