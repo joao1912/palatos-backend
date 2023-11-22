@@ -115,7 +115,7 @@ class mesaController {
 
             mesa.save()
 
-            res.status(200).json({
+            res.status(201).json({
                 status:'success',
                 message: "Troca efetuada"
             })
