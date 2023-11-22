@@ -139,14 +139,14 @@ class restauranteController {
             let nomeCategorias
 
             if (categorias.indexOf(",")) {
-                nomeCategorias = (categorias.split(",")).trim()
+                nomeCategorias = (categorias.split(","))
             } else {
-                nomeCategorias = [(categorias).trim()]
+                nomeCategorias = [categorias]
             }
-            
-            console.log(nomeCategorias)
 
             for(let nome of nomeCategorias) {
+
+                nome = nome.trim()
                 
                 const categoria = await Categoria.findOne({
                     where: {
