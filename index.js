@@ -9,10 +9,6 @@ import "./database/assossiations.js"
     await database.sync()
 })()
 
-import setCategorias from "./utils/create_categorias.js"
-
-setCategorias()
-
 import restaurantRoutes from "./routes/Restaurante.js"
 import userRoutes from "./routes/User.js"
 import searchRoutes from "./routes/search.js"
