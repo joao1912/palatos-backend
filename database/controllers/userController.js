@@ -140,7 +140,7 @@ class userController {
                                 nome_completo
                             }) 
             
-                            id=usuario.id
+                            console.log(usuario.id)
                         } catch (err) {
                             throw new CustomError("O servidor falhou criar o usuário", 500)
                         }
@@ -152,7 +152,7 @@ class userController {
         });
 
        const createTokenAccess = new CreateTokenAccess()
-       console.log(id)
+       
        const token=await createTokenAccess.execute(id)
 
        res.status(200).json({
