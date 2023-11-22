@@ -140,6 +140,7 @@ class userController {
                                 nome_completo
                             }) 
             
+                            console.log(usuario)
                             console.log(usuario.id)
                         } catch (err) {
                             throw new CustomError("O servidor falhou criar o usuário", 500)
