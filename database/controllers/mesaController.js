@@ -147,7 +147,7 @@ class mesaController {
 
             await Mesa.destroy({
                 where:{
-                   id:idMesa 
+                   id:idMesa
                 }
             })
         } catch (error) {
