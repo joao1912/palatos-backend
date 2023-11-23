@@ -180,7 +180,10 @@ class userController {
         })
     
         if (!emailUsuario) {
-            throw new CustomError('Email ou senha incorreto',401)
+            return res.status(401).json({
+                status: "wrong_email",
+                message:"E-mail inválido"
+            })
         }
 
         try {
@@ -189,7 +192,10 @@ class userController {
                     throw new CustomError(err,500)
                 }
                 if (!res){
-                    throw new CustomError("Email ou senha incorreto",401)
+                    return res.status(401).json({
+                        status: "wrong_password",
+                        message:"Senha inválida"
+                    })
                 }
             })
         
