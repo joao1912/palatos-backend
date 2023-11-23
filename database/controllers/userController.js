@@ -187,11 +187,11 @@ class userController {
         }
 
         try {
-            bcrypt.compare(senha,emailUsuario.senha,(err,res)=>{
+            bcrypt.compare(senha,emailUsuario.senha,(err,resPassword)=>{
                 if(err){
                     throw new CustomError(err,500)
                 }
-                if (!res){
+                if (!resPassword){
                     return res.status(401).json({
                         status: "wrong_password",
                         message:"Senha inválida"
