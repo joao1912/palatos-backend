@@ -28,7 +28,7 @@ async function create_comandas() {
     result = await ProdutoComanda.create({
         quantidade: 2,
         observacoes: "Bem fritinho!",
-        fk_cardapio: 4,
+        fk_cardapio: 1,
         fk_comanda: idComanda
     }, {
     })
@@ -51,7 +51,7 @@ if(!idComanda) {
 result = await ProdutoComanda.create({
     quantidade: 2,
     observacoes: "Bem fritinho!",
-    fk_cardapio: 4,
+    fk_cardapio: 1,
     fk_comanda: idComanda
 }, {
 })
@@ -74,7 +74,7 @@ if(!idComanda) {
 result = await ProdutoComanda.create({
     quantidade: 1,
     observacoes: "Bem fritinho sim!",
-    fk_cardapio: 3,
+    fk_cardapio: 2,
     fk_comanda: idComanda
 }, {
 })
