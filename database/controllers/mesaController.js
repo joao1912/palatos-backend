@@ -8,19 +8,28 @@ import { CustomError } from "../../Middlewares/erros.js"
 class mesaController {
 
     async geraIdentificacaoMesas(idRestaurante) {
-        const mesas = await Mesa.findAll({
+        const lista = await ListaMesa.findAll({
             where: {
                 fk_restaurante: idRestaurante
             }
         })
-        if (!mesas || mesas.length == 0) return
+        if (!lista) return
 
-        let valInicial = 1
-        for (let objMesa of mesas) {
-            objMesa.update({
-                identificacao_mesa: `Mesa ${valInicial}`
+        let valAtual = 1
+        for (let objLista of lista) {
+            const mesas = await Mesa.findAll({
+                where: {
+                    id: objLista.fk_mesa
+                }
             })
-            valInicial++
+            if (!Mesas) continue
+
+            for (let objMesa of mesas) {
+                objMesa.update({
+                    identificacao_mesa: `Mesa ${valAtual}`
+                })
+                valAtual++
+            }
         }
     }
 
