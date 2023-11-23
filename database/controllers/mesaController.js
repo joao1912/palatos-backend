@@ -89,7 +89,7 @@ class mesaController {
                 fk_mesa: mesa.id,
             })
 
-            this.geraIdentificacaoMesas(idRestaurante)
+            //this.geraIdentificacaoMesas(idRestaurante)
         } catch (error) {
             console.log(error)
             throw new CustomError("O servidor falhou em criar a mesa", 500)
