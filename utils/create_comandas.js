@@ -4,8 +4,8 @@ import Comanda from "../database/models/Comanda.js"
 import Restaurante from "../database/models/Restaurante.js";
 import ProdutoComanda from "../database/models/ProdutoComanda.js"
 
-const userId = 10
-const idRestaurante = 2
+const userId = 13
+const idRestaurante = 9
 
 async function create_comandas() {
 
