@@ -25,12 +25,8 @@ class comandaController {
             let fimDia = new Date(inicioDia)
             fimDia.setHours(23, 59, 59, 999)
 
+
             listComandas = await Comanda.findAll({
-                where: {
-                    data_entrada: {
-                        [Op.between]: [inicioDia, fimDia]
-                    }
-                },
                 include: [{
                     model: ProdutoComanda,
                     include: [{
@@ -39,6 +35,22 @@ class comandaController {
                     }]
                 }]
             })
+
+
+            // listComandas = await Comanda.findAll({
+            //     where: {
+            //         data_entrada: {
+            //             [Op.between]: [inicioDia, fimDia]
+            //         }
+            //     },
+            //     include: [{
+            //         model: ProdutoComanda,
+            //         include: [{
+            //             model: Cardapio,
+            //             attributes: ['nome_produto']
+            //         }]
+            //     }]
+            // })
 
             if (!listComandas) {
                 return res.status(200).json({
