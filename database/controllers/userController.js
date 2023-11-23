@@ -5,7 +5,7 @@ import Reserva from "../models/Reserva.js";
 import Restaurante from "../models/Restaurante.js";
 import Usuario from "../models/Usuario.js";
 import bcrypt from "bcrypt";
-import {CreateTokenAccess} from "../../utils/CreateTokenAccess.js"
+import { CreateTokenAccess } from "../../utils/CreateTokenAccess.js"
 
 
 class userController {
@@ -14,24 +14,24 @@ class userController {
 
         const {
             id
-        }=req.params;
+        } = req.params;
 
         const user = await Usuario.findByPk(id)
 
-        const arrayFavoritos= []
+        const arrayFavoritos = []
 
         const favorito = await Favorito.findAll({
-            where:{
-                fk_usuario:id
+            where: {
+                fk_usuario: id
             }
         })
 
-        for (let i=0; i<favorito; i++) {
+        for (let i = 0; i < favorito; i++) {
 
             const restaurant = await Restaurante.findByPk(favorito.fk_restaurante)
-            const obj= {
-                id_restaurante:restaurant.id,
-                foto:restaurant.foto
+            const obj = {
+                id_restaurante: restaurant.id,
+                foto: restaurant.foto
             }
 
             arrayFavoritos.push(obj)
@@ -39,40 +39,40 @@ class userController {
 
         }
 
-        const reservas= await Reserva.findAll({
-            where:{
-                fk_usuario:id
+        const reservas = await Reserva.findAll({
+            where: {
+                fk_usuario: id
             }
         })
 
-        const usuarioReserva= await Usuario.findByPk(id)
+        const usuarioReserva = await Usuario.findByPk(id)
 
-        reservas.nome_completo=usuarioReserva.nome_completo
+        reservas.nome_completo = usuarioReserva.nome_completo
 
-        const contato= await Contato.findOne({
-            where:{
-                fk_usuario:id
+        const contato = await Contato.findOne({
+            where: {
+                fk_usuario: id
             }
         })
 
-        const resultado={
-            foto:user.foto,
-            nome:user.nome_completo,
-            email:user.email,
-            tel:contato.celular,
-            favoritos:arrayFavoritos || [],
-            reservas:reservas || []
+        const resultado = {
+            foto: user.foto,
+            nome: user.nome_completo,
+            email: user.email,
+            tel: contato.celular,
+            favoritos: arrayFavoritos || [],
+            reservas: reservas || []
         }
 
         res.status(200).json({
-            status:"success",
+            status: "success",
             usuario: resultado
         })
     }
 
     async getUsers(req, res) {
 
-        const usuarios= await Usuario.findAll()
+        const usuarios = await Usuario.findAll()
 
         if (!usuarios) {
             throw new CustomError("O servidor falhou em buscar os usuários", 500)
@@ -89,124 +89,115 @@ class userController {
         res.status(200).json({
             status: "success",
             message: "user authenticated"
-        }) 
+        })
     }
 
     async createUser(req, res) {
-       const {
+        const {
             nome_completo,
             email,
             senha
-       } = req.body
+        } = req.body
 
-       const emailJaExiste= await Usuario.findOne({
-        where: {
-            email:email
+        const emailJaExiste = await Usuario.findOne({
+            where: {
+                email: email
+            }
+        })
+
+        if (emailJaExiste) {
+            throw new CustomError("Este email já existe", 400)
         }
-       })
 
-       if (emailJaExiste) {
-        throw new CustomError("Este email já existe",400)
-       }
+        let id
 
-       let id
-
-       bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.genSalt(10, function (err, salt) {
 
             if (err) {
                 throw new CustomError("Erro ao tentar obter o salt", 500)
             }
 
-            bcrypt.hash(senha, salt, async function(err, hash) {
+            bcrypt.hash(senha, salt, async function (err, hash) {
 
                 if (err) {
                     throw new CustomError("Erro ao tentar esconder a senha", 404)
                 }
-                
-                
+
+
             });
-       });
-
-       bcrypt.genSalt(10)
-        .then(
-            salt => {
-                bcrypt.hash(senha, salt)
-                    .then(hash => {
-
-                        async function createNewUserWithHash() {
-
-                            try {
-                                const usuario = await Usuario.create({
-                                    email,
-                                    senha:hash,
-                                    nome_completo
-                                }) 
-                
-                                const createTokenAccess = new CreateTokenAccess()
-       
-                                const token= await createTokenAccess.execute(usuario.id)
-
-                                res.status(200).json({
-                                    status:"success",
-                                    token
-                                })
-
-                            } catch (err) {
-                                throw new CustomError("O servidor falhou criar o usuário", 500)
-                            }
-                        }
-                        createNewUserWithHash()
-                        
-                    });
-                }
-        ).catch(err => {
-            console.log(err)
-            throw new CustomError("Erro ao tentar enconder a senha", 500)
         });
+
+        bcrypt.genSalt(10)
+            .then(
+                salt => {
+                    bcrypt.hash(senha, salt)
+                        .then(hash => {
+
+                            async function createNewUserWithHash() {
+
+                                try {
+                                    const usuario = await Usuario.create({
+                                        email,
+                                        senha: hash,
+                                        nome_completo
+                                    })
+
+                                    const createTokenAccess = new CreateTokenAccess()
+
+                                    const token = await createTokenAccess.execute(usuario.id)
+
+                                    res.status(200).json({
+                                        status: "success",
+                                        token
+                                    })
+
+                                } catch (err) {
+                                    throw new CustomError("O servidor falhou criar o usuário", 500)
+                                }
+                            }
+                            createNewUserWithHash()
+
+                        });
+                }
+            ).catch(err => {
+                console.log(err)
+                throw new CustomError("Erro ao tentar enconder a senha", 500)
+            });
 
     }
 
     async login(req, res) {
-        
-        const{
+
+        const {
             email,
             senha
-        }=req.body
+        } = req.body
 
-        const emailUsuario= await Usuario.findOne({
+        const emailUsuario = await Usuario.findOne({
             where: {
-                email:email
+                email: email
             }
         })
-    
+
         if (!emailUsuario) {
             return res.status(401).json({
                 status: "wrong_email",
-                message:"E-mail inválido"
+                message: "E-mail inválido"
             })
         }
 
-        try {
-            bcrypt.compare(senha,emailUsuario.senha,(err,resPassword)=>{
-                if(err){
-                    throw new CustomError(err,500)
-                }
-                if (!resPassword){
-                    return res.status(401).json({
-                        status: "wrong_password",
-                        message:"Senha inválida"
-                    })
-                }
+        let resPassword = await bcrypt.compare(senha, emailUsuario.senha) {
+            if (!resPassword){
+            return res.status(401).json({
+                status: "wrong_password",
+                message: "Senha inválida"
             })
-        
-        } catch (error) {
-            throw new CustomError("O servidor falhou logar o usuário", 500)
         }
 
         const createTokenAccess = new CreateTokenAccess()
-        const token=await createTokenAccess.execute(emailUsuario.id)
+        const token = await createTokenAccess.execute(emailUsuario.id)
         res.status(200).json({
-            status:"success",
+            status: "success",
             token
         })
 
