@@ -186,8 +186,8 @@ class userController {
             })
         }
 
-        let resPassword = await bcrypt.compare(senha, emailUsuario.senha) {
-            if (!resPassword){
+        const resPassword = await bcrypt.compare(senha, emailUsuario.senha)
+            if (!resPassword) {
             return res.status(401).json({
                 status: "wrong_password",
                 message: "Senha inválida"
