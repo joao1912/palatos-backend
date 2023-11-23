@@ -1,3 +1,5 @@
+import ProdutoCarrinho from "../models/ProdutoCarrinho.js"
+import Financeiro from "../models/Financeiro.js"
 import Mesa from "../models/Mesa.js"
 import ListaMesa from "../models/ListaMesa.js"
 import { CustomError } from "../../Middlewares/erros.js"
@@ -37,14 +39,14 @@ class mesaController {
 
     async criarMesa(req, res) {
         const { idRestaurante } = req.params
-      
+
         let mesa
 
         try {
             mesa = await Mesa.create({
                 conta: 0
             })
-            
+
             const jsonMesa = JSON.stringify({
                 idRestaurante: idRestaurante,
                 idMesa: mesa.id
@@ -69,14 +71,14 @@ class mesaController {
 
         res.status(200).json({
             status: "success",
-            mesa:mesa
+            mesa: mesa
         })
     }
 
     async adicionarQrCode(req, res) {
 
         const { idMesa } = req.params;
-        const {jsonMesa} = req.body;
+        const { jsonMesa } = req.body;
         let mesa
 
         try {
@@ -87,9 +89,9 @@ class mesaController {
             mesa.save()
 
         } catch (error) {
-            throw new CustomError("Erro ao adicionar os qrcodes", 500)            
+            throw new CustomError("Erro ao adicionar os qrcodes", 500)
         }
-        
+
         res.status(200).json({
             status: "success",
             mesa: mesa
@@ -97,13 +99,13 @@ class mesaController {
 
     }
 
-    async trocarOcupado(req,res){
-        const {idMesa} = req.params
-        const {isOccupied} = req.body
+    async trocarOcupado(req, res) {
+        const { idMesa } = req.params
+        const { isOccupied } = req.body
 
         const mesa = await Mesa.findByPk(idMesa)
 
-        if(!mesa){
+        if (!mesa) {
             throw new CustomError("Esta mesa não foi encontrada", 404)
         }
 
@@ -115,8 +117,26 @@ class mesaController {
 
             mesa.save()
 
+            if (!isOccupied) {
+                const produtos = await ProdutoCarrinho.findAll({
+                    where: {
+                        fk_mesa: mesa.id
+                    }
+                })
+                if (produtos && produtos.length > 0) {
+                    for (let produtoObj of produtos) {
+                        await Financeiro.create({
+                            dataCompra: new Date(),
+                            fk_usuario: req.id,
+                            fk_restaurante: req.idRestaurante,
+                            fk_cardapio: produtoObj.fk_cardapio
+                        })
+                    }
+                }
+            }
+
             res.status(200).json({
-                status:'success',
+                status: 'success',
                 message: "Troca efetuada"
             })
 
@@ -125,14 +145,14 @@ class mesaController {
         let message = isOccupied ? "Já está ocupada." : "Já está livre."
 
         res.status(200).json({
-            status:'success',
+            status: 'success',
             message: message
         })
 
     }
 
-    async deletarMesa(req,res){
-        const {idMesa} = req.params
+    async deletarMesa(req, res) {
+        const { idMesa } = req.params
 
         if (!idMesa) {
             throw new CustomError("Id inválido", 400)
@@ -146,8 +166,8 @@ class mesaController {
             })
 
             await Mesa.destroy({
-                where:{
-                   id:idMesa
+                where: {
+                    id: idMesa
                 }
             })
         } catch (error) {
@@ -155,11 +175,11 @@ class mesaController {
         }
 
         res.status(200).json({
-            status:'success',
-            message:'Mesa deletada com sucesso!'
+            status: 'success',
+            message: 'Mesa deletada com sucesso!'
         })
 
-    }    
+    }
 
 }
 

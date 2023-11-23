@@ -15,6 +15,7 @@ Financeiro.init(
         data_compra: {
             type: DataTypes.DATE,
             allowNull:false,
+            defaultValue: Sequelize.fn("NOW")
         },
 
     },
