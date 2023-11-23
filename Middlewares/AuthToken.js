@@ -15,7 +15,7 @@ class AuthToken {
         
         jwt.verify(token, SECRET_KEY, async (err, decode) => {
             if (err) {
-                res.status(401).send('Token Inválido')
+                return res.status(401).send('Token Inválido')
             }
 
             req.id = decode.userId
