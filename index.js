@@ -22,7 +22,7 @@ import categoriaRoutes from "./routes/Categoria.js"
 import mesaRoutes from "./routes/Mesa.js"
 
 import { CustomError, errorHandler } from "./Middlewares/erros.js"
-app.use(errorHandler)
+
 
 import swaggerDocs from "./swagger.json" assert { type: "json"};
 import { CreateTokenAccess } from "./utils/CreateTokenAccess.js"
@@ -30,6 +30,7 @@ const createTokenAccess = new CreateTokenAccess()
 
 export const SECRET_KEY = "chaveSeg"
 const app = express()
+app.use(errorHandler)
 app.use(express.json())
 app.use(cors())
 
