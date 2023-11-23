@@ -6,14 +6,14 @@ import { CustomError } from "../../Middlewares/erros.js"
 
 
 class mesaController {
-
+    
     async geraIdentificacaoMesas(idRestaurante) {
         const lista = await ListaMesa.findAll({
             where: {
                 fk_restaurante: idRestaurante
             }
         })
-        if (!lista) return
+        if (!lista || lista.length == 0) return
 
         let valAtual = 1
         for (let objLista of lista) {
@@ -22,7 +22,7 @@ class mesaController {
                     id: objLista.fk_mesa
                 }
             })
-            if (!Mesas) continue
+            if (!mesas || mesas.length == 0) continue
 
             for (let objMesa of mesas) {
                 objMesa.update({
@@ -89,7 +89,7 @@ class mesaController {
                 fk_mesa: mesa.id,
             })
 
-            //this.geraIdentificacaoMesas(idRestaurante)
+            this.geraIdentificacaoMesas(idRestaurante)
         } catch (error) {
             console.log(error)
             throw new CustomError("O servidor falhou em criar a mesa", 500)
