@@ -36,8 +36,9 @@ async function create_comandas() {
 //Criando outra
 
 result = await Comanda.create({
-    is_reserva: true,
+    is_reserva: false,
     data_entrada: data_entrada,
+    numeroMesa: 2,
 }, {
 })
 
@@ -60,7 +61,7 @@ result = await ProdutoComanda.create({
 result = await Comanda.create({
     is_reserva: false,
     data_entrada: data_entrada,
-    numeroMesa: 2,
+    numeroMesa: 1,
 }, {
 })
 
