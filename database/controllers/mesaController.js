@@ -7,6 +7,23 @@ import { CustomError } from "../../Middlewares/erros.js"
 
 class mesaController {
 
+    async geraIdentificacaoMesas(idRestaurante) {
+        const mesas = await Mesa.findAll({
+            where: {
+                fk_restaurante: idRestaurante
+            }
+        })
+        if (!mesas || mesas.length == 0) return
+
+        let valInicial = 1
+        for (let objMesa of mesas) {
+            objMesa.update({
+                identificacao_mesa: `Mesa ${valInicial}`
+            })
+            valInicial++
+        }
+    }
+
     async pegarMesas(req, res) {
 
         const { idRestaurante } = req.params
@@ -25,7 +42,7 @@ class mesaController {
 
         for (let obj of listaMesas) {
 
-            const mesa = await Mesa.findByPk(obj.fk_mesa)
+            let mesa = await Mesa.findByPk(obj.fk_mesa)
             mesas.push(mesa)
 
         }
@@ -63,6 +80,7 @@ class mesaController {
                 fk_mesa: mesa.id,
             })
 
+            this.geraIdentificacaoMesas(idRestaurante)
         } catch (error) {
             console.log(error)
             throw new CustomError("O servidor falhou em criar a mesa", 500)
