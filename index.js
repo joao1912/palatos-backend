@@ -22,6 +22,7 @@ import categoriaRoutes from "./routes/Categoria.js"
 import mesaRoutes from "./routes/Mesa.js"
 
 import { CustomError, errorHandler } from "./Middlewares/erros.js"
+app.use(errorHandler)
 
 import swaggerDocs from "./swagger.json" assert { type: "json"};
 import { CreateTokenAccess } from "./utils/CreateTokenAccess.js"
@@ -83,7 +84,7 @@ app.post("/loadImage", upload.single('file'), function(req,res) {
     res.status(200).send(req.file)
 })
 
-app.use(errorHandler)
+
 
 app.listen(8085, () => {
     console.log("Servidor rodando na porta http://45.224.129.126:8085/")
