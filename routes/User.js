@@ -16,6 +16,6 @@ router.post("/newUser", userController.createUser)
 
 router.post('/login', userController.login)
 
-
+router.patch('/toggleFavorito/:idRestaurante', authToken.execute, userController.toggleFavorito)
 
 export default router

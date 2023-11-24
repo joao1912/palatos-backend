@@ -203,6 +203,63 @@ class userController {
 
     }
 
+    async toggleFavorito(req, res) {
+
+        const {idRestaurante} = req.params;
+        const id = req.id;
+
+        let favoritos
+
+        try {
+            favoritos = await Favorito.findAll({
+                where: {
+                    fk_usuario: id
+                }
+            })
+            
+        } catch (error) {
+            throw new CustomError("O servidor falhou em buscar os favoritos")
+        }
+
+        let isNew = true
+
+        for (let fav of favoritos) {
+
+            if (fav.fk_restaurante == idRestaurante) {
+
+                isNew = false
+
+            }
+        }
+
+        if (isNew) {
+
+            await Favorito.create({
+                fk_restaurante: idRestaurante,
+                fk_usuario: id
+            })
+
+            return res.status(200).json({
+                status: "success",
+                message: "Restaurante Favoritado"
+            })
+
+        } else {
+
+            await Favorito.destroy({
+                where: {
+                    fk_restaurante: idRestaurante,
+                    fk_usuario: id
+                }
+            })
+
+            return res.status(200).json({
+                status: "success",
+                message: "Restaurante removido dos favoritos"
+            })
+
+        }
+    }
 }
 
 export default userController
