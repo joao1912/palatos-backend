@@ -109,6 +109,51 @@ class cardapioController {
             message: "Pratos deletados"
         })
     }
+
+    async editCardapio(req, res) {
+
+        const {
+            nome,
+            descricao,
+            preco,
+            tipo
+        } = req.body;
+
+        const {id} = req.params;
+
+        const image = req.file;
+
+        try {
+            
+            const produto = await Cardapio.findByPk(id)
+
+            await produto.update({
+                nome_produto: nome,
+                descricao: descricao,
+                preco: preco,
+                tipo: tipo
+            })
+
+            if (image) {
+
+                await produto.update({
+                    foto: `http://45.224.129.126:8085/files/${image.filename}`
+                })
+
+            }
+
+            res.status(200).json({
+                status: 'success',
+                message: "Produto editado"
+            })
+
+        } catch (error) {
+            
+            throw new CustomError("O servidor falhou em editar o produto: " + error)
+
+        }
+
+    }
 }
 
 export default cardapioController

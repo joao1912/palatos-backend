@@ -16,6 +16,8 @@ router.get ("/prato/:codigo",CardapioController.getProdutoIndividual)
 
 router.post("/add", authToken.execute, upload.single("file"), CardapioController.createCardapio)
 
+router.put("/edit/:id", authToken.execute, upload.single("file"), CardapioController.editCardapio)
+
 router.delete("/delete", authToken.execute, CardapioController.deleteCardapio)
 
 export default router
