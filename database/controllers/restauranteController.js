@@ -415,7 +415,7 @@ async function editContato(restaurante, telefone_fixo, celular) {
         contatoRest.save()
     
     } catch(err) {
-
+        console.log(err)
         throw new CustomError("O servidor falhou em editar o contato do restaurante", 500)
                     
     }
