@@ -136,6 +136,8 @@ class cardapioController {
 
         const {id} = req.params;
 
+        const idRestautante = req.idRestaurante;
+
         const image = req.file;
 
         const isValid = id.includes("ID")
@@ -143,7 +145,19 @@ class cardapioController {
         if (isValid) {
 
             try {
-                const produtoCriado = await this.createCardapio(req, res, true)
+
+                const path = `http://45.224.129.126:8085/files/${image.filename}`
+        
+                const newProduct = {
+                    nome_produto: nome,
+                    preco: preco,
+                    descricao: descricao,
+                    foto: path,
+                    tipo: tipo,
+                    fk_restaurante: idRestautante
+                }
+
+                const produtoCriado = await Cardapio.create(newProduct)
 
                 return res.status(200).json({
                     status: 'success',
