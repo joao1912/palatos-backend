@@ -101,6 +101,7 @@ class cardapioController {
     async deleteCardapio(req,res) {
 
         const {pratos} = req.params;
+        console.log(req)
 
         try {
 
