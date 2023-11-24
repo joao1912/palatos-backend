@@ -100,8 +100,7 @@ class cardapioController {
 
     async deleteCardapio(req,res) {
 
-        const {pratos} = req.params;
-        console.log(req)
+        const pratos = req.query.pratos;
 
         try {
 
