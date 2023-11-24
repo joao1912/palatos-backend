@@ -195,6 +195,7 @@ class restauranteController {
         const nomeFoto = req.file
 
         const {idRestaurante} = req.params;
+        const userId = req.id
 
         const restaurant = await Restaurante.findByPk(idRestaurante) 
 
@@ -276,7 +277,7 @@ class restauranteController {
 
         await editConfigRest(restaurant, reservasAtivas, tempoTolerancia)
 
-        await editContato(restaurant, telefone, celular)
+        await editContato(restaurant, telefone, celular, userId)
 
         res.status(200).json({
             status: 'success',
@@ -402,10 +403,10 @@ async function editConfigRest(restaurante, reservas_ativas, tempo_tolerancia) {
     }
 }
 
-async function editContato(restaurante, telefone_fixo, celular) {
+async function editContato(restaurante, telefone_fixo, celular, userId) {
     try {
             
-        const contatoRest = await Contato.findOne({where: {fk_restaurante: restaurante.id}}) 
+        const contatoRest = await Contato.findOne({where: {fk_usuario: userId}}) 
 
         contatoRest.set({
            telefone_fixo: telefone_fixo || contatoRest.telefone_fixo,
