@@ -100,22 +100,29 @@ class cardapioController {
 
     async deleteCardapio(req,res) {
 
-        const idPratos = req.body;
+        const {pratos} = req.body;
 
-        for (let i = 0 ; i < idPratos.length ; i++) {
+        try {
 
-            await Cardapio.destroy({
-                where: {
-                    codigo: idPratos[i]
-                }
+            for (let i = 0 ; i < pratos.length ; i++) {
+
+                await Cardapio.destroy({
+                    where: {
+                        codigo: pratos[i]
+                    }
+                })
+
+            }
+
+            res.status(200).json({
+                status: "success",
+                message: "Pratos deletados"
             })
 
+        } catch (error) {
+              console.log(error)  
+              throw new CustomError("O servidor falhou em deletar o prato", 500)
         }
-
-        res.status(200).json({
-            status: "success",
-            message: "Pratos deletados"
-        })
     }
 
     async editCardapio(req, res) {
