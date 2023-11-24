@@ -138,33 +138,28 @@ class cardapioController {
 
         const image = req.file;
 
-        const produto = await Cardapio.findByPk(id)
+        const isValid = id.includes("ID")
 
-        if (!produto) {
+        if (isValid) {
 
-            const isValid = id.includes("ID")
+            try {
+                const produtoCriado = await this.createCardapio(req, res, true)
 
-            if (isValid) {
+                return res.status(200).json({
+                    status: 'success',
+                    message: "Produto criado",
+                    produtoCriado
+                })
 
-                try {
-                    const produtoCriado = await this.createCardapio(req, res, true)
-
-                    return res.status(200).json({
-                        status: 'success',
-                        message: "Produto criado",
-                        produtoCriado
-                    })
-
-                } catch (error) {
-                    console.log(error)
-                    throw new CustomError("O servidor falhou em crirar um item do menu", 500)
-                }  
-            }
+            } catch (error) {
+                console.log(error)
+                throw new CustomError("O servidor falhou em crirar um item do menu", 500)
+            }  
         }
 
         try {
             
-            
+            const produto = await Cardapio.findByPk(id)
 
             await produto.update({
                 nome_produto: nome,
