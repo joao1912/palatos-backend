@@ -43,7 +43,7 @@ class cardapioController {
 
 
 
-    async createCardapio(req, res) {
+    async createCardapio(req, res, callByEdit = false) {
         
         const foto = req.file;
         
@@ -82,11 +82,19 @@ class cardapioController {
             throw new CustomError("O servidor falhou em criar o menu.", 500)
         }
 
-        res.status(200).json({
-            status: "success",
-            message: "Produto criado com sucesso.",
-            produto: produto
-        })
+        if (!callByEdit) {
+
+            return produto
+            
+        } else {
+
+            res.status(200).json({
+                status: "success",
+                message: "Produto criado com sucesso.",
+                produto: produto
+            }) 
+
+        }
 
     }
 
@@ -123,9 +131,33 @@ class cardapioController {
 
         const image = req.file;
 
+        const produto = await Cardapio.findByPk(id)
+
+        if (!produto) {
+
+            const isValid = id.includes("ID")
+
+            if (isValid) {
+
+                try {
+                    const produtoCriado = await this.createCardapio(req, res, true)
+
+                    return res.status(200).json({
+                        status: 'success',
+                        message: "Produto criado",
+                        produtoCriado
+                    })
+
+                } catch (error) {
+                    console.log(error)
+                    throw new CustomError("O servidor falhou em crirar um item do menu", 500)
+                }  
+            }
+        }
+
         try {
             
-            const produto = await Cardapio.findByPk(id)
+            
 
             await produto.update({
                 nome_produto: nome,
