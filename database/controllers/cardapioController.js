@@ -100,7 +100,7 @@ class cardapioController {
 
     async deleteCardapio(req,res) {
 
-        const {pratos} = req.body;
+        const {pratos} = req.params;
 
         try {
 
