@@ -43,7 +43,7 @@ app.get("/", (req, res) => {
 }) 
 
 app.post("/createToken", async (req, res) => {
-    const token = await createTokenAccess.execute(10, 10)
+    const token = await createTokenAccess.execute(13, 9)
 
     res.status(200).json({
         message: "Token criado!",
