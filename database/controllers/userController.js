@@ -28,14 +28,14 @@ class userController {
 
         for (let i = 0; i < favorito.length; i++) {
 
-            const restaurant = await Restaurante.findByPk(favorito.fk_restaurante)
+            const restaurant = await Restaurante.findByPk(favorito[i].fk_restaurante)
+
             const obj = {
                 id_restaurante: restaurant.id,
                 foto: restaurant.foto
             }
 
             arrayFavoritos.push(obj)
-
 
         }
 
