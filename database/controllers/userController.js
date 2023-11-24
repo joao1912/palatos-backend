@@ -26,7 +26,7 @@ class userController {
             }
         })
 
-        for (let i = 0; i < favorito; i++) {
+        for (let i = 0; i < favorito.length; i++) {
 
             const restaurant = await Restaurante.findByPk(favorito.fk_restaurante)
             const obj = {
