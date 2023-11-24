@@ -224,6 +224,7 @@ class restauranteController {
             nomeCategorias.push(categoriaCompleta.nome)
         }
 
+        console.log(categorias)
     
         const categoriasAdicionadas = categorias.filter(categoria => !nomeCategorias.includes(categoria));
 
