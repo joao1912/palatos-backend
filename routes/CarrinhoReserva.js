@@ -7,10 +7,11 @@ const carrinhoMesaController= new CarrinhoReservaController();
 
 const router = express.Router()
 
-router.get("/:id", carrinhoMesaController.getCarrinho)
-
+router.get("/getAll/:idRestaurante", authToken.execute, carrinhoMesaController.getCarrinho)
 
 router.post("/addItem", authToken.execute, carrinhoMesaController.addItem)
+
+
 
 
 

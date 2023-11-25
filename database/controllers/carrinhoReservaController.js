@@ -1,6 +1,7 @@
 import { CustomError } from "../../Middlewares/erros.js"
 import Cardapio from "../models/Cardapio.js"
 import ReservaCarrinho from "../models/ReservaCarrinho.js"
+import Restaurante from "../models/Restaurante.js"
 
 
 class CarrinhoReservaController{
@@ -32,7 +33,10 @@ class CarrinhoReservaController{
     }
 
     async getCarrinho(req,res){
-        const id=req.params.id
+
+        const idRest = req.params.idRestaurante
+        const id = req.id
+
         const carrinhoRes=await ReservaCarrinho.findAll({
             where:{
                 fk_usuario:id
@@ -44,6 +48,13 @@ class CarrinhoReservaController{
 
         for(let obj of carrinhoRes){
             const produto = await Cardapio.findByPk(obj.fk_cardapio)
+
+            const restauranteProduto = Restaurante.findByPk(produto.fk_restaurante)
+            
+            if (restauranteProduto.id != idRest) {
+                continue
+            }
+
             const {nome_produto,preco}=produto
             obj.nome_produto=nome_produto
             obj.preco=preco
