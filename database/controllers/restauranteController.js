@@ -413,14 +413,11 @@ async function editContato(telefone_fixo, celular, userId) {
     try {
             
         const contatoRest = await Contato.findOne({where: {fk_usuario: userId}}) 
-        console.log(contatoRest)
-
-        contatoRest.set({
+        console.log(telefone_fixo)
+        contatoRest.update({
            telefone_fixo: telefone_fixo,
            celular: celular
         })
-
-        contatoRest.save()
     
     } catch(err) {
         console.log(err)
