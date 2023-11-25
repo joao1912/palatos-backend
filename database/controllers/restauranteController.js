@@ -219,15 +219,19 @@ class restauranteController {
 
         const categoriasRestaurante = []
         const nomeCategorias = []
+
         for(let categoria of listaCategorias) {
             const categoriaCompleta = await Categoria.findByPk(categoria.fk_categoria)
             categoriasRestaurante.push(categoriaCompleta)
             nomeCategorias.push(categoriaCompleta.nome)
         }
-    
-        const categoriasAdicionadas = [categorias].filter(categoria => !nomeCategorias.includes(categoria));
 
-        const categoriasRemovidas = nomeCategorias.filter(categoria => ![categorias].includes(categoria));
+        let categoriasUnicas = categorias.split(',')
+        categoriasUnicas = categoriasUnicas.trim()
+    
+        const categoriasAdicionadas = categoriasUnicas.filter(categoria => !nomeCategorias.includes(categoria));
+
+        const categoriasRemovidas = nomeCategorias.filter(categoria => !categoriasUnicas.includes(categoria));
 
         if (categoriasAdicionadas) {
 
