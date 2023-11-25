@@ -227,7 +227,7 @@ class restauranteController {
         }
 
         let categoriasUnicas = categorias.split(',')
-        categoriasUnicas = categoriasUnicas.trim()
+        
     
         const categoriasAdicionadas = categoriasUnicas.filter(categoria => !nomeCategorias.includes(categoria));
 
