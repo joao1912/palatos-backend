@@ -233,6 +233,8 @@ class restauranteController {
 
             for (let novaCategoria of categoriasAdicionadas) {
 
+                novaCategoria = novaCategoria.trim()
+
                 const idCategoria = await Categoria.findOne({
                     where: {
                         nome: novaCategoria
@@ -277,7 +279,7 @@ class restauranteController {
 
         await editConfigRest(restaurant, reservasAtivas, tempoTolerancia)
 
-        await editContato(restaurant, telefone, celular, userId)
+        await editContato(telefone, celular, userId)
 
         res.status(200).json({
             status: 'success',
@@ -403,7 +405,7 @@ async function editConfigRest(restaurante, reservas_ativas, tempo_tolerancia) {
     }
 }
 
-async function editContato(restaurante, telefone_fixo, celular, userId) {
+async function editContato(telefone_fixo, celular, userId) {
     try {
             
         const contatoRest = await Contato.findOne({where: {fk_usuario: userId}}) 
