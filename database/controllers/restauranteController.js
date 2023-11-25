@@ -232,9 +232,9 @@ class restauranteController {
         if (categoriasAdicionadas) {
 
             for (let novaCategoria of categoriasAdicionadas) {
-                console.log("categorias: " = categoriasAdicionadas)
+                console.log("categorias: " + categoriasAdicionadas)
                 console.log(novaCategoria)
-                
+
                 novaCategoria = novaCategoria.trim()
 
                 const idCategoria = await Categoria.findOne({
