@@ -227,12 +227,14 @@ class restauranteController {
     
         const categoriasAdicionadas = [categorias].filter(categoria => !nomeCategorias.includes(categoria));
 
-        const categoriasRemovidas = nomeCategorias.filter(categoria => !categorias.includes(categoria));
+        const categoriasRemovidas = nomeCategorias.filter(categoria => ![categorias].includes(categoria));
 
         if (categoriasAdicionadas) {
 
             for (let novaCategoria of categoriasAdicionadas) {
-
+                console.log("categorias: " = categoriasAdicionadas)
+                console.log(novaCategoria)
+                
                 novaCategoria = novaCategoria.trim()
 
                 const idCategoria = await Categoria.findOne({
