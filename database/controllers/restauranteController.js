@@ -236,8 +236,6 @@ class restauranteController {
         if (categoriasAdicionadas) {
 
             for (let novaCategoria of categoriasAdicionadas) {
-                console.log("categorias: " + categoriasAdicionadas)
-                console.log(novaCategoria)
 
                 novaCategoria = novaCategoria.trim()
 
@@ -324,7 +322,7 @@ class restauranteController {
 
     async loginRestaurant(req,res){
 
-        console.log(req.body)
+        
         const {
             email,
             senha
@@ -416,6 +414,8 @@ async function editContato(telefone_fixo, celular, userId) {
             
         const contatoRest = await Contato.findOne({where: {fk_usuario: userId}}) 
 
+        console.log(telefone_fixo)
+        console.log(celular)
         contatoRest.set({
            telefone_fixo: telefone_fixo || contatoRest.telefone_fixo,
            celular: celular || contatoRest.celular
