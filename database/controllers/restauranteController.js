@@ -338,6 +338,16 @@ class restauranteController {
             where: {fk_usuario: usuario.id}
         })
 
+        if (!usuario){
+            throw new CustomError("Email ou Senha incorretos.", 401)
+        }        
+
+        const passwordIsValid = await bcrypt.compare(senha, usuario.senha)
+
+        if (!passwordIsValid) {
+            throw new CustomError("Email ou Senha incorretos.", 401)
+        }
+
         const createTokenAccess= new CreateTokenAccess()
         const token= await createTokenAccess.execute(usuario.id, restaurante.id)
 
@@ -346,20 +356,6 @@ class restauranteController {
             token: token
         })
 
-        /* if (!usuario){
-            throw new CustomError("Email ou Senha incorretos.", 401)
-        }        
-
-        try {
-            await bcrypt.compare(senha, usuario.senha)
-
-            
-
-            
-
-        } catch (err) {
-            throw new CustomError("Email ou Senha incorretos.", 401)
-        } */
     }
 }
 
