@@ -66,10 +66,11 @@ class CarrinhoReservaController{
             if (restauranteProduto.id != idRest) {
                 continue
             }
-            console.log("teste")
+            
             const {nome_produto,preco}=produto
             obj.nome_produto=nome_produto
             obj.preco=preco
+            console.log(obj)
             carrinho.push(obj)
         }
 
