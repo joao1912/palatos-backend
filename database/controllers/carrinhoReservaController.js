@@ -64,7 +64,7 @@ class CarrinhoReservaController{
             const produto = await Cardapio.findByPk(obj.fk_cardapio)
 
             const restauranteProduto = Restaurante.findByPk(produto.fk_restaurante)
-            
+            console.log("rest: " + idRest + " idRestBanco: " + restauranteProduto.id )
             if (restauranteProduto.id != idRest) {
                 continue
             }
