@@ -37,12 +37,18 @@ class CarrinhoReservaController{
         const idRest = req.params.idRestaurante
         const id = req.id
 
-        const carrinhoRes=await ReservaCarrinho.findAll({
-            where:{
-                fk_usuario:id
-            }
+        let carrinhoRes
 
-        })
+        try {
+            carrinhoRes=await ReservaCarrinho.findAll({
+                where:{
+                    fk_usuario:id
+                }
+    
+            })
+        } catch (error) {
+            console.log(error)
+        }
 
         if (!carrinhoRes) {
 
