@@ -1,12 +1,10 @@
 import database from "../db.js";
 import { DataTypes } from "sequelize";
 import Sequelize from "sequelize";
-import PedidoReserva from "./PedidoReserva.js";
 import Cardapio from "./Cardapio.js";
 import Usuario from "./Usuario.js";
 
 class ReservaCarrinho extends Sequelize.Model{}
-
 
 ReservaCarrinho.init(
     {
@@ -26,12 +24,12 @@ ReservaCarrinho.init(
         tableName: "Reservas_carrinho"
     }
 )
-PedidoReserva.belongsTo( Cardapio ,{
+ReservaCarrinho.belongsTo( Cardapio ,{
     constraints: true,
     foreignKey: "fk_cardapio"
 })
 
-PedidoReserva.belongsTo( Usuario , {
+ReservaCarrinho.belongsTo( Usuario , {
     constraints: true,
     foreignKey: "fk_usuario"
 })
