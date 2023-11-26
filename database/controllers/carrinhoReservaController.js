@@ -44,6 +44,12 @@ class CarrinhoReservaController{
 
         })
 
+        if (!carrinhoRes) {
+
+            return res.status(200).json({status:'success', carrinho: []}) 
+
+        }
+
         const carrinho=[]
 
         for(let obj of carrinhoRes){
