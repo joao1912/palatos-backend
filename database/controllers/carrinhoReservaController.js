@@ -50,8 +50,6 @@ class CarrinhoReservaController{
             console.log(error)
         }
 
-        console.log(carrinhoRes)
-
         if (!carrinhoRes) {
 
             return res.status(200).json({status:'success', carrinho: []}) 
@@ -63,8 +61,8 @@ class CarrinhoReservaController{
         for(let obj of carrinhoRes){
             const produto = await Cardapio.findByPk(obj.fk_cardapio)
 
-            const restauranteProduto = Restaurante.findByPk(produto.fk_restaurante)
-            console.log(restauranteProduto)
+            const restauranteProduto = await Restaurante.findByPk(produto.fk_restaurante)
+            
             if (restauranteProduto.id != idRest) {
                 continue
             }
