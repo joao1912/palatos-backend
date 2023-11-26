@@ -19,6 +19,11 @@ class restauranteController {
         if (idRestaurante) {
            
             const result = await Restaurante.findByPk(idRestaurante)
+
+            if (!result) {
+                throw new CustomError("O restaurante não foi encontrado", 404)
+            }
+
             const {
                 id,
                 nome,
