@@ -11,6 +11,8 @@ router.get("/getAll/:idRestaurante", authToken.execute, carrinhoMesaController.g
 
 router.post("/addItem", authToken.execute, carrinhoMesaController.addItem)
 
+router.delete("/deleteItem/:idItem", authToken.execute, carrinhoMesaController.deleteItem)
+
 
 
 

@@ -63,6 +63,47 @@ class CarrinhoReservaController{
 
         res.status(200).json({status:'success', carrinho}) 
     }
+
+    async deleteItem(req, res) {
+
+        const {idItem} = req.params;
+        const userId = req.id
+
+
+
+        try {
+
+            const item = ReservaCarrinho.findOne({
+                where: {
+                    fk_usuario: userId,
+                    fk_cardapio: idItem
+                }
+            })
+
+            if (!item) {
+                throw new CustomError("O item não foi encontrado no carrinho", 404)
+            }
+
+            await ReservaCarrinho.destroy({
+                where: {
+                    fk_usuario: userId,
+                    fk_cardapio: idItem
+                }
+            })
+
+
+        } catch (error) {
+
+            throw new CustomError("O servidor falhou em deletar o item", 500)
+            
+        }
+
+        res.status(200).json({
+            status: 'success',
+            message: 'Item excluido do carrinho com sucesso.'
+        })
+
+    }
 }
 
 export default CarrinhoReservaController
