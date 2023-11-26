@@ -334,13 +334,17 @@ class restauranteController {
             } 
         })
 
+        if (!usuario){
+            throw new CustomError("Email ou Senha incorretos.", 401)
+        }
+
         const restaurante = await Restaurante.findOne({
             where: {fk_usuario: usuario.id}
         })
 
-        if (!usuario){
+        if (!restaurante){
             throw new CustomError("Email ou Senha incorretos.", 401)
-        }        
+        }
 
         const passwordIsValid = await bcrypt.compare(senha, usuario.senha)
 
