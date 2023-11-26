@@ -55,11 +55,17 @@ class userController {
             }
         })
 
+        let celular
+
+        if (contato) {
+            celular = contato.celular
+        }
+
         const resultado = {
             foto: user.foto,
             nome: user.nome_completo,
             email: user.email,
-            tel: contato.celular,
+            tel: celular,
             favoritos: arrayFavoritos || [],
             reservas: reservas || []
         }
