@@ -50,11 +50,13 @@ class CarrinhoReservaController{
             console.log(error)
         }
 
-        /* if (!carrinhoRes) {
+        console.log(carrinhoRes)
+
+        if (!carrinhoRes) {
 
             return res.status(200).json({status:'success', carrinho: []}) 
 
-        } */
+        }
 
         const carrinho=[]
 
