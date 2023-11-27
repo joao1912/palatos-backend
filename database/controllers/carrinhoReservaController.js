@@ -68,10 +68,13 @@ class CarrinhoReservaController{
             }
             const prod = {}
             const {nome_produto,preco, codigo}=produto
+            
             prod.nome_produto= nome_produto
             prod.preco= preco
             prod.id = codigo
-
+            prod.observacoes = obj.observacoes
+            prod.quantidade = obj.quantidade
+            prod.fk_restaurante = produto.fk_restaurante
             
            
             carrinho.push(prod)
