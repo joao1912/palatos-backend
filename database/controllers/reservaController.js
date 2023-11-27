@@ -38,13 +38,10 @@ class reservaController {
     }
 
     async addReserva(req,res) {
-        const { id, dataEntrada, idRestaurante, pedido} = req.body; 
-        // a data tera que vir completa com horario
 
-        const usuario = await Usuario.findByPk(id);
-        if (!usuario) {
-            throw new CustomError("Usuário não encontrado", 404)
-        }
+        const { dataEntrada, pedido} = req.body; 
+        const idRestaurante = pedido[0].fk_restaurante
+        const id = req.id
         
         let num = 0
         while(true) {
@@ -57,26 +54,30 @@ class reservaController {
             if(!reserva) break
         }
 
-        const novaReserva = await Reserva.create({
-            cod: num,
-            data_entrada: dataEntrada,
-            fk_usuario: id,
-            fk_restaurante: idRestaurante
-        })
+        let novaReserva
 
-        if (!novaReserva) {
+        try {
+            novaReserva = await Reserva.create({
+                cod: num,
+                data_entrada: dataEntrada,
+                fk_usuario: id,
+                fk_restaurante: idRestaurante
+            })
+    
+            for(let produto of pedido){
+
+               await PedidoReserva.create({
+                    observacoes:produto.observacoes,
+                    quantidade:produto.quantidade,
+                    fk_reserva: novaReserva.cod,
+                    fk_cardapio: produto.id
+               }) 
+
+            }
+
+        } catch (error) {
             throw new CustomError("O servidor falhou em criar a reserva.", 500)
         }
-
-        for(let produto of pedido){
-           await PedidoReserva.create({
-                observacoes:produto.observacoes,
-                quantidade:produto.quantidade,
-                fk_reserva: novaReserva.cod,
-                fk_cardapio: produto.codigo
-           }) 
-        }
-
         
         res.status(200).json({
             status: 'success',
