@@ -78,7 +78,7 @@ class cardapioController {
             produto = await Cardapio.create(newProduct)
         
         } catch (err) {
-
+console.log(err)
             throw new CustomError("O servidor falhou em criar o menu.", 500)
         }
 
