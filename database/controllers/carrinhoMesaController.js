@@ -28,8 +28,6 @@ class CarrinhoMesaController {
         const{idMesa}=req.params
         let pratos
 
-        console.log(idMesa)
-
         try {
             pratos= await ProdutoCarrinho.findAll({
                 where:{
@@ -76,6 +74,7 @@ class CarrinhoMesaController {
                 }
             })
         } catch (error) {
+            console.log(error)
             throw new CustomError("O servidor não conseguiu excluir o produto",500)
         }
 
