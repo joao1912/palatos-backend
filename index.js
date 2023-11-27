@@ -21,8 +21,7 @@ import carrinhoReservaRoutes from "./routes/CarrinhoReserva.js"
 import categoriaRoutes from "./routes/Categoria.js"
 import mesaRoutes from "./routes/Mesa.js"
 
-import { CustomError, errorHandler } from "./Middlewares/erros.js"
-
+import { errorHandler } from "./Middlewares/erros.js"
 
 import swaggerDocs from "./swagger.json" assert { type: "json"};
 import { CreateTokenAccess } from "./utils/CreateTokenAccess.js"
@@ -38,8 +37,8 @@ app.use("/api-docs", swaggerUi.serve , swaggerUi.setup(swaggerDocs))
 
 app.get("/", (req, res) => {
     
-    throw new CustomError("Eita", 401)
-    // res.json({message: 'OLA!!', token})
+    res.json({message: 'OLA!!'})
+
 }) 
 
 app.post("/createToken", async (req, res) => {
@@ -74,18 +73,6 @@ app.use("/restaurante", restaurantRoutes)
 app.use("/search", searchRoutes)
 
 app.use("/categoria", categoriaRoutes)
-
-import multer from "multer"
-import { storage } from "./Middlewares/MulterConfig.js"
-const upload = multer({storage: storage})
-
-app.post("/loadImage", upload.single('file'), function(req,res) {
-    console.log(req.file)
-    console.log(req.body)
-    res.status(200).send(req.file)
-})
-
-
 
 app.listen(8085, () => {
     console.log("Servidor rodando na porta http://45.224.129.126:8085/")

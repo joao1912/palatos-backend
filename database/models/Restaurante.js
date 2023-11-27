@@ -19,7 +19,7 @@ Restaurante.init(
         },
         foto: {
             type: DataTypes.TEXT,
-            defaultValue: "https://caminho-imagem.com"
+            defaultValue: "http://45.224.129.126:8085/files/1700623512130-fotoRestaurante.png"
         },
         plano: {
             type: DataTypes.INTEGER

@@ -124,7 +124,7 @@ class restauranteController {
             if (nomeFoto) {
                 foto = `http://45.224.129.126:8085/files/${nomeFoto.filename}`
             } else {
-                `http://45.224.129.126:8085/files/restaurante`
+                foto = `http://45.224.129.126:8085/files/1700623512130-fotoRestaurante.png`
             }
 
             const contatoRest = await createContato(idUser, telefone, celular)

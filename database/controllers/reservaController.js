@@ -40,8 +40,6 @@ class reservaController {
     async addReserva(req,res) {
 
         const { dataEntrada, pedido} = req.body; 
-        console.log(dataEntrada)
-        console.log(pedido)
         const idRestaurante = pedido[0].fk_restaurante
         const id = req.id
         
