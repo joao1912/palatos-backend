@@ -62,8 +62,7 @@ class CarrinhoMesaController {
     }
 
     async deleteItem(req,res){
-        const{idMesa}=req.params
-        const{idProduto}=req.body
+        const{idMesa, idProduto}=req.params
         
 
         try {
