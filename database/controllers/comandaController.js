@@ -152,7 +152,8 @@ class comandaController {
             try {
                 
                 const comandaMesa= await Comanda.create({
-                    is_reserva:false
+                    is_reserva:false,
+                    numeroMesa: idMesa
                 })
 
                 const produtos= await ProdutoCarrinho.findAll({
