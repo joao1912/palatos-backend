@@ -90,7 +90,31 @@ class mesaController {
                 fk_mesa: mesa.id,
             })
 
-            this.geraIdentificacaoMesas(idRestaurante)
+            const lista = await ListaMesa.findAll({
+                where: {
+                    fk_restaurante: idRestaurante
+                }
+            })
+    
+            if (!lista || lista.length == 0) return
+    
+            let valAtual = 1
+            
+            const mesas = []
+            for (let objLista of lista) {
+                const mesa = await Mesa.findByPk(objLista.fk_mesa)
+                if (!mesa) continue
+    
+                mesas.push(mesa)
+            }
+    
+            for (let objMesa of mesas) {
+                objMesa.update({
+                    identificacao_mesa: `Mesa ${valAtual}`
+                })
+                valAtual++
+            }
+
         } catch (error) {
             console.log(error)
             throw new CustomError("O servidor falhou em criar a mesa", 500)
@@ -204,7 +228,30 @@ class mesaController {
             throw new CustomError("A mesa não pode ser deletada", 500)
         }
 
-        this.geraIdentificacaoMesas(idRestaurante)
+        const lista = await ListaMesa.findAll({
+            where: {
+                fk_restaurante: idRestaurante
+            }
+        })
+
+        if (!lista || lista.length == 0) return
+
+        let valAtual = 1
+        
+        const mesas = []
+        for (let objLista of lista) {
+            const mesa = await Mesa.findByPk(objLista.fk_mesa)
+            if (!mesa) continue
+
+            mesas.push(mesa)
+        }
+
+        for (let objMesa of mesas) {
+            objMesa.update({
+                identificacao_mesa: `Mesa ${valAtual}`
+            })
+            valAtual++
+        }
 
         res.status(200).json({
             status: 'success',
