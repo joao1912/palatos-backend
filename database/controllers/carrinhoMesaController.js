@@ -28,6 +28,8 @@ class CarrinhoMesaController {
         const{idMesa}=req.params
         let pratos
 
+        console.log(idMesa)
+
         try {
             pratos= await ProdutoCarrinho.findAll({
                 where:{
