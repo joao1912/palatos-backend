@@ -37,10 +37,17 @@ class CarrinhoMesaController {
 
         for(let obj of pratos){
             const produto = await Cardapio.findByPk(obj.fk_cardapio)
-            const {nome_produto,preco}=produto
-            obj.nome_produto=nome_produto
-            obj.preco=preco
-            carrinho.push(obj)
+            const {nome_produto,preco, codigo}=produto
+            const objProd = {}
+
+            objProd.nome_produto= nome_produto
+            objProd.preco= preco
+            objProd.id = codigo
+            objProd.observacoes = obj.observacoes
+            objProd.quantidade = obj.quantidade
+            objProd.fk_restaurante = produto.fk_restaurante
+
+            carrinho.push(objProd)
         }
 
         res.status(200).json({
