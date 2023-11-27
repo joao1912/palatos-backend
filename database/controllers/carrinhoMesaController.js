@@ -26,12 +26,17 @@ class CarrinhoMesaController {
 
     async getAll(req,res){
         const{idMesa}=req.params
+        let pratos
 
-        const pratos= await ProdutoCarrinho.findAll({
-            where:{
-                fk_mesa:idMesa,
-            }
-        }) 
+        try {
+            pratos= await ProdutoCarrinho.findAll({
+                where:{
+                    fk_mesa:idMesa,
+                }
+            }) 
+        } catch (error) {
+            console.log(error)
+        }
 
         const carrinho=[]
 
