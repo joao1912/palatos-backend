@@ -122,12 +122,15 @@ class restauranteController {
             let foto
 
             if (nomeFoto) {
-                foto = `http://45.224.129.126:8085/files/${nomeFoto.filename}`
+                foto = `http://192.168.15.50:8085/files/${nomeFoto.filename}`
             } else {
-                foto = `http://45.224.129.126:8085/files/1700623512130-fotoRestaurante.png`
+                foto = `http://192.168.15.50:8085/files/1700623512130-fotoRestaurante.png`
             }
 
             const contatoRest = await createContato(idUser, telefone, celular)
+
+            console.log(celular)
+            console.log(endereco)
 
             const resultRestaurant = await Restaurante.create({
                 nome, 
@@ -279,7 +282,7 @@ class restauranteController {
         if (nomeFoto) {
 
             restaurant.set({
-                foto: `http://45.224.129.126:8085/files/${nomeFoto.filename}`
+                foto: `http://192.168.15.50:8085/files/${nomeFoto.filename}`
             })
 
         }

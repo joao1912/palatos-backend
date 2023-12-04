@@ -60,7 +60,7 @@ class cardapioController {
             throw new CustomError("token inválido", 401)
         }
         
-        const path = `http://45.224.129.126:8085/files/${foto.filename}`
+        const path = `http://192.168.15.50:8085/files/${foto.filename}`
         
         const newProduct = {
             nome_produto: nome,
@@ -146,7 +146,7 @@ class cardapioController {
 
             try {
 
-                const path = `http://45.224.129.126:8085/files/${image.filename}`
+                const path = `http://192.168.15.50:8085/files/${image.filename}`
         
                 const newProduct = {
                     nome_produto: nome,
@@ -185,7 +185,7 @@ class cardapioController {
             if (image) {
 
                 await produto.update({
-                    foto: `http://45.224.129.126:8085/files/${image.filename}`
+                    foto: `http://192.168.15.50:8085/files/${image.filename}`
                 })
 
             }

@@ -10,7 +10,7 @@
     },
     "servers": [
         {
-            "url": "http://45.224.129.126:8085",
+            "url": "http://192.168.15.50:8085",
             "description": "API de produção"
         }
     ],

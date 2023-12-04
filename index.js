@@ -20,7 +20,9 @@ import carrinhoMesaRoutes from "./routes/CarrinhoMesa.js"
 import carrinhoReservaRoutes from "./routes/CarrinhoReserva.js"
 import categoriaRoutes from "./routes/Categoria.js"
 import mesaRoutes from "./routes/Mesa.js"
-
+/* 
+import setCategorias from "./utils/create_categorias.js"
+setCategorias() */
 import { errorHandler } from "./Middlewares/erros.js"
 
 import swaggerDocs from "./swagger.json" assert { type: "json"};
@@ -75,5 +77,5 @@ app.use("/search", searchRoutes)
 app.use("/categoria", categoriaRoutes)
 
 app.listen(8085, () => {
-    console.log("Servidor rodando na porta http://45.224.129.126:8085/")
+    console.log("Servidor rodando na porta http://localhost:8085/")
 })
